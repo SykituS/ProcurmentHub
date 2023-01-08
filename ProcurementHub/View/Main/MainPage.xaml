@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ProcurementHub.MainPage">
+
+    <ScrollView>
+        <VerticalStackLayout
+            Spacing="25"
+            Padding="30,0"
+            VerticalOptions="Center">
+
+            <Label Text="Procurement Hub" FontSize="Large" HorizontalTextAlignment="Center" />
+
+            <BoxView Color="CornflowerBlue"
+                     CornerRadius="10"
+                     WidthRequest="160"
+                     HeightRequest="160"
+                     VerticalOptions="Center"
+                     HorizontalOptions="Center" />
+            
+            <Button Text="Login" Command="{Binding GoToLoginPage}"/>
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>
