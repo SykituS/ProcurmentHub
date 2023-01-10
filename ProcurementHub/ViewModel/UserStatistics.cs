@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ProcurementHub.ViewModel
 {
-    internal class UserStatistics
+    public class UserStatistics
     {
         int ID { get; set; }
         int TeamID { get; set; }
@@ -24,6 +24,6 @@ namespace ProcurementHub.ViewModel
         Users User { get; set; }
         Orders Order { get; set; }
         Payments Payment { get; set; }
-        RestaurantsMenu RestaurantMenu { get; set; }
+        RestaurantsItemMenu RestaurantItemMenu { get; set; }
     }
 }

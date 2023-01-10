@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ProcurementHub.ViewModel
+namespace Domain.Models
 {
-    internal class RestaurantsMenu
+    public class RestaurantsItemMenu
     {
         int ID { get; set; }
         int RestaurantID { get; set; }

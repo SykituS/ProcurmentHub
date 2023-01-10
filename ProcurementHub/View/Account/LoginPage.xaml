@@ -8,7 +8,7 @@
         <VerticalStackLayout>
             <Label Text="Procurement Hub" FontSize="Large" HorizontalTextAlignment="Center" />
 
-            <Entry Text="Test"/>
+            <Button Text="Click Me"/>
         </VerticalStackLayout>
 
     </ContentPage.Content>
