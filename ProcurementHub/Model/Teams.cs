@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ProcurementHub.ViewModel
+namespace ProcurementHub.Model
 {
     public class Teams
     {

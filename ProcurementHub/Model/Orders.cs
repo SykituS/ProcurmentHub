@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ProcurementHub.ViewModel
+namespace ProcurementHub.Model
 {
     public class Orders
     {
@@ -20,6 +20,6 @@ namespace ProcurementHub.ViewModel
         Restaurants Restaurant { get; set; }
         Teams Team { get; set; }
         Users User { get; set; }
-        
+
     }
 }

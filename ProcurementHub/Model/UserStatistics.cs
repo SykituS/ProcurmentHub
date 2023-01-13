@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ProcurementHub.ViewModel
+namespace ProcurementHub.Model
 {
     public class UserStatistics
     {
@@ -19,7 +19,7 @@ namespace ProcurementHub.ViewModel
         int OrderTimestamp { get; set; }
         int PaymentTimestamp { get; set; }
         int PaymentMethod { get; set; }
-        
+
         Teams Team { get; set; }
         Users User { get; set; }
         Orders Order { get; set; }

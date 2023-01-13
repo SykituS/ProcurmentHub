@@ -5,7 +5,7 @@ VisualStudioVersion = 17.0.31611.283
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProcurementHub", "ProcurementHub\ProcurementHub.csproj", "{2C8CAD58-30A7-4D11-BCA8-2992FC623676}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "Domain\Domain.csproj", "{1C1F3B86-A0DE-4A46-BC31-8A1A26E716A2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProcurementHub.Domain", "Domain\ProcurementHub.Domain.csproj", "{1C1F3B86-A0DE-4A46-BC31-8A1A26E716A2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

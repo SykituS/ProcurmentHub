@@ -1,4 +1,4 @@
-﻿namespace ProcurementHub;
+﻿namespace ProcurementHub.View.Main;
 
 public partial class MainPage : ContentPage
 {

@@ -1,4 +1,10 @@
-﻿namespace ProcurementHub;
+﻿using Microsoft.Extensions.Logging;
+using ProcurementHub.Services;
+using ProcurementHub.View;
+using ProcurementHub.View.Account;
+using ProcurementHub.View.Main;
+
+namespace ProcurementHub;
 
 public static class MauiProgram
 {
@@ -13,6 +19,11 @@ public static class MauiProgram
 				fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
 			});
 
-		return builder.Build();
+        builder.Services.AddSingleton<UsersService>();
+        builder.Services.AddSingleton<UsersViewModel>();
+        builder.Services.AddSingleton<LoginPage>();
+        builder.Services.AddSingleton<MainPage>();
+
+        return builder.Build();
 	}
 }

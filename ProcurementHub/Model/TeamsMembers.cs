@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ProcurementHub.ViewModel
+namespace ProcurementHub.Model
 {
     public class TeamsMembers
     {
@@ -13,7 +13,7 @@ namespace ProcurementHub.ViewModel
         TeamRoles Role { get; set; }
         string Contribution { get; set; }
         string PaymentStatus { get; set; }
-        
+
         Teams Team { get; set; }
         ICollection<Users> Users { get; set; }
     }

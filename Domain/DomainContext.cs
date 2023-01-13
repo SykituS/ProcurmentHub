@@ -1,20 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
-using Domain.Models;
+﻿using Microsoft.EntityFrameworkCore;
+using ProcurementHub.Domain.Models;
 
-namespace Domain
+namespace ProcurementHub.Domain
 {
-    public class Context : DbContext
+    public class DomainContext : DbContext
     {
-        public Context(DbContextOptions<Context> options) : base(options)
+        public DomainContext(DbContextOptions<DomainContext> options) : base(options)
         {
+            
         }
-
-        //Data Source=./;Initial Catalog=ProcurementHub;Integrated Security=True
 
         #region DbSets
         public DbSet<Users> Users { get; set; }
@@ -26,5 +20,10 @@ namespace Domain
         public DbSet<UserStatistics> UserStatistics { get; set; }
         public DbSet<TeamsMembers> TeamsMembers { get; set; }
         #endregion
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            //optionsBuilder.UseSqlServer(@"Data Source=./;Initial Catalog=ProcurementHub;Integrated Security=True");
+        }
     }
 }

@@ -2,13 +2,34 @@
 
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="ProcurementHub.View.LoginPanel.LoginPage">
+             x:Class="ProcurementHub.View.Account.LoginPage"
+             xmlns:model="clr-namespace:Domain.Models;assembly=Domain"
+             xmlns:viewmodel="clr-namespace:ProcurementHub.ViewModel"
+             xmlns:models="using:ProcurementHub.Domain.Models"
+             xmlns:model1="using:ProcurementHub.Model"
+             x:DataType="viewmodel:UsersViewModel">
     <ContentPage.Content>
 
         <VerticalStackLayout>
             <Label Text="Procurement Hub" FontSize="Large" HorizontalTextAlignment="Center" />
 
-            <Button Text="Click Me"/>
+            <Button Text="Click Me" Command="{Binding GetUsersCommand}" IsEnabled="{Binding IsNotBusy}"/>
+            <CollectionView ItemsSource="{Binding Users}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="model1:Users">
+                        <HorizontalStackLayout>
+                            <Label VerticalOptions="Center">
+                                <Label.Text>
+                                    <MultiBinding StringFormat="{}{0} | {1}">
+                                        <Binding Path="FirstName" />
+                                        <Binding Path="LastName" />
+                                    </MultiBinding>
+                                </Label.Text>
+                            </Label>
+                        </HorizontalStackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
         </VerticalStackLayout>
 
     </ContentPage.Content>
