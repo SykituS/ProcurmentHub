@@ -1,21 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ProcurementHub.Model
+﻿namespace ProcurementHub.Domain.Models
 {
     public class TeamsMembers
     {
-        int Id { get; set; }
-        int TeamId { get; set; }
+        int ID { get; set; }
+        int TeamID { get; set; }
+        int UserID { get; set; }
         TeamRoles Role { get; set; }
-        string Contribution { get; set; }
-        string PaymentStatus { get; set; }
-
+        
         Teams Team { get; set; }
-        ICollection<Users> Users { get; set; }
+        ICollection<Users> User { get; set; }
     }
 
     enum TeamRoles

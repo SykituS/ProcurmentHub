@@ -7,6 +7,5 @@
         string Location { get; set; }
         int PhoneNumber { get; set; }
         string Website { get; set; }
-        float Rating { get; set; }
     }
 }

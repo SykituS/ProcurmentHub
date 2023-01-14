@@ -15,9 +15,6 @@ namespace ProcurementHub.Domain
         public DbSet<Restaurants> Restaurants { get; set; }
         public DbSet<RestaurantsItemMenu> RestaurantsItemMenu { get; set; }
         public DbSet<Teams> Teams { get; set; }
-        public DbSet<Orders> Orders { get; set; }
-        public DbSet<Payments> Payments { get; set; }
-        public DbSet<UserStatistics> UserStatistics { get; set; }
         public DbSet<TeamsMembers> TeamsMembers { get; set; }
         #endregion
 

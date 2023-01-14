@@ -1,18 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ProcurementHub.Model
+﻿namespace ProcurementHub.Domain.Models
 {
     public class Teams
     {
-        int Id { get; set; }
-        int TeamName { get; set; }
-        int Description { get; set; }
-        int CreatorId { get; set; }
-        int Status { get; set; }
-        Users Creator { get; set; }
+        int ID { get; set; }
+        string TeamName { get; set; }
+        string Description { get; set; }
+        int CreatedByID { get; set; }
+        Status Status { get; set; }
+
+        Users CreatedBy { get; set; }
     }
 }

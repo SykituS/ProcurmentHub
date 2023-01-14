@@ -2,11 +2,12 @@
 {
     public class Teams
     {
-        int Id { get; set; }
-        int TeamName { get; set; }
-        int Description { get; set; }
-        int CreatorId { get; set; }
-        int Status { get; set; }
-        Users Creator { get; set; }
+        int ID { get; set; }
+        string TeamName { get; set; }
+        string Description { get; set; }
+        int CreatedByID { get; set; }
+        Status Status { get; set; }
+
+        Users CreatedBy { get; set; }
     }
 }

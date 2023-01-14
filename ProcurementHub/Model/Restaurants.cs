@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ProcurementHub.Model
+﻿namespace ProcurementHub.Domain.Models
 {
     public class Restaurants
     {
@@ -13,6 +7,5 @@ namespace ProcurementHub.Model
         string Location { get; set; }
         int PhoneNumber { get; set; }
         string Website { get; set; }
-        float Rating { get; set; }
     }
 }
