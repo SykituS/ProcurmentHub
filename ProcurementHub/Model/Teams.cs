@@ -1,4 +1,4 @@
-﻿namespace ProcurementHub.Domain.Models
+﻿namespace ProcurementHub.Model
 {
     public class Teams
     {

@@ -5,7 +5,6 @@
              x:Class="ProcurementHub.View.Account.LoginPage"
              xmlns:model="clr-namespace:Domain.Models;assembly=Domain"
              xmlns:viewmodel="clr-namespace:ProcurementHub.ViewModel"
-             xmlns:models="using:ProcurementHub.Domain.Models"
              xmlns:model1="using:ProcurementHub.Model"
              x:DataType="viewmodel:UsersViewModel">
     <ContentPage.Content>
