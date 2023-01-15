@@ -3,9 +3,12 @@ using ProcurementHub.Domain.Models;
 
 namespace ProcurementHub.Domain
 {
-    public class DomainContext : DbContext
+    public class ProcurementHubContext : DbContext
     {
-        public DomainContext(DbContextOptions<DomainContext> options) : base(options)
+        public ProcurementHubContext()
+        { }
+
+        public ProcurementHubContext(DbContextOptions options) : base(options)
         {
             
         }
@@ -20,7 +23,8 @@ namespace ProcurementHub.Domain
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            //optionsBuilder.UseSqlServer(@"Data Source=./;Initial Catalog=ProcurementHub;Integrated Security=True");
+            if (!optionsBuilder.IsConfigured)
+                optionsBuilder.UseSqlServer(@"Data Source=.\;Initial Catalog=ProcurementHub;Integrated Security=True;MultipleActiveResultSets=true; TrustServerCertificate=True");
         }
     }
 }

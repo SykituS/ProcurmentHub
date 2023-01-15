@@ -11,7 +11,7 @@ USE ProcurementHub
 GO
 
 CREATE TABLE Users(
-	ID int NOT NULL PRIMARY KEY,
+	ID int IDENTITY(1, 1) NOT NULL PRIMARY KEY,
 	FirstName VARCHAR(50) NOT NULL,
 	LastName VARCHAR(50) NOT NULL,
 	Email VARCHAR(50) NOT NULL,
@@ -30,7 +30,7 @@ CREATE TABLE Users(
 )
 
 CREATE TABLE Teams (
-	ID int NOT NULL PRIMARY KEY,
+	ID int IDENTITY(1, 1) NOT NULL PRIMARY KEY,
 	TeamName VARCHAR(50) NOT NULL,
 	Description VARCHAR(250) NOT NULL,
 	CreatedByID int NOT NULL,
@@ -40,7 +40,7 @@ CREATE TABLE Teams (
 )
 
 CREATE TABLE TeamsMember (
-	ID int NOT NULL PRIMARY KEY,
+	ID int IDENTITY(1, 1) NOT NULL PRIMARY KEY,
 	TeamID int NOT NULL,
 	UserID int NOT NULL,
 	Role int NOT NULL,
@@ -50,7 +50,7 @@ CREATE TABLE TeamsMember (
 )
 
 CREATE TABLE Restaurants(
-	ID int NOT NULL PRIMARY KEY,
+	ID int IDENTITY(1, 1) NOT NULL PRIMARY KEY,
 	Name VARCHAR(100) NOT NULL,
 	Location VARCHAR(200),
 	PhoneNumber int,
@@ -58,7 +58,7 @@ CREATE TABLE Restaurants(
 )
 
 CREATE TABLE RestaurantItemMenu(
-	ID int NOT NULL PRIMARY KEY,
+	ID int IDENTITY(1, 1) NOT NULL PRIMARY KEY,
 	RestaurantID int NOT NULL,
 	ItemName int NOT NULL,
 	ItemPrice MONEY NOT NULL,

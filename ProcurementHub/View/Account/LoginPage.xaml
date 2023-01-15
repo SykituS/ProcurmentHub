@@ -3,9 +3,9 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ProcurementHub.View.Account.LoginPage"
-             xmlns:model="clr-namespace:Domain.Models;assembly=Domain"
+             xmlns:model="clr-namespace:ProcurementHub.Domain.Models;assembly=ProcurementHub.Domain"
              xmlns:viewmodel="clr-namespace:ProcurementHub.ViewModel"
-             xmlns:model1="using:ProcurementHub.Model"
+             xmlns:models="clr-namespace:ProcurementHub.Domain.Models;assembly=ProcurementHub.Domain"
              x:DataType="viewmodel:UsersViewModel">
     <ContentPage.Content>
 
@@ -15,7 +15,7 @@
             <Button Text="Click Me" Command="{Binding GetUsersCommand}" IsEnabled="{Binding IsNotBusy}"/>
             <CollectionView ItemsSource="{Binding Users}">
                 <CollectionView.ItemTemplate>
-                    <DataTemplate x:DataType="model1:Users">
+                    <DataTemplate x:DataType="models:Users">
                         <HorizontalStackLayout>
                             <Label VerticalOptions="Center">
                                 <Label.Text>

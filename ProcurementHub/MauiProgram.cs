@@ -8,7 +8,7 @@ namespace ProcurementHub;
 
 public static class MauiProgram
 {
-	public static MauiApp CreateMauiApp()
+    public static MauiApp CreateMauiApp()
 	{
 		var builder = MauiApp.CreateBuilder();
 		builder
@@ -23,6 +23,8 @@ public static class MauiProgram
         builder.Services.AddSingleton<UsersViewModel>();
         builder.Services.AddSingleton<LoginPage>();
         builder.Services.AddSingleton<MainPage>();
+
+		
 
         return builder.Build();
 	}

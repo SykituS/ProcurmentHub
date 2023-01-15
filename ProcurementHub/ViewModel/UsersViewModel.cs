@@ -1,15 +1,15 @@
-﻿using ProcurementHub.Model;
+﻿using ProcurementHub.Domain.Handlers.Queries;
+using ProcurementHub.Domain.Models;
 using ProcurementHub.Services;
+using Users = ProcurementHub.Domain.Models.Users;
 
 namespace ProcurementHub.ViewModel
 {
     public partial class UsersViewModel : BaseViewModel
     {
-        private readonly UsersService _usersService;
         public ObservableCollection<Users> Users { get; set; } = new();
-        public UsersViewModel(UsersService usersService)
+        public UsersViewModel()
         {
-            _usersService = usersService;
             Title = "Users";
         }
 
@@ -24,14 +24,7 @@ namespace ProcurementHub.ViewModel
             try
             {
                 Users.Clear();
-                List<Users> users = new List<Users>
-                {
-                    new Users()
-                    {
-                        FirstName = "Mateusz",
-                        LastName = "Jaruga"
-                    }
-                };
+                var users = await new UsersService().GetUsers();
                 foreach (var user in users)
                 {
                     Users.Add(user);

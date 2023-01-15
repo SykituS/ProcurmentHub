@@ -12,15 +12,15 @@
         public DateTime CreatedOn { get; set; }
         public DateTime UpdatedOn { get; set; }
         
-        public string VerificationCode { get; set; }
-        public string VerificationStatus { get; set; }
-        public DateTime VerificationExpiry { get; set; }
+        public string? VerificationCode { get; set; }
+        public string? VerificationStatus { get; set; }
+        public DateTime? VerificationExpiry { get; set; }
 
-        public string ResetCode { get; set; }
-        public DateTime ResetCodeExpiry { get; set; }
+        public string? ResetCode { get; set; }
+        public DateTime? ResetCodeExpiry { get; set; }
         
         public bool IsDeleted { get; set; }
-        public DateTime DeletedDate { get; set; }
+        public DateTime? DeletedDate { get; set; }
     }
 
     public enum UserRoles

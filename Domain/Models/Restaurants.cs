@@ -2,10 +2,10 @@
 {
     public class Restaurants
     {
-        int ID { get; set; }
-        string Name { get; set; }
-        string Location { get; set; }
-        int PhoneNumber { get; set; }
-        string Website { get; set; }
+        public int ID { get; set; }
+        public string Name { get; set; }
+        public string Location { get; set; }
+        public int PhoneNumber { get; set; }
+        public string Website { get; set; }
     }
 }

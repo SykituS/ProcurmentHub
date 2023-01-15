@@ -2,16 +2,16 @@
 {
     public class TeamsMembers
     {
-        int ID { get; set; }
-        int TeamID { get; set; }
-        int UserID { get; set; }
-        TeamRoles Role { get; set; }
-        
-        Teams Team { get; set; }
-        ICollection<Users> User { get; set; }
+        public int ID { get; set; }
+        public int TeamID { get; set; }
+        public int UserID { get; set; }
+        public TeamRoles Role { get; set; }
+         
+        public Teams Team { get; set; }
+        public Users User { get; set; }
     }
 
-    enum TeamRoles
+    public enum TeamRoles
     {
         Creator,
         Member

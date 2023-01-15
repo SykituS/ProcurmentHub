@@ -2,13 +2,13 @@
 {
     public class RestaurantsItemMenu
     {
-        int ID { get; set; }
-        int RestaurantID { get; set; }
-        string ItemName { get; set; }
-        int ItemPrice { get; set; }
-        string ItemDescription { get; set; }
-        string ItemCategory { get; set; }
-
-        Restaurants Restaurant { get; set; }
+        public int ID { get; set; }
+        public int RestaurantID { get; set; }
+        public string ItemName { get; set; }
+        public int ItemPrice { get; set; }
+        public string ItemDescription { get; set; }
+        public string ItemCategory { get; set; }
+         
+        public Restaurants Restaurant { get; set; }
     }
 }

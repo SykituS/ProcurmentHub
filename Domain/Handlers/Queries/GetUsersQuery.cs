@@ -4,15 +4,15 @@ namespace ProcurementHub.Domain.Handlers.Queries
 {
     public class GetUsersQuery
     {
-        public GetUsersQuery(DomainContext domainContext)
+        public GetUsersQuery(ProcurementHubContext procurementHubContext)
         {
-            if (domainContext == null)
-                throw new ArgumentNullException(nameof(domainContext));
+            if (procurementHubContext == null)
+                throw new ArgumentNullException(nameof(procurementHubContext));
 
-            Context = domainContext;
+            Context = procurementHubContext;
         }
 
-        protected DomainContext Context { get; }
+        protected ProcurementHubContext Context { get; }
 
         public IQueryable<Users> Execute()
         {
