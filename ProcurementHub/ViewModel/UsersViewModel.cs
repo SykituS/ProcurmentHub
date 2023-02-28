@@ -1,5 +1,4 @@
-﻿using ProcurementHub.Domain.Handlers.Queries;
-using ProcurementHub.Domain.Models;
+﻿using ProcurementHub.Domain.Models;
 using ProcurementHub.Services;
 using Users = ProcurementHub.Domain.Models.Users;
 

@@ -22,7 +22,7 @@ CREATE TABLE Users(
 	UpdatedOn DATETIME NOT NULL,
 	VerificationCode VARCHAR(6),
 	VerificationStatus int,
-	VerificationExpiry int,
+	VerificationCodeExpiry int,
 	ResetCode VARCHAR(50),
 	ResetCodeExpiry DATETIME,
 	IsDeleted bit NOT NULL DEFAULT 0,
