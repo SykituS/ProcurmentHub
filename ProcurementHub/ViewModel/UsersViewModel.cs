@@ -1,5 +1,7 @@
-﻿using ProcurementHub.Domain.Models;
+﻿using GrpcShared;
+using ProcurementHub.Domain.Models;
 using ProcurementHub.Services;
+using static GrpcShared.Greeter;
 using Users = ProcurementHub.Domain.Models.Users;
 
 namespace ProcurementHub.ViewModel
@@ -7,7 +9,8 @@ namespace ProcurementHub.ViewModel
     public partial class UsersViewModel : BaseViewModel
     {
         public ObservableCollection<Users> Users { get; set; } = new();
-        public UsersViewModel()
+
+        public UsersViewModel(Greeter.GreeterClient greeterClient) : base(greeterClient)
         {
             Title = "Users";
         }
@@ -23,7 +26,7 @@ namespace ProcurementHub.ViewModel
             try
             {
                 Users.Clear();
-                var users = await new UsersService().GetUsers();
+                var users = await new UsersService(_greeterClient).GetUsers();
                 foreach (var user in users)
                 {
                     Users.Add(user);
@@ -38,5 +41,7 @@ namespace ProcurementHub.ViewModel
                 IsBusy = false;
             }
         }
+
+        
     }
 }
