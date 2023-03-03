@@ -9,20 +9,17 @@ using GrpcShared.Models;
 
 namespace ProcurementHub.Services
 {
-    public class PersonsService
+    public class PersonsService : BaseServices
     {
-        private readonly Procurement.ProcurementClient _procurementClient;
-
-        public PersonsService(Procurement.ProcurementClient procurementClient)
+        public PersonsService(Procurement.ProcurementClient procurementClient) : base(procurementClient)
         {
-            _procurementClient = procurementClient;
         }
 
         readonly List<Persons> _persons = new List<Persons>();
 
         public async Task<List<Persons>> GetPersonsAsync()
         {
-            var result = await _procurementClient.GetPersonsAsync(new GRPCStatus() { Code = 200 });
+            var result = await ProcurementClient.GetPersonsAsync(new GRPCStatus() { Code = 200 });
 
             foreach (var person in result.Persons)
             {
@@ -37,5 +34,7 @@ namespace ProcurementHub.Services
 
             return _persons;
         }
+
+        
     }
 }

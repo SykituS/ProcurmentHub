@@ -21,7 +21,8 @@ namespace ProcurementHub.ViewModel
         [ObservableProperty]
         private string _errorMessage;
 
-
+        [ObservableProperty] 
+        private bool _isRefreshing;
 
         [RelayCommand]
         async Task Login()
@@ -33,17 +34,17 @@ namespace ProcurementHub.ViewModel
 
             try
             {
-                _errorMessage = "Test";
-
-                await Shell.Current.GoToAsync(nameof(MainPage), true);
+                await Shell.Current.DisplayAlert("Error", ErrorMessage, "OK");
             }
             catch (Exception ex)
             {
                 Debug.WriteLine(ex);
+                await Shell.Current.DisplayAlert("Error", "Unexpected error occurred! Please try again!", "OK");
             }
             finally
             {
                 IsBusy = false;
+                IsRefreshing = false;
             }
 
         }

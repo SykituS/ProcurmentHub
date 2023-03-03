@@ -11,7 +11,7 @@ public static class MauiProgram
 {
     public static MauiApp CreateMauiApp()
     {
-        string BaseAddress = "https://localhost:7170";
+        const string baseAddress = "https://localhost:7170";
 
         var builder = MauiApp.CreateBuilder();
 		builder
@@ -23,18 +23,47 @@ public static class MauiProgram
 			});
         builder.Services.AddScoped(services =>
         {
-            var baseUri = new Uri(BaseAddress);
+            var baseUri = new Uri(baseAddress);
             var channel = GrpcChannel.ForAddress(baseUri);
             return new Procurement.ProcurementClient(channel);
         });
 
+        #region User
+
         builder.Services.AddSingleton<UsersService>();
         builder.Services.AddSingleton<UsersViewModel>();
+
+        #endregion
+
+        #region Person
+
         builder.Services.AddSingleton<PersonsViewModel>();
         builder.Services.AddSingleton<PersonsService>();
+
+        #endregion
+
+        #region Login
+
         builder.Services.AddSingleton<LoginViewModel>();
         builder.Services.AddSingleton<LoginService>();
         builder.Services.AddSingleton<LoginPage>();
+
+        #endregion
+
+        #region Register
+
+        builder.Services.AddSingleton<RegisterViewModel>();
+        builder.Services.AddSingleton<RegisterServices>();
+        builder.Services.AddSingleton<RegisterPage>();
+
+        #endregion
+
+        #region ForgotPassword
+
+        builder.Services.AddSingleton<ForgotPasswordPage>();
+
+        #endregion
+
         builder.Services.AddSingleton<MainPage>();
 
 		

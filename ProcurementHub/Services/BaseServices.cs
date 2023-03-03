@@ -9,11 +9,11 @@ namespace ProcurementHub.Services
 {
     public class BaseServices
     {
-        private readonly Procurement.ProcurementClient _procurementClient;
+        public Procurement.ProcurementClient ProcurementClient;
 
         public BaseServices(Procurement.ProcurementClient procurementClient)
         {
-            _procurementClient = procurementClient;
+            ProcurementClient = procurementClient;
         }
     }
 }
