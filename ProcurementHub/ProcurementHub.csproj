@@ -49,19 +49,24 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Folder Include="View\Statistics\" />
+	  <AndroidResource Remove="View\Statistics\**" />
+	  <Compile Remove="View\Statistics\**" />
+	  <EmbeddedResource Remove="View\Statistics\**" />
+	  <MauiCss Remove="View\Statistics\**" />
+	  <MauiXaml Remove="View\Statistics\**" />
+	  <None Remove="View\Statistics\**" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <PackageReference Include="CommunityToolkit.Mvvm" Version="8.0.0" />
   </ItemGroup>
 
 	<ItemGroup>
-	  <PackageReference Include="CommunityToolkit.Mvvm" Version="8.1.0" />
-  </ItemGroup>
-
-	<ItemGroup>
-	  <ProjectReference Include="..\GrpcShared\GrpcShared.csproj" />
+	  <ProjectReference Include="..\..\ProcurementService\GrpcShared\GrpcShared.csproj" />
 	</ItemGroup>
 
   <ItemGroup>
-    <Protobuf Include="Protos\greet.proto" GrpcServices="Client" />
+    <Protobuf Include="Protos\Procurement.proto" GrpcServices="Client" />
   </ItemGroup>
 
 	<ItemGroup>
@@ -74,6 +79,10 @@
 	  <MauiXaml Update="View\Account\LoginPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="Model\" />
 	</ItemGroup>
 
 	<ProjectExtensions><VisualStudio><UserProperties XamarinHotReloadDebuggerTimeoutExceptionProcurementHubHideInfoBar="True" /></VisualStudio></ProjectExtensions>

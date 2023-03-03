@@ -25,11 +25,15 @@ public static class MauiProgram
         {
             var baseUri = new Uri(BaseAddress);
             var channel = GrpcChannel.ForAddress(baseUri);
-            return new Greeter.GreeterClient(channel);
+            return new Procurement.ProcurementClient(channel);
         });
 
         builder.Services.AddSingleton<UsersService>();
         builder.Services.AddSingleton<UsersViewModel>();
+        builder.Services.AddSingleton<PersonsViewModel>();
+        builder.Services.AddSingleton<PersonsService>();
+        builder.Services.AddSingleton<LoginViewModel>();
+        builder.Services.AddSingleton<LoginService>();
         builder.Services.AddSingleton<LoginPage>();
         builder.Services.AddSingleton<MainPage>();
 

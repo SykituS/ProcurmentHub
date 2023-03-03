@@ -1,29 +1,28 @@
 ﻿
 
 using GrpcShared;
-using ProcurementHub.Domain.Models;
 
 namespace ProcurementHub.Services
 {
     public class UsersService
     {
-        private readonly Greeter.GreeterClient _greeterClient;
+        private readonly Procurement.ProcurementClient _procurementClient;
 
-        public UsersService(Greeter.GreeterClient greeterClient)
+        public UsersService(Procurement.ProcurementClient procurementClient)
         {
-            _greeterClient = greeterClient;
+            _procurementClient = procurementClient;
         }
 
-        readonly List<Users> _userList = new();
+        //readonly List<Users> _userList = new();
 
-        public async Task<List<Users>> GetUsers()
-        {
-            if (_userList?.Count > 0)
-                return _userList;
+        //public async Task<List<Users>> GetUsers()
+        //{
+        //    if (_userList?.Count > 0)
+        //        return _userList;
 
-            var mess = _greeterClient.SayHello(new HelloRequest{ Name = "Name"});
+        //    var mess = _procurementClient.SayHello(new HelloRequest{ Name = "Name"});
 
-            return _userList;
-        }
+        //    return _userList;
+        //}
     }
 }

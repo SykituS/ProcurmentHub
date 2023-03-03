@@ -5,11 +5,11 @@ namespace ProcurementHub.ViewModel
     [INotifyPropertyChanged]
     public partial class BaseViewModel
     {
-        public Greeter.GreeterClient _greeterClient;
+        public Procurement.ProcurementClient ProcurementClient;
 
-        public BaseViewModel(Greeter.GreeterClient greeterClient)
+        public BaseViewModel(Procurement.ProcurementClient procurementClient)
         {
-            _greeterClient = greeterClient;
+            ProcurementClient = procurementClient;
         }
 
         [ObservableProperty]
