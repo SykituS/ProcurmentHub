@@ -36,14 +36,12 @@
             </Frame>
 
             <StackLayout Orientation="Horizontal" Margin="0,10,0,0" Padding="0">
-                <Button Text="Create new account" TextColor="DarkGray" FontSize="Small" />
-                <Button Text="Forgot password" TextColor="#58D68D" FontAttributes="Bold" HorizontalOptions="EndAndExpand"/>
+                <Button Text="Create new account" TextColor="DarkGray" FontSize="Small" Command="{Binding GoToRegisterPageCommand}"/>
+                <Button Text="Forgot password" TextColor="#58D68D" FontAttributes="Bold" HorizontalOptions="EndAndExpand" Command="{Binding GoToForgotPasswordPageCommand}"/>
             </StackLayout>
 
             <Button Text="Sign In" BackgroundColor="#58D68B" TextColor="White" FontAttributes="Bold" CornerRadius="30"
                     WidthRequest="200" Margin="0,15,0,0" Command="{Binding LoginCommand}" IsEnabled="{Binding IsNotBusy}"/>
         </StackLayout>
-
-
-    </Grid>
+        </Grid>
 </ContentPage>

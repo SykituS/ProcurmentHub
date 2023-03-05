@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using GrpcShared;
 using GrpcShared.Models;
+using ProcurementHub.View.Account;
 using ProcurementHub.View.Main;
 
 namespace ProcurementHub.ViewModel
@@ -46,7 +47,18 @@ namespace ProcurementHub.ViewModel
                 IsBusy = false;
                 IsRefreshing = false;
             }
+        }
 
+        [RelayCommand]
+        async Task GoToRegisterPage()
+        {
+            await Shell.Current.GoToAsync(nameof(RegisterPage), true);
+        }
+
+        [RelayCommand]
+        async Task GoToForgotPasswordPage()
+        {
+            await Shell.Current.GoToAsync(nameof(ForgotPasswordPage), true);
         }
     }
 }
