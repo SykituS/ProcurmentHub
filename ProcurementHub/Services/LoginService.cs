@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using GrpcShared;
 using GrpcShared.Models;
+using ProcurementHub.Infrastructure;
 using ProcurementHub.Model;
 
 namespace ProcurementHub.Services
@@ -27,6 +28,17 @@ namespace ProcurementHub.Services
             ResponseMessage.Message = response.Message;
 
             return ResponseMessage;
+        }
+
+        public async Task<Users> GetUserDataAsync(Guid guid)
+        {
+            var response = await ProcurementClient.GetUserDataAsync(new GRPCStatus() { Message = guid.ToString() });
+
+            var mapper = MapperConfig.InitializeAutomapper();
+
+            var result = mapper.Map<GRPCLoggedUser, Users>(response);
+
+            return result;
         }
 
     }

@@ -6,7 +6,7 @@ namespace ProcurementHub.ViewModel
     public partial class BaseViewModel
     {
         public Procurement.ProcurementClient ProcurementClient;
-
+        
         public BaseViewModel(Procurement.ProcurementClient procurementClient)
         {
             ProcurementClient = procurementClient;

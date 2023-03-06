@@ -1,6 +1,9 @@
-﻿using Grpc.Net.Client;
+﻿using AutoMapper;
+using Grpc.Net.Client;
 using GrpcShared;
+using GrpcShared.Models;
 using Microsoft.Extensions.Logging;
+using ProcurementHub.Infrastructure;
 using ProcurementHub.Services;
 using ProcurementHub.View;
 using ProcurementHub.View.Account;
@@ -27,6 +30,7 @@ public static class MauiProgram
             var channel = GrpcChannel.ForAddress(baseUri);
             return new Procurement.ProcurementClient(channel);
         });
+
 
         #region User
 

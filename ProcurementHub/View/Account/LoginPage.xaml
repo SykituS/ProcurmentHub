@@ -23,14 +23,14 @@
             <Frame BackgroundColor="Transparent" BorderColor="LightGreen" Padding="0" HorizontalOptions="FillAndExpand"
                    CornerRadius="30">
                 <StackLayout Orientation="Horizontal">
-                    <Entry Text="{Binding LoginUser.UserName}" Placeholder="Username" TextColor="Black" FontAttributes="Bold"
+                    <Entry Text="{Binding LoginUser.UserName, Mode=TwoWay}" Placeholder="Username" TextColor="Black" FontAttributes="Bold"
                            VerticalOptions="Center" HorizontalOptions="FillAndExpand" Margin="0,0,20,0" />
                 </StackLayout>
             </Frame>
             <Frame BackgroundColor="Transparent" BorderColor="LightGreen" Padding="0" HorizontalOptions="FillAndExpand"
                    CornerRadius="30" Margin="0,15,0,0">
                 <StackLayout Orientation="Horizontal">
-                    <Entry Text="{Binding LoginUser.Password}" Placeholder="Password" TextColor="Black" FontAttributes="Bold"
+                    <Entry Text="{Binding LoginUser.Password, Mode=TwoWay}" Placeholder="Password" TextColor="Black" FontAttributes="Bold"
                            VerticalOptions="Center" HorizontalOptions="FillAndExpand" Margin="0,0,20,0" IsPassword="True"/>
                 </StackLayout>
             </Frame>
