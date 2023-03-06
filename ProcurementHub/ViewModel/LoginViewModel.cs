@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using GrpcShared;
 using GrpcShared.Models;
+using ProcurementHub.Model;
+using ProcurementHub.Services;
 using ProcurementHub.View.Account;
 using ProcurementHub.View.Main;
 
@@ -17,7 +20,7 @@ namespace ProcurementHub.ViewModel
         }
 
         [ObservableProperty] 
-        private Users _user;
+        private LoginUser _loginUser = new LoginUser();
 
         [ObservableProperty]
         private string _errorMessage;
@@ -35,7 +38,20 @@ namespace ProcurementHub.ViewModel
 
             try
             {
-                await Shell.Current.DisplayAlert("Error", ErrorMessage, "OK");
+                var result = await new LoginService(ProcurementClient).LoginUserAsync(_loginUser);
+                if (result.Code != (int)HttpStatusCode.OK)
+                {
+                    await Shell.Current.DisplayAlert("Error", result.Message, "OK");
+                }
+                else
+                {
+                    await Shell.Current.DisplayAlert("ID", result.Message, "OK");
+
+                    //await Shell.Current.GoToAsync(nameof(ForgotPasswordPage), true, new Dictionary<string, object>()
+                    //{
+                    //    {"Users", result}
+                    //});
+                }
             }
             catch (Exception ex)
             {
@@ -52,7 +68,10 @@ namespace ProcurementHub.ViewModel
         [RelayCommand]
         async Task GoToRegisterPage()
         {
-            await Shell.Current.GoToAsync(nameof(RegisterPage), true);
+            await Shell.Current.GoToAsync(nameof(RegisterPage), true, new Dictionary<string, object>
+            {
+                {"RegisterNewUserModel", new RegisterNewUserModel() {Person = new Persons()}}
+            });
         }
 
         [RelayCommand]

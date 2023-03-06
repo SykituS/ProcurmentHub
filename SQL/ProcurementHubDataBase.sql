@@ -18,7 +18,7 @@ CREATE TABLE Persons(
 )
 
 CREATE TABLE Users(
-	ID nvarchar(128) NOT NULL Primary key,
+	ID UNIQUEIDENTIFIER NOT NULL Primary key,
 	UserName nvarchar(max),
 	PasswordHash nvarchar(max),
 	SecurityStamp nvarchar(max),

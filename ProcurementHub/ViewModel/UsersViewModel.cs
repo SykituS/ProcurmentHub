@@ -3,6 +3,7 @@ using ProcurementHub.Services;
 
 namespace ProcurementHub.ViewModel
 {
+    [QueryProperty("Users", "Users")]
     public partial class UsersViewModel : BaseViewModel
     {
         //public ObservableCollection<Users> Users { get; set; } = new();

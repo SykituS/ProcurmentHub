@@ -2,11 +2,67 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ProcurementHub.View.Account.RegisterPage"
-             Title="RegisterPage">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+             xmlns:viewmodel="clr-namespace:ProcurementHub.ViewModel"
+             x:DataType="viewmodel:RegisterViewModel">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="50" />
+            <RowDefinition Height="50" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="40" />
+            <RowDefinition Height="40" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Label Grid.Row="1" Text="Welcome!" HorizontalOptions="Center" FontSize="Title" FontAttributes="Bold"></Label>
+        <Label Grid.Row="2" Text="Register your account!" HorizontalOptions="Center" FontSize="Subtitle"></Label>
+
+        <StackLayout Grid.Row="3" Orientation="Vertical" HorizontalOptions="CenterAndExpand">
+            <Frame BackgroundColor="Transparent" BorderColor="LightGreen" Padding="0" HorizontalOptions="FillAndExpand"
+                   CornerRadius="30">
+                <StackLayout Orientation="Horizontal">
+                    <Entry Text="{Binding RegisterNewUser.Person.Email}" Placeholder="Email" TextColor="Black" FontAttributes="Bold"
+                           VerticalOptions="Center" HorizontalOptions="FillAndExpand" Margin="0,0,20,0" />
+                </StackLayout>
+            </Frame>
+
+            <Frame BackgroundColor="Transparent" BorderColor="LightGreen" Padding="0" HorizontalOptions="FillAndExpand"
+                   CornerRadius="30" Margin="0, 15, 0, 0">
+                <StackLayout Orientation="Horizontal">
+                    <Entry Text="{Binding RegisterNewUser.Person.FirstName}" Placeholder="First Name" TextColor="Black" FontAttributes="Bold"
+                           VerticalOptions="Center" HorizontalOptions="FillAndExpand" Margin="0,0,20,0" />
+                </StackLayout>
+            </Frame>
+
+            <Frame BackgroundColor="Transparent" BorderColor="LightGreen" Padding="0" HorizontalOptions="FillAndExpand"
+                   CornerRadius="30" Margin="0, 15, 0, 0">
+                <StackLayout Orientation="Horizontal">
+                    <Entry Text="{Binding RegisterNewUser.Person.LastName}" Placeholder="Last Name" TextColor="Black" FontAttributes="Bold"
+                           VerticalOptions="Center" HorizontalOptions="FillAndExpand" Margin="0,0,20,0" />
+                </StackLayout>
+            </Frame>
+
+            <Frame BackgroundColor="Transparent" BorderColor="LightGreen" Padding="0" HorizontalOptions="FillAndExpand"
+                   CornerRadius="30" Margin="0, 15, 0, 0">
+                <StackLayout Orientation="Horizontal">
+                    <Entry Text="{Binding RegisterNewUser.Password}" Placeholder="Password" TextColor="Black" FontAttributes="Bold"
+                           VerticalOptions="Center" HorizontalOptions="FillAndExpand" Margin="0,0,20,0" IsPassword="True" />
+                </StackLayout>
+            </Frame>
+
+            <Frame BackgroundColor="Transparent" BorderColor="LightGreen" Padding="0" HorizontalOptions="FillAndExpand"
+                   CornerRadius="30" Margin="0, 15, 0, 0">
+                <StackLayout Orientation="Horizontal">
+                    <Entry Text="{Binding RegisterNewUser.ConfirmPassword}" Placeholder="Password" TextColor="Black" FontAttributes="Bold"
+                           VerticalOptions="Center" HorizontalOptions="FillAndExpand" Margin="0,0,20,0" IsPassword="True" />
+                </StackLayout>
+            </Frame>
+
+            <Button Text="Go Back" BackgroundColor="#58D68B" TextColor="White" FontAttributes="Bold" CornerRadius="30"
+                    WidthRequest="200" Margin="0,15,0,0" Command="{Binding GoToLoginPageCommand}"/>
+
+            <Button Text="Sign In" BackgroundColor="#58D68B" TextColor="White" FontAttributes="Bold" CornerRadius="30"
+                    WidthRequest="200" Margin="0,15,0,0" Command="{Binding RegisterCommand}" IsEnabled="{Binding IsNotBusy}"/>
+        </StackLayout>
+    </Grid>
 </ContentPage>

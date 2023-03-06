@@ -61,6 +61,7 @@ public static class MauiProgram
         #region ForgotPassword
 
         builder.Services.AddSingleton<ForgotPasswordPage>();
+        builder.Services.AddSingleton<ForgotPasswordViewModel>();
 
         #endregion
 

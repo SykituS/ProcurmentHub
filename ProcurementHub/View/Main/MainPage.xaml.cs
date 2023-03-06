@@ -1,12 +1,15 @@
-﻿namespace ProcurementHub.View.Main;
+﻿using GrpcShared.Models;
+
+namespace ProcurementHub.View.Main;
 
 public partial class MainPage : ContentPage
 {
-	public MainPage()
+	public MainPage(UsersViewModel viewModel)
 	{
 		InitializeComponent();
-	}
-    
+        BindingContext = viewModel;
+    }
+
 
 }
 
