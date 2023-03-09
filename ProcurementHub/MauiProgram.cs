@@ -70,8 +70,10 @@ public static class MauiProgram
         #endregion
 
         builder.Services.AddSingleton<MainPage>();
+        builder.Services.AddSingleton<AppShellViewModel>();
+        builder.Services.AddSingleton<LoadingPage>();
+        builder.Services.AddSingleton<LoadingPageViewModel>();
 
-		
 
         return builder.Build();
 	}

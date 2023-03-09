@@ -16,27 +16,43 @@ namespace ProcurementHub.Services
         {
         }
 
-        public async Task<ResponseMessage> LoginUserAsync(LoginUser user)
+        public async Task<GRPCLoggedUser> LoginUserAsync(LoginUser user)
         {
-            var response = await ProcurementClient.LoginUserAsync(new GRPCLoginUser
+            var response = await ProcurementClient.LoginUserToApplicationAsync(new GRPCLoginUser
             {
                 Email = user.UserName,
                 Password = user.Password,
             });
 
-            ResponseMessage.Code = response.Code;
-            ResponseMessage.Message = response.Message;
-
-            return ResponseMessage;
+            return response;
         }
 
-        public async Task<Users> GetUserDataAsync(Guid guid)
+        public async Task<Users> ConvertRequestToUserData(GRPCLoggedUser request)
         {
-            var response = await ProcurementClient.GetUserDataAsync(new GRPCStatus() { Message = guid.ToString() });
 
-            var mapper = MapperConfig.InitializeAutomapper();
+            //var mapper = MapperConfig.InitializeAutomapper();
+            //var result = mapper.Map<GRPCLoggedUser, Users>(response);
 
-            var result = mapper.Map<GRPCLoggedUser, Users>(response);
+            var result = new Users
+            {
+                Id = Guid.Parse(request.User.Id),
+                UserName = request.User.UserName,
+                PasswordHash = request.User.PasswordHash,
+                SecurityStamp = request.User.SecurityStamp,
+                PersonID = request.User.PersonID,
+                PrivacyAgreed = request.User.PrivacyAgreed,
+                PrivacyAgreedOn = request.User.PrivacyAgreedOn.Length > 0 ? DateTime.Parse(request.User.PrivacyAgreedOn) : null,
+                Disabled = request.User.Disabled,
+                CreatedOn = DateTime.Parse(request.User.CreatedOn),
+                UpdatedOn = DateTime.Parse(request.User.UpdatedOn),
+                Person = new Persons
+                {
+                    Id = request.Person.Id,
+                    FirstName = request.Person.FirstName,
+                    LastName = request.Person.LastName,
+                    Email = request.Person.Email,
+                }
+            };
 
             return result;
         }

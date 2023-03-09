@@ -11,7 +11,7 @@ namespace ProcurementHub.Services
     public class BaseServices
     {
         protected readonly Procurement.ProcurementClient ProcurementClient;
-        protected readonly ResponseMessage ResponseMessage = new();
+        protected readonly ValidationResponse ValidationResponse = new();
 
         public BaseServices(Procurement.ProcurementClient procurementClient)
         {

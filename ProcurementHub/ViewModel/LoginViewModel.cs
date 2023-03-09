@@ -3,10 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using Grpc.Core;
 using GrpcShared;
 using GrpcShared.Models;
+using Newtonsoft.Json;
+using ProcurementHub.Controls;
 using ProcurementHub.Infrastructure;
 using ProcurementHub.Model;
 using ProcurementHub.Services;
@@ -43,20 +46,30 @@ namespace ProcurementHub.ViewModel
             try
             {
                 var result = await _loginService.LoginUserAsync(_loginUser);
-                if (result.Code != (int)HttpStatusCode.OK)
+
+                if (!result.ValidationResponse.Successful)
                 {
-                    await Shell.Current.DisplayAlert("Error", result.Message, "OK");
+                    await Shell.Current.DisplayAlert("Error", result.ValidationResponse.Information, "OK");
                 }
                 else
                 {
-                    await Shell.Current.DisplayAlert("ID", result.Message, "OK");
+                    var userData = await _loginService.ConvertRequestToUserData(result);
 
-                    var userData = await _loginService.GetUserDataAsync(Guid.Parse(result.Message));
+                    if (Preferences.ContainsKey(nameof(App.User)))
+                    {
+                        Preferences.Remove(nameof(App.User));
+                    }
 
-                    //await Shell.Current.GoToAsync(nameof(ForgotPasswordPage), true, new Dictionary<string, object>()
-                    //{
-                    //    {"Users", result}
-                    //});
+                    string userStr = JsonConvert.SerializeObject(userData);
+                    Preferences.Set(nameof(App.User), userStr);
+
+                    App.User = userData;
+                    Shell.Current.FlyoutHeader = new FlyoutHeaderControl();
+
+                    await Shell.Current.GoToAsync(nameof(MainPage), true, new Dictionary<string, object>()
+                    {
+                        {"Users", userData}
+                    });
                 }
             }
             catch (RpcException ex)

@@ -1,11 +1,14 @@
-﻿namespace ProcurementHub;
+﻿using GrpcShared.Models;
+
+namespace ProcurementHub;
 
 public partial class App : Application
 {
-	public App()
+    public static Users User;
+	public App(AppShellViewModel viewModel)
 	{
 		InitializeComponent();
 
-		MainPage = new AppShell();
+		MainPage = new AppShell(viewModel);
 	}
 }

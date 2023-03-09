@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace ProcurementHub.Model
 {
-    public class ResponseMessage
+    public class ValidationResponse
     {
-        public int Code { get; set; }
-        public string Message { get; set; }
+        public bool Successful { get; set; }
+        public string Information { get; set; }
     }
 }

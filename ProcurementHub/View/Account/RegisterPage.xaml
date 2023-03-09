@@ -4,14 +4,14 @@
              x:Class="ProcurementHub.View.Account.RegisterPage"
              xmlns:viewmodel="clr-namespace:ProcurementHub.ViewModel"
              x:DataType="viewmodel:RegisterViewModel">
-    <Grid>
+    <Grid Margin="20, 0, 20, 0">
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
             <RowDefinition Height="50" />
             <RowDefinition Height="50" />
             <RowDefinition Height="Auto" />
-            <RowDefinition Height="40" />
-            <RowDefinition Height="40" />
+            <RowDefinition Height="50" />
+            <RowDefinition Height="50" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <Label Grid.Row="1" Text="Welcome!" HorizontalOptions="Center" FontSize="Title" FontAttributes="Bold"></Label>
@@ -58,10 +58,10 @@
                 </StackLayout>
             </Frame>
 
-            <Button Text="Go Back" BackgroundColor="#58D68B" TextColor="White" FontAttributes="Bold" CornerRadius="30"
+            <Button Grid.Row="4" Text="Go Back to login" BorderColor="#58D68B"  BackgroundColor="Transparent" TextColor="#58D68B" FontAttributes="Bold" CornerRadius="10"
                     WidthRequest="200" Margin="0,15,0,0" Command="{Binding GoToLoginPageCommand}"/>
 
-            <Button Text="Sign In" BackgroundColor="#58D68B" TextColor="White" FontAttributes="Bold" CornerRadius="30"
+            <Button Grid.Row="5" Text="Register new account" BackgroundColor="#58D68B" TextColor="White" FontAttributes="Bold" CornerRadius="10"
                     WidthRequest="200" Margin="0,15,0,0" Command="{Binding RegisterCommand}" IsEnabled="{Binding IsNotBusy}"/>
         </StackLayout>
     </Grid>

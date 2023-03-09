@@ -1,9 +1,10 @@
 ﻿using GrpcShared;
+using GrpcShared.Models;
 using ProcurementHub.Services;
 
 namespace ProcurementHub.ViewModel
 {
-    [QueryProperty("Users", "Users")]
+    [QueryProperty(nameof(Users), "Users")]
     public partial class UsersViewModel : BaseViewModel
     {
         //public ObservableCollection<Users> Users { get; set; } = new();
@@ -13,7 +14,7 @@ namespace ProcurementHub.ViewModel
             Title = "Users";
         }
 
-
+        [ObservableProperty] private Users _users;
 
         //[RelayCommand]
         //async Task GetUsers()

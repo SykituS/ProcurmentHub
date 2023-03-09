@@ -29,19 +29,19 @@ namespace ProcurementHub.ViewModel
 
             try
             {
-                Persons.Clear();
-                var perons = await new PersonsService(ProcurementClient).GetPersonsAsync();
+                //Persons.Clear();
+                //var perons = await new PersonsService(ProcurementClient).GetPersonsAsync();
 
-                foreach (var peron in perons)
-                {
-                    Persons.Add(new Persons
-                    {
-                        Id = peron.Id,
-                        FirstName = peron.FirstName,
-                        LastName = peron.LastName,
-                        Email = peron.Email
-                    });
-                }
+                //foreach (var peron in perons)
+                //{
+                //    Persons.Add(new Persons
+                //    {
+                //        Id = peron.Id,
+                //        FirstName = peron.FirstName,
+                //        LastName = peron.LastName,
+                //        Email = peron.Email
+                //    });
+                //}
             }
             catch (Exception ex)
             {

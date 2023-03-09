@@ -36,13 +36,13 @@ namespace ProcurementHub.ViewModel
             {
                 var result = await new RegisterServices(ProcurementClient).RegisterNewUserAsync(_registerNewUser);
 
-                if (result.Code != (int)HttpStatusCode.OK)
+                if (result.Successful)
                 {
-                    await Shell.Current.DisplayAlert("Error", "Error occurred: " + result.Message, "OK");
+                    await Shell.Current.DisplayAlert("Success!", "Account was created", "OK");
                 }
                 else
                 {
-                    await Shell.Current.DisplayAlert("Success!", "Account was created", "OK");
+                    await Shell.Current.DisplayAlert("Error", "Error occurred: " + result.Information, "OK");
                 }
                 
             }
@@ -54,7 +54,6 @@ namespace ProcurementHub.ViewModel
             finally
             {
                 IsBusy = false;
-                _registerNewUser = new RegisterNewUserModel();
             }
         }
 

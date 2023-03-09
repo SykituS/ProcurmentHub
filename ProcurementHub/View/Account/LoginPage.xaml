@@ -5,8 +5,12 @@
              x:Class="ProcurementHub.View.Account.LoginPage"
              xmlns:viewmodel="clr-namespace:ProcurementHub.ViewModel"
              x:DataType="viewmodel:LoginViewModel"
-             Shell.NavBarIsVisible="False">
-        <Grid>
+             Shell.FlyoutBehavior="Disabled">
+    <Shell.BackButtonBehavior>
+        <BackButtonBehavior IsEnabled="False" IsVisible="False"/>
+    </Shell.BackButtonBehavior>
+
+    <Grid Margin="20, 0, 20, 0">
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
             <RowDefinition Height="50" />
@@ -21,7 +25,7 @@
 
         <StackLayout Grid.Row="3" Orientation="Vertical" HorizontalOptions="CenterAndExpand">
             <Frame BackgroundColor="Transparent" BorderColor="LightGreen" Padding="0" HorizontalOptions="FillAndExpand"
-                   CornerRadius="30">
+                   CornerRadius="20">
                 <StackLayout Orientation="Horizontal">
                     <Entry Text="{Binding LoginUser.UserName, Mode=TwoWay}" Placeholder="Username" TextColor="Black" FontAttributes="Bold"
                            VerticalOptions="Center" HorizontalOptions="FillAndExpand" Margin="0,0,20,0" />
@@ -35,12 +39,14 @@
                 </StackLayout>
             </Frame>
 
-            <StackLayout Orientation="Horizontal" Margin="0,10,0,0" Padding="0">
-                <Button Text="Create new account" TextColor="DarkGray" FontSize="Small" FontAttributes="Bold" Command="{Binding GoToRegisterPageCommand}"/>
-                <Button Text="Forgot password" TextColor="DarkGray" FontSize="Small" FontAttributes="Bold" HorizontalOptions="EndAndExpand" Command="{Binding GoToForgotPasswordPageCommand}"/>
+            <StackLayout Grid.Row="4" Orientation="Horizontal" Margin="0,10,0,0" Padding="0">
+                <Button Text="Register new account" BorderColor="#58D68B"  BackgroundColor="Transparent" TextColor="#58D68B" FontAttributes="Bold" CornerRadius="10"
+                        WidthRequest="200" Margin="0,15,0,0" Command="{Binding GoToRegisterPageCommand}" />
+                <Button Text="Forgot password" BorderColor="#58D68B"  BackgroundColor="Transparent" TextColor="#58D68B" FontAttributes="Bold" CornerRadius="10"
+                        WidthRequest="200" Margin="0,15,0,0" Command="{Binding GoToForgotPasswordPageCommand}" HorizontalOptions="EndAndExpand"/>
             </StackLayout>
 
-            <Button Text="Sign In" BackgroundColor="#58D68B" TextColor="White" FontAttributes="Bold" CornerRadius="30"
+            <Button Grid.Row="5" Text="Sign In" BackgroundColor="#58D68B" TextColor="White" FontAttributes="Bold" CornerRadius="10"
                     WidthRequest="200" Margin="0,15,0,0" Command="{Binding LoginCommand}" IsEnabled="{Binding IsNotBusy}"/>
         </StackLayout>
         </Grid>

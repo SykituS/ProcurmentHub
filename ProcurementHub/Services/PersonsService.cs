@@ -17,23 +17,23 @@ namespace ProcurementHub.Services
 
         readonly List<Persons> _persons = new List<Persons>();
 
-        public async Task<List<Persons>> GetPersonsAsync()
-        {
-            var result = await ProcurementClient.GetPersonsAsync(new GRPCStatus() { Code = 200 });
+        //public async Task<List<Persons>> GetPersonsAsync()
+        //{
+        //    var result = await ProcurementClient.Get(new GRPCStatus() { Code = 200 });
 
-            foreach (var person in result.Persons)
-            {
-                _persons.Add(new Persons
-                    {
-                        Id = person.Id,
-                        FirstName = person.FirstName,
-                        LastName = person.LastName,
-                        Email = person.Email
-                    });
-            }
+        //    foreach (var person in result.Persons)
+        //    {
+        //        _persons.Add(new Persons
+        //            {
+        //                Id = person.Id,
+        //                FirstName = person.FirstName,
+        //                LastName = person.LastName,
+        //                Email = person.Email
+        //            });
+        //    }
 
-            return _persons;
-        }
+        //    return _persons;
+        //}
 
         
     }

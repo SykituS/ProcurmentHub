@@ -14,7 +14,7 @@ namespace ProcurementHub.Services
         {
         }
         
-        public async Task<ResponseMessage> RegisterNewUserAsync(RegisterNewUserModel model)
+        public async Task<ValidationResponse> RegisterNewUserAsync(RegisterNewUserModel model)
         {
             var result = await ProcurementClient.RegisterUserAsync(new GRPCRegisterNewUser
             {
@@ -28,10 +28,10 @@ namespace ProcurementHub.Services
                 }
             });
 
-            ResponseMessage.Code = result.Code;
-            ResponseMessage.Message = result.Message;
+            ValidationResponse.Successful = result.Successful;
+            ValidationResponse.Information = result.Information;
 
-            return ResponseMessage;
+            return ValidationResponse;
         }
     }
 }

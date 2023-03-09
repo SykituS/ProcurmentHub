@@ -6,11 +6,41 @@
     xmlns:local="clr-namespace:ProcurementHub"
     xmlns:account="using:ProcurementHub.View.Account"
     xmlns:main="using:ProcurementHub.View.Main"
-    Shell.FlyoutBehavior="Disabled">
+    xmlns:viewmodel="clr-namespace:ProcurementHub.ViewModel"
+    x:DataType="viewmodel:AppShellViewModel"
+    Shell.TabBarIsVisible="False">
 
     <ShellContent
+        Shell.FlyoutBehavior="Disabled"
+        FlyoutItemIsVisible="False"
+        NavigationPage.HasNavigationBar="False"
+        ContentTemplate="{DataTemplate main:LoadingPage}"
+        Route="LoadingPage" />
+
+    <ShellContent
+        Shell.FlyoutBehavior="Disabled"
+        FlyoutItemIsVisible="False"
+        NavigationPage.HasNavigationBar="False"
         Title="Login"
         ContentTemplate="{DataTemplate account:LoginPage}"
         Route="LoginPage" />
 
+    <FlyoutItem FlyoutDisplayOptions="AsMultipleItems">
+        <ShellContent
+            Title="Main"
+            ContentTemplate="{DataTemplate main:MainPage}"
+            Route="MainPage" />
+
+        <ShellContent
+            Title="Dashboard"
+            ContentTemplate="{DataTemplate main:MainPage}"
+            Route="MainPage" />
+    </FlyoutItem>
+
+    <Shell.FlyoutFooter>
+        <StackLayout>
+            <Button Text="Log out" Command="{Binding SignOutCommand}"/>
+        </StackLayout>
+    </Shell.FlyoutFooter>
+    
 </Shell>

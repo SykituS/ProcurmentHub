@@ -1,13 +1,16 @@
-﻿using ProcurementHub.View.Account;
+﻿using GrpcShared;
+using ProcurementHub.View.Account;
 using ProcurementHub.View.Main;
 
 namespace ProcurementHub;
 
 public partial class AppShell : Shell
 {
-	public AppShell()
+	public AppShell(AppShellViewModel viewModel)
 	{
 		InitializeComponent();
+
+        BindingContext = viewModel;
 
 		Routing.RegisterRoute(nameof(RegisterPage), typeof(RegisterPage));
 		Routing.RegisterRoute(nameof(LoginPage), typeof(LoginPage));
