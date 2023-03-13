@@ -1,6 +1,7 @@
 ﻿using GrpcShared;
 using GrpcShared.Models;
 using ProcurementHub.Services;
+using ProcurementHub.View.Account;
 
 namespace ProcurementHub.ViewModel
 {
@@ -15,6 +16,7 @@ namespace ProcurementHub.ViewModel
         }
 
         [ObservableProperty] private Users _users;
+        
 
         //[RelayCommand]
         //async Task GetUsers()

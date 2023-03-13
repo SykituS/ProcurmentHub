@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" ?>
+<?xml version="1.0" encoding="UTF-8"?>
+
 <Shell
     x:Class="ProcurementHub.AppShell"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
@@ -8,6 +9,7 @@
     xmlns:main="using:ProcurementHub.View.Main"
     xmlns:viewmodel="clr-namespace:ProcurementHub.ViewModel"
     x:DataType="viewmodel:AppShellViewModel"
+    Shell.FlyoutBehavior="Flyout"
     Shell.TabBarIsVisible="False">
 
     <ShellContent
@@ -39,8 +41,8 @@
 
     <Shell.FlyoutFooter>
         <StackLayout>
-            <Button Text="Log out" Command="{Binding SignOutCommand}"/>
+            <Button Text="Log out" Command="{Binding SignOutCommand}" />
         </StackLayout>
     </Shell.FlyoutFooter>
-    
+
 </Shell>

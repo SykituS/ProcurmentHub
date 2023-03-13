@@ -8,6 +8,7 @@ using ProcurementHub.Services;
 using ProcurementHub.View;
 using ProcurementHub.View.Account;
 using ProcurementHub.View.Main;
+
 namespace ProcurementHub;
 
 public static class MauiProgram
@@ -31,6 +32,9 @@ public static class MauiProgram
             return new Procurement.ProcurementClient(channel);
         });
 
+        builder.Services.AddSingleton<IConnectivity>(Connectivity.Current);
+        builder.Services.AddSingleton<IGeolocation>(Geolocation.Default);
+        builder.Services.AddSingleton<IMap>(Map.Default);
 
         #region User
 

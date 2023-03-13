@@ -14,9 +14,14 @@ namespace ProcurementHub.ViewModel
 {
     public partial class LoadingPageViewModel
     {
-        public LoadingPageViewModel()
+        IConnectivity connectivity;
+
+        public LoadingPageViewModel(IConnectivity connectivity)
         {
+            this.connectivity = connectivity;
+            CheckInternetConnection();
             CheckUserLoginDetails();
+            CheckConnectionTogRPC();
         }
 
         private async void CheckUserLoginDetails()
@@ -32,11 +37,26 @@ namespace ProcurementHub.ViewModel
             {
                 var userInfo = JsonConvert.DeserializeObject<Users>(userStr);
                 App.User = userInfo;
-                Shell.Current.FlyoutHeader = new FlyoutHeaderControl();
+                //Shell.Current.FlyoutHeader = new FlyoutHeaderControl();
 
                 //Navigate to Main Page
                 await Shell.Current.GoToAsync($"{nameof(MainPage)}");
             }
         }
+
+        private async void CheckInternetConnection()
+        {
+            while (connectivity.NetworkAccess == NetworkAccess.Internet)
+            {
+                await Shell.Current.DisplayAlert("No connectivity!",
+                    $"Please check internet and try again.", "OK");
+            }
+        }
+
+        private async void CheckConnectionTogRPC()
+        {
+
+        }
+
     }
 }
