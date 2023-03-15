@@ -4,7 +4,7 @@ namespace ProcurementHub.View.Main;
 
 public partial class MainPage : ContentPage
 {
-	public MainPage(UsersViewModel viewModel)
+	public MainPage(MainPageViewModel viewModel)
 	{
 		InitializeComponent();
         BindingContext = viewModel;

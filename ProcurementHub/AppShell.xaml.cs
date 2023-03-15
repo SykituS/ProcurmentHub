@@ -1,6 +1,7 @@
 ﻿using GrpcShared;
 using ProcurementHub.View.Account;
 using ProcurementHub.View.Main;
+using ProcurementHub.View.Teams;
 
 namespace ProcurementHub;
 
@@ -16,5 +17,6 @@ public partial class AppShell : Shell
 		Routing.RegisterRoute(nameof(LoginPage), typeof(LoginPage));
 		Routing.RegisterRoute(nameof(ForgotPasswordPage), typeof(ForgotPasswordPage));
 		Routing.RegisterRoute(nameof(MainPage), typeof(MainPage));
+		Routing.RegisterRoute(nameof(TeamMainPage), typeof(TeamMainPage));
 	}
 }

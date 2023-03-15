@@ -41,6 +41,12 @@ namespace ProcurementHub.ViewModel
             if (IsBusy)
                 return;
 
+            if (string.IsNullOrWhiteSpace(_loginUser.UserName) || string.IsNullOrWhiteSpace(_loginUser.Password))
+            {
+                    await Shell.Current.DisplayAlert("Error", "Please enter your credentials!", "OK");
+                    return;
+            }
+
             IsBusy = true;
 
             try
@@ -66,10 +72,7 @@ namespace ProcurementHub.ViewModel
                     App.User = userData;
                     Shell.Current.FlyoutHeader = new FlyoutHeaderControl();
 
-                    await Shell.Current.GoToAsync(nameof(MainPage), true, new Dictionary<string, object>()
-                    {
-                        {"Users", userData}
-                    });
+                    await Shell.Current.GoToAsync(nameof(MainPage), true);
                 }
             }
             catch (RpcException ex)
@@ -84,8 +87,6 @@ namespace ProcurementHub.ViewModel
             finally
             {
                 IsBusy = false;
-                IsRefreshing = false;
-                
             }
         }
 

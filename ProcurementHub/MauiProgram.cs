@@ -8,6 +8,7 @@ using ProcurementHub.Services;
 using ProcurementHub.View;
 using ProcurementHub.View.Account;
 using ProcurementHub.View.Main;
+using ProcurementHub.View.Teams;
 
 namespace ProcurementHub;
 
@@ -38,45 +39,63 @@ public static class MauiProgram
 
         #region User
 
-        builder.Services.AddSingleton<UsersService>();
-        builder.Services.AddSingleton<UsersViewModel>();
+        builder.Services.AddTransient<UsersService>();
+        builder.Services.AddTransient<UsersViewModel>();
 
         #endregion
 
         #region Person
 
-        builder.Services.AddSingleton<PersonsViewModel>();
-        builder.Services.AddSingleton<PersonsService>();
+        builder.Services.AddTransient<PersonsViewModel>();
+        builder.Services.AddTransient<PersonsService>();
 
         #endregion
 
         #region Login
 
-        builder.Services.AddSingleton<LoginViewModel>();
-        builder.Services.AddSingleton<LoginService>();
-        builder.Services.AddSingleton<LoginPage>();
+        builder.Services.AddTransient<LoginViewModel>();
+        builder.Services.AddTransient<LoginService>();
+        builder.Services.AddTransient<LoginPage>();
 
         #endregion
 
         #region Register
 
-        builder.Services.AddSingleton<RegisterViewModel>();
-        builder.Services.AddSingleton<RegisterServices>();
-        builder.Services.AddSingleton<RegisterPage>();
+        builder.Services.AddTransient<RegisterViewModel>();
+        builder.Services.AddTransient<RegisterServices>();
+        builder.Services.AddTransient<RegisterPage>();
 
         #endregion
 
         #region ForgotPassword
 
-        builder.Services.AddSingleton<ForgotPasswordPage>();
-        builder.Services.AddSingleton<ForgotPasswordViewModel>();
+        builder.Services.AddTransient<ForgotPasswordPage>();
+        builder.Services.AddTransient<ForgotPasswordViewModel>();
 
         #endregion
 
-        builder.Services.AddSingleton<MainPage>();
+        #region Main
+
+        builder.Services.AddTransient<MainPage>();
+        builder.Services.AddTransient<MainPageViewModel>();
+
+        #endregion
+
+        #region Teams
+
+        builder.Services.AddTransient<TeamsService>();
+        builder.Services.AddTransient<TeamMainPage>();
+
+        #endregion
+
+        #region Loading
+
+        builder.Services.AddTransient<LoadingPage>();
+        builder.Services.AddTransient<LoadingPageViewModel>();
+
+        #endregion
+
         builder.Services.AddSingleton<AppShellViewModel>();
-        builder.Services.AddSingleton<LoadingPage>();
-        builder.Services.AddSingleton<LoadingPageViewModel>();
 
 
         return builder.Build();

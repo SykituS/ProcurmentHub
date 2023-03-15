@@ -93,6 +93,9 @@
 	  <MauiXaml Update="View\Main\LoadingPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="View\Teams\TeamMainPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	</ItemGroup>
 
 	<ProjectExtensions><VisualStudio><UserProperties XamarinHotReloadDebuggerTimeoutExceptionProcurementHubHideInfoBar="True" /></VisualStudio></ProjectExtensions>

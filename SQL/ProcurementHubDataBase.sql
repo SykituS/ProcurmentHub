@@ -41,6 +41,8 @@ CREATE TABLE Teams (
 	TeamName VARCHAR(50) NOT NULL,
 	Description VARCHAR(250) NOT NULL,
 	Status int NOT NULL,
+	TeamJoinCode int NOT NULL,
+	TeamJoinPassword nvarchar(max),
 	CreatedByID int NOT NULL,
 	CreatedOn datetime not null,
 	UpdatedByID int not null,
@@ -51,13 +53,20 @@ CREATE TABLE Teams (
 )
 
 CREATE TABLE TeamMembers (
+	ID int IDENTITY(1, 1) NOT NULL PRIMARY KEY,
 	TeamID int NOT NULL,
 	PersonID int NOT NULL,
-	Role int NOT NULL,
+	Role int NOT NULL,	
 
 	CONSTRAINT FK_TeamMember_Team FOREIGN KEY (TeamID) REFERENCES Teams(ID),
 	CONSTRAINT FK_TeamMember_Person FOREIGN KEY (PersonID) REFERENCES Persons(ID)
 )
+
+--CREATE TABLE TeamJoinRequest (
+--	TeamID int NOT NULL,
+--	PersonID int NOT NULL,
+
+--)
 
 --CREATE TABLE Restaurants(
 --	ID int IDENTITY(1, 1) NOT NULL PRIMARY KEY,

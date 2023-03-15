@@ -3,7 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ProcurementHub.View.Account.RegisterPage"
              xmlns:viewmodel="clr-namespace:ProcurementHub.ViewModel"
-             x:DataType="viewmodel:RegisterViewModel">
+             x:DataType="viewmodel:RegisterViewModel"
+             Shell.FlyoutBehavior="Disabled">
     <Grid Margin="20, 0, 20, 0">
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />

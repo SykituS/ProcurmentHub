@@ -2,26 +2,37 @@
 
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:model="clr-namespace:GrpcShared.Models;assembly=GrpcShared"
+             xmlns:viewmodel="clr-namespace:ProcurementHub.ViewModel"
              x:Class="ProcurementHub.View.Main.MainPage">
     <Shell.BackButtonBehavior>
         <BackButtonBehavior IsEnabled="False" IsVisible="False" />
     </Shell.BackButtonBehavior>
-    <ScrollView>
-        <VerticalStackLayout
-            Spacing="25"
-            Padding="30,0"
-            VerticalOptions="Center">
+    <Grid ColumnDefinitions="*,*"
+        ColumnSpacing="5"
+        RowDefinitions="*,Auto"
+        RowSpacing="0">
 
-            <Label Text="Procurement Hub" FontSize="Large" HorizontalTextAlignment="Center" />
-
-            <BoxView Color="CornflowerBlue"
-                     CornerRadius="10"
-                     WidthRequest="160"
-                     HeightRequest="160"
-                     VerticalOptions="Center"
-                     HorizontalOptions="Center" />
-
-        </VerticalStackLayout>
-    </ScrollView>
-
+        <ContentView Grid.Row="3">
+            <CollectionView ItemsSource="{Binding Teams}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="model:Teams">
+                        <Grid Padding="10">
+                            <Frame HeightRequest="125">
+                                <Frame.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:MainPageViewModel}}, Path=GoToTeamCommand}"/>
+                                </Frame.GestureRecognizers>
+                                <Grid Padding="0" ColumnDefinitions="126, *">
+                                    <VerticalStackLayout>
+                                        <Label Text="{Binding TeamName}" />
+                                        <Label Text="{Binding Description}" />
+                                    </VerticalStackLayout>
+                                </Grid>
+                            </Frame>
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </ContentView>
+    </Grid>
 </ContentPage>
