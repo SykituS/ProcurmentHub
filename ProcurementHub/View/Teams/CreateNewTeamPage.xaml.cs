@@ -2,9 +2,9 @@ using ProcurementHub.ViewModel.TeamsViewModels;
 
 namespace ProcurementHub.View.Teams;
 
-public partial class TeamMainPage : ContentPage
+public partial class CreateNewTeamPage : ContentPage
 {
-	public TeamMainPage(TeamMainViewModel viewModel)
+	public CreateNewTeamPage(CreateNewTeamViewModel viewModel)
 	{
 		InitializeComponent();
 		BindingContext = viewModel;

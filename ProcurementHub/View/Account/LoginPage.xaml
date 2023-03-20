@@ -49,5 +49,5 @@
             <Button Grid.Row="5" Text="Sign In" BackgroundColor="#58D68B" TextColor="White" FontAttributes="Bold" CornerRadius="10"
                     WidthRequest="200" Margin="0,15,0,0" Command="{Binding LoginCommand}" IsEnabled="{Binding IsNotBusy}"/>
         </StackLayout>
-        </Grid>
+    </Grid>
 </ContentPage>

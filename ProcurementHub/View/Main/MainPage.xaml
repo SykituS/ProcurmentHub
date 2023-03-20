@@ -4,35 +4,48 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:model="clr-namespace:GrpcShared.Models;assembly=GrpcShared"
              xmlns:viewmodel="clr-namespace:ProcurementHub.ViewModel"
+             x:DataType="viewmodel:MainPageViewModel"
              x:Class="ProcurementHub.View.Main.MainPage">
     <Shell.BackButtonBehavior>
         <BackButtonBehavior IsEnabled="False" IsVisible="False" />
     </Shell.BackButtonBehavior>
-    <Grid ColumnDefinitions="*,*"
+    <Grid
+        ColumnDefinitions="*,*"
         ColumnSpacing="5"
         RowDefinitions="*,Auto"
         RowSpacing="0">
 
-        <ContentView Grid.Row="3">
-            <CollectionView ItemsSource="{Binding Teams}">
-                <CollectionView.ItemTemplate>
-                    <DataTemplate x:DataType="model:Teams">
-                        <Grid Padding="10">
-                            <Frame HeightRequest="125">
-                                <Frame.GestureRecognizers>
-                                    <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:MainPageViewModel}}, Path=GoToTeamCommand}"/>
-                                </Frame.GestureRecognizers>
-                                <Grid Padding="0" ColumnDefinitions="126, *">
-                                    <VerticalStackLayout>
-                                        <Label Text="{Binding TeamName}" />
-                                        <Label Text="{Binding Description}" />
-                                    </VerticalStackLayout>
-                                </Grid>
-                            </Frame>
-                        </Grid>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
-        </ContentView>
+        <RefreshView
+            Grid.ColumnSpan="2"
+            Command="{Binding GetTeamsCommand}"
+            IsRefreshing="{Binding IsRefreshing}">
+            <ContentView>
+                <CollectionView ItemsSource="{Binding Teams}">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="model:Teams">
+                            <Grid Padding="10">
+                                <Frame HeightRequest="125">
+                                    <Frame.GestureRecognizers>
+                                        <TapGestureRecognizer
+                                            Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:MainPageViewModel}}, Path=GoToTeamCommand}"
+                                            CommandParameter="{Binding .}" />
+                                    </Frame.GestureRecognizers>
+                                    <Grid Padding="0">
+                                        <VerticalStackLayout>
+                                            <Label Text="{Binding TeamName}" FontAttributes="Bold" FontSize="Large" />
+                                            <Label Text="{Binding Description}" />
+                                        </VerticalStackLayout>
+                                    </Grid>
+                                </Frame>
+                            </Grid>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </ContentView>
+        </RefreshView>
+
+
+        <Button Text="Create new team" Grid.Row="1" Grid.Column="0" Command="{Binding GoToCreateNewTeamCommand}" />
+        <Button Text="Join team" Grid.Row="1" Grid.Column="1" Command="{Binding GoToJoinTeamCommand}" />
     </Grid>
 </ContentPage>

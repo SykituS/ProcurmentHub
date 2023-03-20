@@ -9,6 +9,7 @@ using ProcurementHub.View;
 using ProcurementHub.View.Account;
 using ProcurementHub.View.Main;
 using ProcurementHub.View.Teams;
+using ProcurementHub.ViewModel.TeamsViewModels;
 
 namespace ProcurementHub;
 
@@ -85,6 +86,13 @@ public static class MauiProgram
 
         builder.Services.AddTransient<TeamsService>();
         builder.Services.AddTransient<TeamMainPage>();
+
+        builder.Services.AddTransient<CreateNewTeamPage>();
+        builder.Services.AddTransient<JoinTeamPage>();
+
+        builder.Services.AddTransient<TeamMainViewModel>();
+        builder.Services.AddTransient<JoinTeamViewModel>();
+        builder.Services.AddTransient<CreateNewTeamViewModel>();
 
         #endregion
 

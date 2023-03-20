@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ProcurementHub.View.Teams.JoinTeamPage"
+             xmlns:viewmodel ="clr-namespace:ProcurementHub.ViewModel.TeamsViewModels"
+             x:DataType="viewmodel:JoinTeamViewModel">
+    <Grid Margin="20, 0, 20, 0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="50" />
+            <RowDefinition Height="50" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="40" />
+            <RowDefinition Height="40" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Label Grid.Row="1" Text="Join to existing team" HorizontalOptions="Center" FontSize="Title" FontAttributes="Bold"></Label>
+
+        <StackLayout Grid.Row="3" Orientation="Vertical" HorizontalOptions="CenterAndExpand">
+            <Frame BackgroundColor="Transparent" BorderColor="LightGreen" Padding="0" HorizontalOptions="FillAndExpand"
+                   CornerRadius="20">
+                <StackLayout Orientation="Horizontal">
+                    <Entry Text="{Binding Team.TeamJoinCode, Mode=TwoWay}" Placeholder="Team code" TextColor="Black" FontAttributes="Bold"
+                           VerticalOptions="Center" HorizontalOptions="FillAndExpand" Margin="0,0,20,0" />
+                </StackLayout>
+            </Frame>
+            <Frame BackgroundColor="Transparent" BorderColor="LightGreen" Padding="0" HorizontalOptions="FillAndExpand"
+                   CornerRadius="30" Margin="0,15,0,0">
+                <StackLayout Orientation="Horizontal">
+                    <Entry Text="{Binding Team.TeamJoinPassword, Mode=TwoWay}" Placeholder="Team password" TextColor="Black" FontAttributes="Bold"
+                           VerticalOptions="Center" HorizontalOptions="FillAndExpand" Margin="0,0,20,0" IsPassword="True"/>
+                </StackLayout>
+            </Frame>
+            <StackLayout Grid.Row="4" Orientation="Horizontal" Margin="0,10,0,0" Padding="0">
+                <Button Text="Cancel" BorderColor="#58D68B"  BackgroundColor="Transparent" TextColor="#58D68B" FontAttributes="Bold" CornerRadius="10"
+                        WidthRequest="200" Margin="0,15,0,0" Command="{Binding .}" />
+                <Button Text="Send invitation" BorderColor="#58D68B"  BackgroundColor="Transparent" TextColor="#58D68B" FontAttributes="Bold" CornerRadius="10"
+                        WidthRequest="200" Margin="0,15,0,0" Command="{Binding .}" HorizontalOptions="EndAndExpand"/>
+            </StackLayout>
+        </StackLayout>
+    </Grid>
+</ContentPage>

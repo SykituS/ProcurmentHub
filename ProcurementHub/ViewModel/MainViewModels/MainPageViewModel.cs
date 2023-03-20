@@ -7,6 +7,7 @@ using Grpc.Core;
 using GrpcShared;
 using GrpcShared.Models;
 using ProcurementHub.Services;
+using ProcurementHub.View.Teams;
 
 namespace ProcurementHub.ViewModel
 {
@@ -21,7 +22,11 @@ namespace ProcurementHub.ViewModel
             GetTeamsAsync();
             Title = "Main Page";
         }
-        
+
+        [ObservableProperty]
+        bool isRefreshing;
+
+        [RelayCommand]
         async Task GetTeamsAsync()
         {
             if (IsBusy)
@@ -59,13 +64,32 @@ namespace ProcurementHub.ViewModel
             finally
             {
                 IsBusy = false;
+                IsRefreshing = false;
             }
         }
 
         [RelayCommand]
-        async Task GoToTeam()
+        async Task GoToTeam(Teams teams)
         {
+            if (teams == null)
+                return;
 
+            await Shell.Current.GoToAsync(nameof(TeamMainPage), true, new Dictionary<string, object>
+            {
+                {"Teams", teams }
+            });
+        }
+
+        [RelayCommand]
+        async Task GoToCreateNewTeam()
+        {
+            await Shell.Current.GoToAsync(nameof(CreateNewTeamPage), true);
+        }
+
+        [RelayCommand]
+        async Task GoToJoinTeam()
+        {
+            await Shell.Current.GoToAsync(nameof(JoinTeamPage), true);
         }
     }
 }

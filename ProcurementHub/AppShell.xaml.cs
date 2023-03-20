@@ -18,5 +18,7 @@ public partial class AppShell : Shell
 		Routing.RegisterRoute(nameof(ForgotPasswordPage), typeof(ForgotPasswordPage));
 		Routing.RegisterRoute(nameof(MainPage), typeof(MainPage));
 		Routing.RegisterRoute(nameof(TeamMainPage), typeof(TeamMainPage));
-	}
+		Routing.RegisterRoute(nameof(JoinTeamPage), typeof(JoinTeamPage));
+		Routing.RegisterRoute(nameof(CreateNewTeamPage), typeof(CreateNewTeamPage));
+    }
 }
