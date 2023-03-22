@@ -8,7 +8,7 @@ using GrpcShared.Models;
 
 namespace ProcurementHub.ViewModel.TeamsViewModels
 {
-    [QueryProperty(nameof(Teams), "Teams")]
+    [QueryProperty(nameof(Team), "Teams")]
     public partial class TeamMainViewModel : BaseViewModel
     {
         public TeamMainViewModel(Procurement.ProcurementClient procurementClient) : base(procurementClient)

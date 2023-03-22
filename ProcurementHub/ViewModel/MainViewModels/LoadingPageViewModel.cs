@@ -26,7 +26,7 @@ namespace ProcurementHub.ViewModel
 
         private async void CheckUserLoginDetails()
         {
-            string userStr = Preferences.Get(nameof(App.User), "");
+            string userStr = Preferences.Get(nameof(App.LoggedUserInApplication), "");
 
             if (string.IsNullOrWhiteSpace(userStr))
             {
@@ -36,7 +36,7 @@ namespace ProcurementHub.ViewModel
             else
             {
                 var userInfo = JsonConvert.DeserializeObject<Users>(userStr);
-                App.User = userInfo;
+                App.LoggedUserInApplication = userInfo;
                 //Shell.Current.FlyoutHeader = new FlyoutHeaderControl();
 
                 //Navigate to Main Page

@@ -44,7 +44,7 @@ namespace ProcurementHub.ViewModel
                         Teams.Clear();
                     
 
-                    foreach (var team in result.ResultValues)
+                    foreach (var team in result.ResultValues.OrderBy(e => e.TeamName))
                         Teams.Add(team);
                 }
                 else

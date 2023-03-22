@@ -61,15 +61,15 @@ namespace ProcurementHub.ViewModel
                 {
                     var userData = await _loginService.ConvertRequestToUserData(result);
 
-                    if (Preferences.ContainsKey(nameof(App.User)))
+                    if (Preferences.ContainsKey(nameof(App.LoggedUserInApplication)))
                     {
-                        Preferences.Remove(nameof(App.User));
+                        Preferences.Remove(nameof(App.LoggedUserInApplication));
                     }
 
                     string userStr = JsonConvert.SerializeObject(userData);
-                    Preferences.Set(nameof(App.User), userStr);
+                    Preferences.Set(nameof(App.LoggedUserInApplication), userStr);
 
-                    App.User = userData;
+                    App.LoggedUserInApplication = userData;
                     Shell.Current.FlyoutHeader = new FlyoutHeaderControl();
 
                     await Shell.Current.GoToAsync(nameof(MainPage), true);

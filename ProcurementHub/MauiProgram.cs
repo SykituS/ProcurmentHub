@@ -38,7 +38,7 @@ public static class MauiProgram
         builder.Services.AddSingleton<IGeolocation>(Geolocation.Default);
         builder.Services.AddSingleton<IMap>(Map.Default);
 
-        #region User
+        #region LoggedUserInApplication
 
         builder.Services.AddTransient<UsersService>();
         builder.Services.AddTransient<UsersViewModel>();

@@ -41,7 +41,7 @@ CREATE TABLE Teams (
 	TeamName VARCHAR(50) NOT NULL,
 	Description VARCHAR(250) NOT NULL,
 	Status int NOT NULL,
-	TeamJoinCode int NOT NULL,
+	TeamJoinCode varchar(6) NOT NULL,
 	TeamJoinPassword nvarchar(max),
 	CreatedByID int NOT NULL,
 	CreatedOn datetime not null,

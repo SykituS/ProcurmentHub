@@ -21,9 +21,9 @@ namespace ProcurementHub.Services
         {
             var reply = await ProcurementClient.GetTeamsListAsync(new GRPCLoginInformationForUser
             {
-                Id = App.User.Id.ToString(),
-                Username = App.User.UserName,
-                Password = App.User.PasswordHash
+                Id = App.LoggedUserInApplication.Id.ToString(),
+                Username = App.LoggedUserInApplication.UserName,
+                Password = App.LoggedUserInApplication.PasswordHash
             });
 
             var result = new ValidationResponseWithResult<List<Teams>>();
@@ -54,6 +54,33 @@ namespace ProcurementHub.Services
 
             result.ResultValues = _teams;
             result.Successful = true;
+            return result;
+        }
+
+        public async Task<ValidationResponse> CreateNewTeamAsync(Teams team)
+        {
+            var reply = await ProcurementClient.CreateNewTeamAsync(new GRPCCreateNewTeam
+            {
+                Team = new GRPCTeam()
+                {
+                    TeamJoinPassword = team.TeamJoinPassword,
+                    TeamName = team.TeamName,
+                    Descirption = team.Description,
+                },
+                User = new GRPCLoginInformationForUser()
+                {
+                    Id = App.LoggedUserInApplication.Id.ToString(),
+                    Password = App.LoggedUserInApplication.PasswordHash,
+                    Username = App.LoggedUserInApplication.UserName,
+                }
+            });
+
+            var result = new ValidationResponse()
+            {
+                Successful = reply.Successful,
+                Information = reply.Information,
+            };
+
             return result;
         }
     }

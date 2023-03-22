@@ -17,11 +17,11 @@ namespace ProcurementHub.ViewModel
         [RelayCommand]
         async void SignOut()
         {
-            if (Preferences.ContainsKey(nameof(App.User)))
+            if (Preferences.ContainsKey(nameof(App.LoggedUserInApplication)))
             {
-                Preferences.Remove(nameof(App.User));
+                Preferences.Remove(nameof(App.LoggedUserInApplication));
             }
-            App.User = null;
+            App.LoggedUserInApplication = null;
             await Shell.Current.GoToAsync($"{nameof(LoginPage)}");
         }
     }
