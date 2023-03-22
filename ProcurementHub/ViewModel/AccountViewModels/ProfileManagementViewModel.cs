@@ -6,12 +6,13 @@ using System.Threading.Tasks;
 using GrpcShared;
 using ProcurementHub.View.Account;
 
-namespace ProcurementHub.ViewModel
+namespace ProcurementHub.ViewModel.AccountViewModels
 {
-    public partial class AppShellViewModel : BaseViewModel
+    public partial class ProfileManagementViewModel : BaseViewModel
     {
-        public AppShellViewModel(Procurement.ProcurementClient procurementClient) : base(procurementClient)
+        public ProfileManagementViewModel(Procurement.ProcurementClient procurementClient) : base(procurementClient)
         {
+            Title = "Manage your profile!";
         }
 
         [RelayCommand]

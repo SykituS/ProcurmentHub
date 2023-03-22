@@ -37,7 +37,6 @@ namespace ProcurementHub.ViewModel
             {
                 var userInfo = JsonConvert.DeserializeObject<Users>(userStr);
                 App.LoggedUserInApplication = userInfo;
-                //Shell.Current.FlyoutHeader = new FlyoutHeaderControl();
 
                 //Navigate to Main Page
                 await Shell.Current.GoToAsync($"{nameof(MainPage)}");

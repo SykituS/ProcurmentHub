@@ -9,6 +9,7 @@ using ProcurementHub.View;
 using ProcurementHub.View.Account;
 using ProcurementHub.View.Main;
 using ProcurementHub.View.Teams;
+using ProcurementHub.ViewModel.AccountViewModels;
 using ProcurementHub.ViewModel.TeamsViewModels;
 
 namespace ProcurementHub;
@@ -52,26 +53,21 @@ public static class MauiProgram
 
         #endregion
 
-        #region Login
+        #region Account
 
         builder.Services.AddTransient<LoginViewModel>();
         builder.Services.AddTransient<LoginService>();
         builder.Services.AddTransient<LoginPage>();
-
-        #endregion
-
-        #region Register
-
+        
         builder.Services.AddTransient<RegisterViewModel>();
         builder.Services.AddTransient<RegisterServices>();
         builder.Services.AddTransient<RegisterPage>();
-
-        #endregion
-
-        #region ForgotPassword
-
+        
         builder.Services.AddTransient<ForgotPasswordPage>();
         builder.Services.AddTransient<ForgotPasswordViewModel>();
+
+        builder.Services.AddTransient<ProfileManagementPage>();
+        builder.Services.AddTransient<ProfileManagementViewModel>();
 
         #endregion
 
@@ -79,6 +75,9 @@ public static class MauiProgram
 
         builder.Services.AddTransient<MainPage>();
         builder.Services.AddTransient<MainPageViewModel>();
+
+        builder.Services.AddTransient<LoadingPage>();
+        builder.Services.AddTransient<LoadingPageViewModel>();
 
         #endregion
 
@@ -95,15 +94,7 @@ public static class MauiProgram
         builder.Services.AddTransient<CreateNewTeamViewModel>();
 
         #endregion
-
-        #region Loading
-
-        builder.Services.AddTransient<LoadingPage>();
-        builder.Services.AddTransient<LoadingPageViewModel>();
-
-        #endregion
-
-        builder.Services.AddSingleton<AppShellViewModel>();
+        
 
 
         return builder.Build();

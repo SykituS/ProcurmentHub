@@ -7,11 +7,9 @@ namespace ProcurementHub;
 
 public partial class AppShell : Shell
 {
-	public AppShell(AppShellViewModel viewModel)
+	public AppShell()
 	{
 		InitializeComponent();
-
-        BindingContext = viewModel;
 
 		Routing.RegisterRoute(nameof(RegisterPage), typeof(RegisterPage));
 		Routing.RegisterRoute(nameof(LoginPage), typeof(LoginPage));
@@ -20,5 +18,6 @@ public partial class AppShell : Shell
 		Routing.RegisterRoute(nameof(TeamMainPage), typeof(TeamMainPage));
 		Routing.RegisterRoute(nameof(JoinTeamPage), typeof(JoinTeamPage));
 		Routing.RegisterRoute(nameof(CreateNewTeamPage), typeof(CreateNewTeamPage));
+		Routing.RegisterRoute(nameof(ProfileManagementPage), typeof(ProfileManagementPage));
     }
 }

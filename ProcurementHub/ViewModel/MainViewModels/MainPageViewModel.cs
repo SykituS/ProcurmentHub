@@ -7,6 +7,7 @@ using Grpc.Core;
 using GrpcShared;
 using GrpcShared.Models;
 using ProcurementHub.Services;
+using ProcurementHub.View.Account;
 using ProcurementHub.View.Teams;
 
 namespace ProcurementHub.ViewModel
@@ -90,6 +91,12 @@ namespace ProcurementHub.ViewModel
         async Task GoToJoinTeam()
         {
             await Shell.Current.GoToAsync(nameof(JoinTeamPage), true);
+        }
+
+        [RelayCommand]
+        async Task GoToProfile()
+        {
+            await Shell.Current.GoToAsync(nameof(ProfileManagementPage), true);
         }
     }
 }

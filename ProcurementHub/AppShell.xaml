@@ -5,12 +5,11 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:ProcurementHub"
-    xmlns:account="using:ProcurementHub.View.Account"
+    xmlns:account="clr-namespace:ProcurementHub.View.Account"
     xmlns:main="using:ProcurementHub.View.Main"
     xmlns:viewmodel="clr-namespace:ProcurementHub.ViewModel"
-    x:DataType="viewmodel:AppShellViewModel"
-    Shell.FlyoutBehavior="Flyout"
-    Shell.TabBarIsVisible="False">
+    Shell.FlyoutBehavior="Disabled"
+    Shell.TabBarIsVisible="True">
 
     <ShellContent
         Shell.FlyoutBehavior="Disabled"
@@ -27,22 +26,29 @@
         ContentTemplate="{DataTemplate account:LoginPage}"
         Route="LoginPage" />
 
-    <FlyoutItem FlyoutDisplayOptions="AsMultipleItems">
+    <TabBar>
+        <Tab Title="Dashboard">
+            <ShellContent
+                Title="Test"
+                ContentTemplate="{DataTemplate main:MainPage}"
+                Route="MainPage" />
+            <ShellContent
+                Title="Test"
+                ContentTemplate="{DataTemplate main:MainPage}"
+                Route="MainPage" />
+        </Tab>
         <ShellContent
-            Title="Main"
+            Title="Test"
             ContentTemplate="{DataTemplate main:MainPage}"
             Route="MainPage" />
-
         <ShellContent
-            Title="Dashboard"
+            Title="Test"
             ContentTemplate="{DataTemplate main:MainPage}"
             Route="MainPage" />
-    </FlyoutItem>
-
-    <Shell.FlyoutFooter>
-        <StackLayout>
-            <Button Text="Log out" Command="{Binding SignOutCommand}" />
-        </StackLayout>
-    </Shell.FlyoutFooter>
+        <ShellContent
+            Title="Test"
+            ContentTemplate="{DataTemplate main:MainPage}"
+            Route="MainPage" />
+    </TabBar>
 
 </Shell>

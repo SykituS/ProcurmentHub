@@ -10,13 +10,13 @@
         <BackButtonBehavior IsEnabled="False" IsVisible="False" />
     </Shell.BackButtonBehavior>
     <Grid
-        ColumnDefinitions="*,*"
+        ColumnDefinitions="*,*,*"
         ColumnSpacing="5"
         RowDefinitions="*,Auto"
         RowSpacing="0">
 
         <RefreshView
-            Grid.ColumnSpan="2"
+            Grid.ColumnSpan="3"
             Command="{Binding GetTeamsCommand}"
             IsRefreshing="{Binding IsRefreshing}">
             <ContentView>
@@ -47,5 +47,7 @@
 
         <Button Text="Create new team" Grid.Row="1" Grid.Column="0" Command="{Binding GoToCreateNewTeamCommand}" />
         <Button Text="Join team" Grid.Row="1" Grid.Column="1" Command="{Binding GoToJoinTeamCommand}" />
+        <Button Text="Profile Page" Grid.Row="1" Grid.Column="2" Command="{Binding GoToProfileCommand}" />
+
     </Grid>
 </ContentPage>

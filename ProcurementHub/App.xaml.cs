@@ -5,10 +5,10 @@ namespace ProcurementHub;
 public partial class App : Application
 {
     public static Users LoggedUserInApplication;
-	public App(AppShellViewModel viewModel)
+	public App()
 	{
 		InitializeComponent();
 
-		MainPage = new AppShell(viewModel);
+		MainPage = new AppShell();
 	}
 }

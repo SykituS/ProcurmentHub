@@ -63,9 +63,10 @@ CREATE TABLE TeamMembers (
 )
 
 --CREATE TABLE TeamJoinRequest (
+--	ID int IDENTITY(1, 1) NOT NULL PRIMARY KEY,
 --	TeamID int NOT NULL,
 --	PersonID int NOT NULL,
-
+--	JoinStatus int NOT NULL,
 --)
 
 --CREATE TABLE Restaurants(

@@ -5,6 +5,7 @@
              xmlns:viewmodel="clr-namespace:ProcurementHub.ViewModel.TeamsViewModels"
              Title="{Binding Team.TeamName}"
              x:DataType="viewmodel:TeamMainViewModel">
+
     <VerticalStackLayout>
         <Label 
             Text="Welcome to Team Menu"
@@ -14,5 +15,8 @@
             Text="{Binding Team.TeamName}"
             VerticalOptions="Center" 
             HorizontalOptions="Center" />
+        <Button Text="Start new order"/>
+        <Button Text="TEMP go to team member"/>
+        <Button Text="TEMP go to team settings"/>
     </VerticalStackLayout>
 </ContentPage>
