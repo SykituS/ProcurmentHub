@@ -17,5 +17,7 @@ namespace ProcurementHub.ViewModel.TeamsViewModels
 
         [ObservableProperty]
         Teams team;
+
+        
     }
 }

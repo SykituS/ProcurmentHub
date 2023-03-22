@@ -83,5 +83,45 @@ namespace ProcurementHub.Services
 
             return result;
         }
+
+        public async Task<ValidationResponseWithResult<Teams>> JoinToTeam(Teams team)
+        {
+            var reply = await ProcurementClient.JoinToTeamAsync(new GRPCJoinToTeam()
+            {
+                TeamJoinPassword = team.TeamJoinPassword,
+                TeamJoinCode = team.TeamJoinCode,
+                User = new GRPCLoginInformationForUser()
+                {
+                    Id = App.LoggedUserInApplication.Id.ToString(),
+                    Password = App.LoggedUserInApplication.PasswordHash,
+                    Username = App.LoggedUserInApplication.UserName,
+                }
+            });
+
+            var result = new ValidationResponseWithResult<Teams>
+            {
+                Successful = reply.Response.Successful,
+                Information = reply.Response.Information,
+            };
+
+            if (result.Successful)
+            {
+                result.ResultValues = new Teams
+                {
+                    ID = reply.Team.Id,
+                    TeamName = reply.Team.TeamName,
+                    Description = reply.Team.Descirption,
+                    Status = (TeamStatusEnum)reply.Team.Status,
+                    TeamJoinCode = reply.Team.TeamJoinCode,
+                    TeamJoinPassword = reply.Team.TeamJoinPassword,
+                    CreatedById = reply.Team.CreatedById,
+                    CreatedOn = DateTime.Parse(reply.Team.CreatedOn),
+                    UpdatedById = reply.Team.UpdatedById,
+                    UpdatedOn = DateTime.Parse(reply.Team.UpdatedOn),
+                };
+            }
+
+            return result;
+        }
     }
 }
