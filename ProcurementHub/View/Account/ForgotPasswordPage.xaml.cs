@@ -2,8 +2,9 @@ namespace ProcurementHub.View.Account;
 
 public partial class ForgotPasswordPage : ContentPage
 {
-	public ForgotPasswordPage()
+	public ForgotPasswordPage(ForgotPasswordViewModel viewModel)
 	{
 		InitializeComponent();
+		BindingContext = viewModel;
 	}
 }
