@@ -16,8 +16,25 @@ namespace ProcurementHub.ViewModel.TeamsViewModels
         }
 
         [ObservableProperty]
-        Teams team;
+        private Teams _team;
 
-        
+        [RelayCommand]
+        async Task StartNewOrder()
+        {
+
+        }
+
+        [RelayCommand]
+        async Task GoToTeamSettingsPage()
+        {
+
+        }
+
+        [RelayCommand]
+        async Task GoToTeamMembersPage()
+        {
+
+        }
+
     }
 }

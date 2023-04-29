@@ -17,8 +17,9 @@
             <RowDefinition Height="50" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
+        <Label Grid.Row="1" Text="{Binding Model.ProfileWelcomeText}" HorizontalOptions="Center" FontSize="Title" FontAttributes="Bold"/>
         <StackLayout Grid.Row="3" Orientation="Vertical" HorizontalOptions="CenterAndExpand">
-            <Button Grid.Row="4" Text="Go Back to login" BorderColor="#58D68B"  BackgroundColor="Transparent" TextColor="#58D68B" FontAttributes="Bold" CornerRadius="10"
+            <Button Grid.Row="4" Text="Log out" BorderColor="#58D68B"  BackgroundColor="Transparent" TextColor="#58D68B" FontAttributes="Bold" CornerRadius="10"
                     WidthRequest="200" Margin="0,15,0,0" Command="{Binding SignOutCommand}"/>
 
         </StackLayout>
@@ -29,9 +30,13 @@
             RowDefinitions="*,Auto"
             RowSpacing="0">
 
-        <Button Text="Create new team" Grid.Row="1" Grid.Column="0" Command="{Binding GoToCreateNewTeamCommand}" />
-        <Button Text="Join team" Grid.Row="1" Grid.Column="1" Command="{Binding GoToJoinTeamCommand}" />
-        <Button Text="Dashboard" Grid.Row="1" Grid.Column="2" Command="{Binding GoToDashboardCommand}" />
+            <Button Text="Create new team" Grid.Row="1" Grid.Column="0" FontAttributes="Bold"
+                BorderColor="#58D68B" BackgroundColor="Transparent" TextColor="#58D68B"  Command="{Binding GoToCreateNewTeamCommand}" />
+            <Button Text="Join team" Grid.Row="1" Grid.Column="1" FontAttributes="Bold"
+                BorderColor="#58D68B" BackgroundColor="Transparent" TextColor="#58D68B" Command="{Binding GoToJoinTeamCommand}" />
+            <Button Text="Dashboard" Grid.Row="1" Grid.Column="2" FontAttributes="Bold"
+                BorderColor="#58D68B" BackgroundColor="Transparent" TextColor="#58D68B" Command="{Binding GoToDashboardCommand}" />
+            
 
         </Grid>
     </Grid>

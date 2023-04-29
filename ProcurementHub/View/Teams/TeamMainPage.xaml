@@ -7,14 +7,32 @@
              x:DataType="viewmodel:TeamMainViewModel">
 
     <VerticalStackLayout>
-        <Label 
-            Text="Welcome to Team Menu"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-        <Label 
-            Text="{Binding Team.TeamName}"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
+        <Label VerticalOptions="Center" 
+               HorizontalOptions="Center">
+            <Label.Text>
+                <MultiBinding StringFormat="Team name: {0}">
+                    <Binding Path="Team.TeamName"></Binding>
+                </MultiBinding>
+            </Label.Text>
+        </Label>
+
+        <Label VerticalOptions="Center" 
+               HorizontalOptions="Center">
+            <Label.Text>
+                <MultiBinding StringFormat="Description: {0}">
+                    <Binding Path="Team.Description"></Binding>
+                </MultiBinding>
+            </Label.Text>
+        </Label>
+        <Label VerticalOptions="Center" 
+                   HorizontalOptions="Center">
+            <Label.Text>
+                <MultiBinding StringFormat="Join code: {0}">
+                    <Binding Path="Team.TeamJoinCode"></Binding>
+                </MultiBinding>
+            </Label.Text>
+        </Label>
+
         <Button Text="Start new order"/>
         <Button Text="TEMP go to team member"/>
         <Button Text="TEMP go to team settings"/>

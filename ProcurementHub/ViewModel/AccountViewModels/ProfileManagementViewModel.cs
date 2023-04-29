@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using GrpcShared;
+using ProcurementHub.Model;
 using ProcurementHub.View.Account;
 using ProcurementHub.View.Main;
 using ProcurementHub.View.Teams;
@@ -15,7 +16,10 @@ namespace ProcurementHub.ViewModel.AccountViewModels
         public ProfileManagementViewModel(Procurement.ProcurementClient procurementClient) : base(procurementClient)
         {
             Title = "Manage your profile!";
+            _model.ProfileWelcomeText = $"Hi, {App.LoggedUserInApplication.Person.GetFullName()}";
         }
+
+        [ObservableProperty] private ProfileManagementModel _model = new ProfileManagementModel();
 
         [RelayCommand]
         async void SignOut()
