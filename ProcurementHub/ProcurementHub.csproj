@@ -65,7 +65,7 @@
   </ItemGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\..\ProcurementService\GrpcShared\GrpcShared.csproj" />
+	  <ProjectReference Include="..\GrpcShared\GrpcShared.csproj" />
 	</ItemGroup>
 
   <ItemGroup>
