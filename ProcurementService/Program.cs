@@ -1,3 +1,4 @@
+using Grpc.Net.Client;
 using Microsoft.EntityFrameworkCore;
 using ProcurementService.Data;
 using ProcurementService.Data.Query;

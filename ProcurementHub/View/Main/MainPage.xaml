@@ -24,7 +24,7 @@
                     <CollectionView.ItemTemplate>
                         <DataTemplate x:DataType="model:Teams">
                             <Grid Padding="10">
-                                <Frame HeightRequest="125" BackgroundColor="Transparent" BorderColor="#58D68B">
+                                <Frame HeightRequest="125" BackgroundColor="Transparent" BorderColor="#0d529c" HasShadow="True">
                                     <Frame.GestureRecognizers>
                                         <TapGestureRecognizer
                                             Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:MainPageViewModel}}, Path=GoToTeamCommand}"
@@ -44,12 +44,12 @@
             </ContentView>
         </RefreshView>
 
-        <Button Text="Create new team" Grid.Row="1" Grid.Column="0" FontAttributes="Bold"
-                BorderColor="#58D68B" BackgroundColor="Transparent" TextColor="#58D68B"  Command="{Binding GoToCreateNewTeamCommand}" />
-        <Button Text="Join team" Grid.Row="1" Grid.Column="1" FontAttributes="Bold"
-                BorderColor="#58D68B" BackgroundColor="Transparent" TextColor="#58D68B" Command="{Binding GoToJoinTeamCommand}" />
-        <Button Text="Profile Page" Grid.Row="1" Grid.Column="2" FontAttributes="Bold"
-                BorderColor="#58D68B" BackgroundColor="Transparent" TextColor="#58D68B" Command="{Binding GoToProfileCommand}" />
+        <Button Text="Create new team" Grid.Row="1" Grid.Column="0" FontAttributes="Bold" Margin="5,0,0,5"
+                BorderColor="#0d529c"  BackgroundColor="#0d529c" TextColor="White" Command="{Binding GoToCreateNewTeamCommand}" />
+        <Button Text="Join team" Grid.Row="1" Grid.Column="1" FontAttributes="Bold" Margin="0,0,0,5"
+                BorderColor="#0d529c"  BackgroundColor="#0d529c" TextColor="White" Command="{Binding GoToJoinTeamCommand}" />
+        <Button Text="Profile" Grid.Row="1" Grid.Column="2" FontAttributes="Bold" Margin="0,0,5,5"
+                BorderColor="#0d529c"  BackgroundColor="#0d529c" TextColor="White" Command="{Binding GoToProfileCommand}" />
 
     </Grid>
 </ContentPage>

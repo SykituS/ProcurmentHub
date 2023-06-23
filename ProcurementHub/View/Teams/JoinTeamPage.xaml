@@ -14,28 +14,28 @@
             <RowDefinition Height="40" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <Label Grid.Row="1" Text="Join to existing team" HorizontalOptions="Center" FontSize="Title" FontAttributes="Bold"></Label>
+        <Label Grid.Row="1" Text="Join to existing team" HorizontalOptions="Center" FontSize="Title" FontAttributes="Bold" TextColor="#1c1002"></Label>
 
         <StackLayout Grid.Row="3" Orientation="Vertical" HorizontalOptions="CenterAndExpand">
-            <Frame BackgroundColor="Transparent" BorderColor="LightGreen" Padding="0" HorizontalOptions="FillAndExpand"
-                   CornerRadius="20">
+            <Frame BackgroundColor="Transparent" BorderColor="#0d529c" Padding="0" HorizontalOptions="FillAndExpand"
+                   CornerRadius="10">   
                 <StackLayout Orientation="Horizontal">
                     <Entry Text="{Binding Team.TeamJoinCode, Mode=TwoWay}" Placeholder="Team code" TextColor="Black" FontAttributes="Bold"
-                           VerticalOptions="Center" HorizontalOptions="FillAndExpand" Margin="0,0,20,0" />
+                           VerticalOptions="Center" HorizontalOptions="FillAndExpand" Margin="0,0,0,0" />
                 </StackLayout>
             </Frame>
-            <Frame BackgroundColor="Transparent" BorderColor="LightGreen" Padding="0" HorizontalOptions="FillAndExpand"
-                   CornerRadius="30" Margin="0,15,0,0">
+            <Frame BackgroundColor="Transparent" BorderColor="#0d529c" Padding="0" HorizontalOptions="FillAndExpand"
+                   CornerRadius="10" Margin="0,15,0,0">
                 <StackLayout Orientation="Horizontal">
                     <Entry Text="{Binding Team.TeamJoinPassword, Mode=TwoWay}" Placeholder="Team password" TextColor="Black" FontAttributes="Bold"
-                           VerticalOptions="Center" HorizontalOptions="FillAndExpand" Margin="0,0,20,0" IsPassword="True"/>
+                           VerticalOptions="Center" HorizontalOptions="FillAndExpand" Margin="0,0,0,0" IsPassword="True"/>
                 </StackLayout>
             </Frame>
             <StackLayout Grid.Row="4" Orientation="Horizontal" Margin="0,10,0,0" Padding="0">
-                <Button Text="Cancel" BorderColor="#58D68B"  BackgroundColor="Transparent" TextColor="#58D68B" FontAttributes="Bold" CornerRadius="10"
-                        WidthRequest="200" Margin="0,15,0,0" Command="{Binding GoBackToMainPageCommand}" />
-                <Button Text="Send invitation" BorderColor="#58D68B"  BackgroundColor="Transparent" TextColor="#58D68B" FontAttributes="Bold" CornerRadius="10"
-                        WidthRequest="200" Margin="0,15,0,0" Command="{Binding JoinToTeamCommand}" HorizontalOptions="EndAndExpand"/>
+                <Button Text="Cancel" BorderColor="#0d529c"  BackgroundColor="#0d529c" FontAttributes="Bold" CornerRadius="10"
+                        WidthRequest="150" Margin="0,15,10,0" Command="{Binding GoBackToMainPageCommand}" HorizontalOptions="EndAndExpand"/>
+                <Button Text="Send invitation" BorderColor="#0d529c"  BackgroundColor="#0d529c" FontAttributes="Bold" CornerRadius="10"
+                        WidthRequest="150" Margin="0,15,0,0" Command="{Binding JoinToTeamCommand}" HorizontalOptions="StartAndExpand"/>
             </StackLayout>
         </StackLayout>
     </Grid>

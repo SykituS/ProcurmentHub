@@ -9,7 +9,7 @@
     xmlns:main="using:ProcurementHub.View.Main"
     xmlns:viewmodel="clr-namespace:ProcurementHub.ViewModel"
     Shell.FlyoutBehavior="Disabled"
-    Shell.TabBarIsVisible="True">
+    Shell.TabBarIsVisible="False">
 
     <ShellContent
         Shell.FlyoutBehavior="Disabled"
@@ -25,30 +25,5 @@
         Title="Login"
         ContentTemplate="{DataTemplate account:LoginPage}"
         Route="LoginPage" />
-
-    <TabBar>
-        <Tab Title="Dashboard">
-            <ShellContent
-                Title="Test"
-                ContentTemplate="{DataTemplate main:MainPage}"
-                Route="MainPage" />
-            <ShellContent
-                Title="Test"
-                ContentTemplate="{DataTemplate main:MainPage}"
-                Route="MainPage" />
-        </Tab>
-        <ShellContent
-            Title="Test"
-            ContentTemplate="{DataTemplate main:MainPage}"
-            Route="MainPage" />
-        <ShellContent
-            Title="Test"
-            ContentTemplate="{DataTemplate main:MainPage}"
-            Route="MainPage" />
-        <ShellContent
-            Title="Test"
-            ContentTemplate="{DataTemplate main:MainPage}"
-            Route="MainPage" />
-    </TabBar>
 
 </Shell>
