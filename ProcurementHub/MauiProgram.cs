@@ -16,11 +16,14 @@ namespace ProcurementHub;
 
 public static class MauiProgram
 {
-    public static MauiApp CreateMauiApp()
-    {
-        const string baseAddress = "https://localhost:7170";
+	public static MauiApp CreateMauiApp()
+	{
+		string baseAddress = DeviceInfo.Platform == DevicePlatform.Android
+			? "https://0.0.0.0:7170"
+			: "https://localhost:7170";
 
-        var builder = MauiApp.CreateBuilder();
+
+		var builder = MauiApp.CreateBuilder();
 		builder
 			.UseMauiApp<App>()
 			.ConfigureFonts(fonts =>
@@ -28,75 +31,75 @@ public static class MauiProgram
 				fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
 				fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
 			});
-        builder.Services.AddScoped(services =>
-        {
-            var baseUri = new Uri(baseAddress);
-            var channel = GrpcChannel.ForAddress(baseUri);
-            return new Procurement.ProcurementClient(channel);
-        });
+		builder.Services.AddScoped(services =>
+		{
+			var baseUri = new Uri(baseAddress);
+			var channel = GrpcChannel.ForAddress(baseUri);
+			return new Procurement.ProcurementClient(channel);
+		});
 
-        builder.Services.AddSingleton<IConnectivity>(Connectivity.Current);
-        builder.Services.AddSingleton<IGeolocation>(Geolocation.Default);
-        builder.Services.AddSingleton<IMap>(Map.Default);
+		builder.Services.AddSingleton<IConnectivity>(Connectivity.Current);
+		builder.Services.AddSingleton<IGeolocation>(Geolocation.Default);
+		builder.Services.AddSingleton<IMap>(Map.Default);
 
-        #region LoggedUserInApplication
+		#region LoggedUserInApplication
 
-        builder.Services.AddTransient<UsersService>();
-        builder.Services.AddTransient<UsersViewModel>();
+		builder.Services.AddTransient<UsersService>();
+		builder.Services.AddTransient<UsersViewModel>();
 
-        #endregion
+		#endregion
 
-        #region Person
+		#region Person
 
-        builder.Services.AddTransient<PersonsViewModel>();
-        builder.Services.AddTransient<PersonsService>();
+		builder.Services.AddTransient<PersonsViewModel>();
+		builder.Services.AddTransient<PersonsService>();
 
-        #endregion
+		#endregion
 
-        #region Account
+		#region Account
 
-        builder.Services.AddTransient<LoginViewModel>();
-        builder.Services.AddTransient<LoginService>();
-        builder.Services.AddTransient<LoginPage>();
-        
-        builder.Services.AddTransient<RegisterViewModel>();
-        builder.Services.AddTransient<RegisterServices>();
-        builder.Services.AddTransient<RegisterPage>();
-        
-        builder.Services.AddTransient<ForgotPasswordPage>();
-        builder.Services.AddTransient<ForgotPasswordViewModel>();
+		builder.Services.AddTransient<LoginViewModel>();
+		builder.Services.AddTransient<LoginService>();
+		builder.Services.AddTransient<LoginPage>();
 
-        builder.Services.AddTransient<ProfileManagementPage>();
-        builder.Services.AddTransient<ProfileManagementViewModel>();
+		builder.Services.AddTransient<RegisterViewModel>();
+		builder.Services.AddTransient<RegisterServices>();
+		builder.Services.AddTransient<RegisterPage>();
 
-        #endregion
+		builder.Services.AddTransient<ForgotPasswordPage>();
+		builder.Services.AddTransient<ForgotPasswordViewModel>();
 
-        #region Main
+		builder.Services.AddTransient<ProfileManagementPage>();
+		builder.Services.AddTransient<ProfileManagementViewModel>();
 
-        builder.Services.AddTransient<MainPage>();
-        builder.Services.AddTransient<MainPageViewModel>();
+		#endregion
 
-        builder.Services.AddTransient<LoadingPage>();
-        builder.Services.AddTransient<LoadingPageViewModel>();
+		#region Main
 
-        #endregion
+		builder.Services.AddTransient<MainPage>();
+		builder.Services.AddTransient<MainPageViewModel>();
 
-        #region Teams
+		builder.Services.AddTransient<LoadingPage>();
+		builder.Services.AddTransient<LoadingPageViewModel>();
 
-        builder.Services.AddTransient<TeamsService>();
-        builder.Services.AddTransient<TeamMainPage>();
+		#endregion
 
-        builder.Services.AddTransient<CreateNewTeamPage>();
-        builder.Services.AddTransient<JoinTeamPage>();
+		#region Teams
 
-        builder.Services.AddTransient<TeamMainViewModel>();
-        builder.Services.AddTransient<JoinTeamViewModel>();
-        builder.Services.AddTransient<CreateNewTeamViewModel>();
+		builder.Services.AddTransient<TeamsService>();
+		builder.Services.AddTransient<TeamMainPage>();
 
-        #endregion
-        
+		builder.Services.AddTransient<CreateNewTeamPage>();
+		builder.Services.AddTransient<JoinTeamPage>();
+
+		builder.Services.AddTransient<TeamMainViewModel>();
+		builder.Services.AddTransient<JoinTeamViewModel>();
+		builder.Services.AddTransient<CreateNewTeamViewModel>();
+
+		#endregion
 
 
-        return builder.Build();
+
+		return builder.Build();
 	}
 }

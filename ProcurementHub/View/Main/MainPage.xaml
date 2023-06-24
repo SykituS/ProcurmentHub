@@ -44,12 +44,12 @@
             </ContentView>
         </RefreshView>
 
-        <Button Text="Create new team" Grid.Row="1" Grid.Column="0" FontAttributes="Bold" Margin="5,0,0,5"
-                BorderColor="#0d529c"  BackgroundColor="#0d529c" TextColor="White" Command="{Binding GoToCreateNewTeamCommand}" />
-        <Button Text="Join team" Grid.Row="1" Grid.Column="1" FontAttributes="Bold" Margin="0,0,0,5"
-                BorderColor="#0d529c"  BackgroundColor="#0d529c" TextColor="White" Command="{Binding GoToJoinTeamCommand}" />
-        <Button Text="Profile" Grid.Row="1" Grid.Column="2" FontAttributes="Bold" Margin="0,0,5,5"
-                BorderColor="#0d529c"  BackgroundColor="#0d529c" TextColor="White" Command="{Binding GoToProfileCommand}" />
+        <Button Text="Create team" Grid.Row="1" Grid.Column="0" FontAttributes="Bold" Margin="5,0,0,5" FontSize="12"
+                BorderColor="#0d529c"  BackgroundColor="#0d529c" TextColor="White" Command="{Binding GoToCreateNewTeamCommand}" LineBreakMode="WordWrap"/>
+        <Button Text="Join team" Grid.Row="1" Grid.Column="1" FontAttributes="Bold" Margin="0,0,0,5" FontSize="12"
+                BorderColor="#0d529c"  BackgroundColor="#0d529c" TextColor="White" Command="{Binding GoToJoinTeamCommand}" LineBreakMode="WordWrap"/>
+        <Button Text="Profile" Grid.Row="1" Grid.Column="2" FontAttributes="Bold" Margin="0,0,5,5" FontSize="12"
+                BorderColor="#0d529c"  BackgroundColor="#0d529c" TextColor="White" Command="{Binding GoToProfileCommand}" LineBreakMode="WordWrap"/>
 
     </Grid>
 </ContentPage>

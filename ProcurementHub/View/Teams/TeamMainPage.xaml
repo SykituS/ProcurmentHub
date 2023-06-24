@@ -3,38 +3,40 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ProcurementHub.View.Teams.TeamMainPage"
              xmlns:viewmodel="clr-namespace:ProcurementHub.ViewModel.TeamsViewModels"
-             Title="{Binding Team.TeamName}"
              x:DataType="viewmodel:TeamMainViewModel">
-
-    <VerticalStackLayout>
-        <Label VerticalOptions="Center" 
-               HorizontalOptions="Center">
-            <Label.Text>
-                <MultiBinding StringFormat="Team name: {0}">
-                    <Binding Path="Team.TeamName"></Binding>
-                </MultiBinding>
-            </Label.Text>
-        </Label>
-
-        <Label VerticalOptions="Center" 
-               HorizontalOptions="Center">
-            <Label.Text>
-                <MultiBinding StringFormat="Description: {0}">
-                    <Binding Path="Team.Description"></Binding>
-                </MultiBinding>
-            </Label.Text>
-        </Label>
-        <Label VerticalOptions="Center" 
-                   HorizontalOptions="Center">
-            <Label.Text>
-                <MultiBinding StringFormat="Join code: {0}">
-                    <Binding Path="Team.TeamJoinCode"></Binding>
-                </MultiBinding>
-            </Label.Text>
-        </Label>
-
-        <Button Text="Start new order"/>
-        <Button Text="TEMP go to team member"/>
-        <Button Text="TEMP go to team settings"/>
-    </VerticalStackLayout>
+    <Shell.NavBarIsVisible>False</Shell.NavBarIsVisible>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="40" />
+            <RowDefinition Height="40" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <StackLayout Grid.Row="1">
+        <Label VerticalOptions="Center" HorizontalOptions="Center" Text="{Binding Team.TeamName}" 
+               FontSize="48" FontAttributes="Bold" FontFamily="Arial"/>
+        <Label VerticalOptions="Center" HorizontalOptions="Center" Text="{Binding Team.Description}" 
+               FontSize="24" FontAttributes="Bold" FontFamily="Arial" />
+            
+            <Label VerticalOptions="Center" 
+                   HorizontalOptions="Center"
+                   Grid.Row="3">
+                <Label.Text>
+                    <MultiBinding StringFormat="Join code: {0}">
+                        <Binding Path="Team.TeamJoinCode"></Binding>
+                    </MultiBinding>
+                </Label.Text>
+            </Label>
+        </StackLayout>
+        <StackLayout Grid.Row="4" Padding="0" Margin="0">
+            <Button Text="Start new order" BorderColor="#0d529c"  BackgroundColor="#0d529c" FontAttributes="Bold" CornerRadius="10"
+                WidthRequest="250" Margin="0,0,0,5" />
+            <Button Text="Team members" BorderColor="#0d529c"  BackgroundColor="#0d529c" FontAttributes="Bold" CornerRadius="10"
+                WidthRequest="250" Margin="0,0,0,5"/>
+            <Button Text="Team settings" BorderColor="#0d529c"  BackgroundColor="#0d529c" FontAttributes="Bold" CornerRadius="10"
+                WidthRequest="250" Margin="0,0,0,5"/>
+        </StackLayout>
+    </Grid>
 </ContentPage>

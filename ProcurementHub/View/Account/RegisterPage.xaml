@@ -19,50 +19,50 @@
         <Label Grid.Row="2" Text="Register your account!" HorizontalOptions="Center" FontSize="Subtitle"></Label>
 
         <StackLayout Grid.Row="3" Orientation="Vertical" HorizontalOptions="CenterAndExpand">
-            <Frame BackgroundColor="Transparent" BorderColor="LightGreen" Padding="0" HorizontalOptions="FillAndExpand"
-                   CornerRadius="30">
+            <Frame BackgroundColor="Transparent" BorderColor="#0d529c" Padding="0"
+                   CornerRadius="10">
                 <StackLayout Orientation="Horizontal">
-                    <Entry Text="{Binding RegisterNewUser.Person.Email}" Placeholder="Email" TextColor="Black" FontAttributes="Bold"
+                    <Entry Text="{Binding RegisterNewUser.Person.Email}" Placeholder="E-mail" TextColor="Black" FontAttributes="Bold"
                            VerticalOptions="Center" HorizontalOptions="FillAndExpand" Margin="0,0,20,0" />
                 </StackLayout>
             </Frame>
 
-            <Frame BackgroundColor="Transparent" BorderColor="LightGreen" Padding="0" HorizontalOptions="FillAndExpand"
-                   CornerRadius="30" Margin="0, 15, 0, 0">
+            <Frame BackgroundColor="Transparent" BorderColor="#0d529c" Padding="0"
+                   CornerRadius="10" Margin="0, 15, 0, 0">
                 <StackLayout Orientation="Horizontal">
                     <Entry Text="{Binding RegisterNewUser.Person.FirstName}" Placeholder="First Name" TextColor="Black" FontAttributes="Bold"
                            VerticalOptions="Center" HorizontalOptions="FillAndExpand" Margin="0,0,20,0" />
                 </StackLayout>
             </Frame>
 
-            <Frame BackgroundColor="Transparent" BorderColor="LightGreen" Padding="0" HorizontalOptions="FillAndExpand"
-                   CornerRadius="30" Margin="0, 15, 0, 0">
+            <Frame BackgroundColor="Transparent" BorderColor="#0d529c" Padding="0" 
+                   CornerRadius="10" Margin="0, 15, 0, 0">
                 <StackLayout Orientation="Horizontal">
                     <Entry Text="{Binding RegisterNewUser.Person.LastName}" Placeholder="Last Name" TextColor="Black" FontAttributes="Bold"
                            VerticalOptions="Center" HorizontalOptions="FillAndExpand" Margin="0,0,20,0" />
                 </StackLayout>
             </Frame>
 
-            <Frame BackgroundColor="Transparent" BorderColor="LightGreen" Padding="0" HorizontalOptions="FillAndExpand"
-                   CornerRadius="30" Margin="0, 15, 0, 0">
+            <Frame BackgroundColor="Transparent" BorderColor="#0d529c" Padding="0" 
+                   CornerRadius="10" Margin="0, 15, 0, 0">
                 <StackLayout Orientation="Horizontal">
                     <Entry Text="{Binding RegisterNewUser.Password}" Placeholder="Password" TextColor="Black" FontAttributes="Bold"
                            VerticalOptions="Center" HorizontalOptions="FillAndExpand" Margin="0,0,20,0" IsPassword="True" />
                 </StackLayout>
             </Frame>
 
-            <Frame BackgroundColor="Transparent" BorderColor="LightGreen" Padding="0" HorizontalOptions="FillAndExpand"
-                   CornerRadius="30" Margin="0, 15, 0, 0">
+            <Frame BackgroundColor="Transparent" BorderColor="#0d529c" Padding="0"
+                   CornerRadius="10" Margin="0, 15, 0, 0">
                 <StackLayout Orientation="Horizontal">
                     <Entry Text="{Binding RegisterNewUser.ConfirmPassword}" Placeholder="Password" TextColor="Black" FontAttributes="Bold"
                            VerticalOptions="Center" HorizontalOptions="FillAndExpand" Margin="0,0,20,0" IsPassword="True" />
                 </StackLayout>
             </Frame>
 
-            <Button Grid.Row="4" Text="Go Back to login" BorderColor="#58D68B"  BackgroundColor="Transparent" TextColor="#58D68B" FontAttributes="Bold" CornerRadius="10"
+            <Button Grid.Row="4" Text="Go Back to login" BorderColor="#0d529c"  BackgroundColor="#0d529c" TextColor="White" FontAttributes="Bold" CornerRadius="10"
                     WidthRequest="200" Margin="0,15,0,0" Command="{Binding GoToLoginPageCommand}"/>
 
-            <Button Grid.Row="5" Text="Register new account" BackgroundColor="#58D68B" TextColor="White" FontAttributes="Bold" CornerRadius="10"
+            <Button Grid.Row="5" Text="Register new account" BorderColor="#0d529c"  BackgroundColor="#0d529c" TextColor="White" FontAttributes="Bold" CornerRadius="10"
                     WidthRequest="200" Margin="0,15,0,0" Command="{Binding RegisterCommand}" IsEnabled="{Binding IsNotBusy}"/>
         </StackLayout>
     </Grid>

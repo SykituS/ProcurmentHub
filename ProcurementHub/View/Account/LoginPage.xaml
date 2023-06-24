@@ -24,15 +24,15 @@
         <Label Grid.Row="2" Text="Sign in!" HorizontalOptions="Center" FontSize="Subtitle"></Label>
 
         <StackLayout Grid.Row="3" Orientation="Vertical" HorizontalOptions="CenterAndExpand">
-            <Frame BackgroundColor="Transparent" BorderColor="LightGreen" Padding="0" HorizontalOptions="FillAndExpand"
-                   CornerRadius="20">
+            <Frame BackgroundColor="Transparent" BorderColor="#0d529c" Padding="0" HorizontalOptions="FillAndExpand"
+                   CornerRadius="10">
                 <StackLayout Orientation="Horizontal">
-                    <Entry Text="{Binding LoginUser.UserName, Mode=TwoWay}" Placeholder="Username" TextColor="Black" FontAttributes="Bold"
+                    <Entry Text="{Binding LoginUser.UserName, Mode=TwoWay}" Placeholder="E-mail" TextColor="Black" FontAttributes="Bold"
                            VerticalOptions="Center" HorizontalOptions="FillAndExpand" Margin="0,0,20,0" />
                 </StackLayout>
             </Frame>
-            <Frame BackgroundColor="Transparent" BorderColor="LightGreen" Padding="0" HorizontalOptions="FillAndExpand"
-                   CornerRadius="30" Margin="0,15,0,0">
+            <Frame BackgroundColor="Transparent" BorderColor="#0d529c" Padding="0" HorizontalOptions="FillAndExpand"
+                   CornerRadius="10" Margin="0,15,0,0">
                 <StackLayout Orientation="Horizontal">
                     <Entry Text="{Binding LoginUser.Password, Mode=TwoWay}" Placeholder="Password" TextColor="Black" FontAttributes="Bold"
                            VerticalOptions="Center" HorizontalOptions="FillAndExpand" Margin="0,0,20,0" IsPassword="True"/>
@@ -40,13 +40,13 @@
             </Frame>
 
             <StackLayout Grid.Row="4" Orientation="Horizontal" Margin="0,10,0,0" Padding="0">
-                <Button Text="Register new account" BorderColor="#58D68B"  BackgroundColor="Transparent" TextColor="#58D68B" FontAttributes="Bold" CornerRadius="10"
-                        WidthRequest="200" Margin="0,15,0,0" Command="{Binding GoToRegisterPageCommand}" />
-                <Button Text="Forgot password" BorderColor="#58D68B"  BackgroundColor="Transparent" TextColor="#58D68B" FontAttributes="Bold" CornerRadius="10"
-                        WidthRequest="200" Margin="0,15,0,0" Command="{Binding GoToForgotPasswordPageCommand}" HorizontalOptions="EndAndExpand"/>
+                <Button Text="Register" BorderColor="#0d529c"  BackgroundColor="#0d529c" TextColor="White" FontAttributes="Bold" CornerRadius="10"
+                        WidthRequest="150" Margin="0,15,0,0" Command="{Binding GoToRegisterPageCommand}" />
+                <Button Text="Forgot password" BorderColor="#0d529c"  BackgroundColor="#0d529c" TextColor="White" FontAttributes="Bold" CornerRadius="10"
+                        WidthRequest="150" Margin="0,15,0,0" Command="{Binding GoToForgotPasswordPageCommand}" HorizontalOptions="EndAndExpand"/>
             </StackLayout>
 
-            <Button Grid.Row="5" Text="Sign In" BackgroundColor="#58D68B" TextColor="White" FontAttributes="Bold" CornerRadius="10"
+            <Button Grid.Row="5" Text="Sign In" BorderColor="#0d529c"  BackgroundColor="#0d529c" TextColor="White" FontAttributes="Bold" CornerRadius="10"
                     WidthRequest="200" Margin="0,15,0,0" Command="{Binding LoginCommand}" IsEnabled="{Binding IsNotBusy}"/>
         </StackLayout>
     </Grid>
