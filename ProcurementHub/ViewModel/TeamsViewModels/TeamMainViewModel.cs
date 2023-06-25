@@ -5,10 +5,11 @@ using System.Text;
 using System.Threading.Tasks;
 using GrpcShared;
 using GrpcShared.Models;
+using ProcurementHub.Model;
 
 namespace ProcurementHub.ViewModel.TeamsViewModels
 {
-    [QueryProperty(nameof(Team), "Teams")]
+    [QueryProperty(nameof(Model), "TeamMainModel")]
     public partial class TeamMainViewModel : BaseViewModel
     {
         public TeamMainViewModel(Procurement.ProcurementClient procurementClient) : base(procurementClient)
@@ -16,7 +17,7 @@ namespace ProcurementHub.ViewModel.TeamsViewModels
         }
 
         [ObservableProperty]
-        private Teams _team;
+        private TeamMainModel _model;
 
         [RelayCommand]
         async Task StartNewOrder()

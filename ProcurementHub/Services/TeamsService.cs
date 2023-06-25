@@ -123,5 +123,39 @@ namespace ProcurementHub.Services
 
             return result;
         }
+
+        public async Task<ValidationResponseWithResult<TeamMainModel>> GetSelectedTeam(int teamId)
+        {
+	        var reply = await ProcurementClient.GetSelectedTeamAsync(new GRPCGetSelectedTeamRequest
+	        {
+		        LoggedUser = new GRPCLoginInformationForUser()
+		        {
+			        Id = App.LoggedUserInApplication.Id.ToString(),
+			        Password = App.LoggedUserInApplication.PasswordHash,
+			        Username = App.LoggedUserInApplication.UserName,
+		        },
+		        TeamId = teamId,
+	        });
+
+            var result = new ValidationResponseWithResult<TeamMainModel>
+            {
+	            Successful = reply.Response.Successful,
+	            Information = reply.Response.Information,
+            };
+
+            if (result.Successful)
+            {
+	            result.ResultValues = new TeamMainModel
+	            {
+		            ID = reply.Id,
+		            TeamName = reply.TeamName,
+		            Description = reply.Descirption,
+		            Status = (TeamStatusEnum)reply.Status,
+		            Role = (TeamRoleEnum)reply.Role,
+	            };
+            }
+
+            return result;
+        }
     }
 }

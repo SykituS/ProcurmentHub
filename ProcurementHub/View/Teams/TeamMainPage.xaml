@@ -15,12 +15,12 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <StackLayout Grid.Row="1">
-        <Label VerticalOptions="Center" HorizontalOptions="Center" Text="{Binding Team.TeamName}" 
+            <Label VerticalOptions="Center" HorizontalOptions="Center" Text="{Binding Model.TeamName}" 
                FontSize="48" FontAttributes="Bold" FontFamily="Arial"/>
-        <Label VerticalOptions="Center" HorizontalOptions="Center" Text="{Binding Team.Description}" 
+            <Label VerticalOptions="Center" HorizontalOptions="Center" Text="{Binding Model.Description}" 
                FontSize="24" FontAttributes="Bold" FontFamily="Arial" />
-            
-            <Label VerticalOptions="Center" 
+
+            <!--<Label VerticalOptions="Center" 
                    HorizontalOptions="Center"
                    Grid.Row="3">
                 <Label.Text>
@@ -28,7 +28,7 @@
                         <Binding Path="Team.TeamJoinCode"></Binding>
                     </MultiBinding>
                 </Label.Text>
-            </Label>
+            </Label>-->
         </StackLayout>
         <StackLayout Grid.Row="4" Padding="0" Margin="0">
             <Button Text="Start new order" BorderColor="#0d529c"  BackgroundColor="#0d529c" FontAttributes="Bold" CornerRadius="10"
@@ -36,7 +36,7 @@
             <Button Text="Team members" BorderColor="#0d529c"  BackgroundColor="#0d529c" FontAttributes="Bold" CornerRadius="10"
                 WidthRequest="250" Margin="0,0,0,5"/>
             <Button Text="Team settings" BorderColor="#0d529c"  BackgroundColor="#0d529c" FontAttributes="Bold" CornerRadius="10"
-                WidthRequest="250" Margin="0,0,0,5"/>
+                WidthRequest="250" Margin="0,0,0,5" IsVisible="{Binding Model.IsAdmin}"/>
         </StackLayout>
     </Grid>
 </ContentPage>

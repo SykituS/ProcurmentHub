@@ -75,11 +75,22 @@ namespace ProcurementHub.ViewModel
             if (teams == null)
                 return;
 
-            await Shell.Current.GoToAsync(nameof(TeamMainPage), true, new Dictionary<string, object>
+            var result = await TeamsService.GetSelectedTeam(teams.ID);
+
+            if (result.Successful)
             {
-                {"Teams", teams }
-            });
-        }
+	            var teamMainModel = result.ResultValues;
+
+				await Shell.Current.GoToAsync(nameof(TeamMainPage), true, new Dictionary<string, object>
+	            {
+	                {"TeamMainModel", teamMainModel }
+	            });
+            }
+            else
+            {
+	            await Shell.Current.DisplayAlert("Error", result.Information, "OK");
+            }
+		}
 
         [RelayCommand]
         async Task GoToCreateNewTeam()

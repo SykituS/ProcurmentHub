@@ -450,8 +450,86 @@ namespace ProcurementService.Services
                     },
                 });
             }
+        }
 
-            
+        public override Task<GRPCSelectedTeamResponse> GetSelectedTeam(GRPCGetSelectedTeamRequest request, ServerCallContext context)
+        {
+	        _logger.LogInformation("Start of call GetSelectedTeam: " + DateTime.Now);
+
+	        var userExistsValidationResult =
+		        _verifyLogin.CheckIfUsersExists(request.LoggedUser.Username, request.LoggedUser.Password, Guid.Parse(request.LoggedUser.Id));
+
+	        if (!userExistsValidationResult.Successful)
+	        {
+		        _logger.LogInformation("End of call GetSelectedTeam: " + DateTime.Now);
+
+		        return Task.FromResult(new GRPCSelectedTeamResponse
+				{
+			        Response = new GRPCValidationResponse()
+			        {
+				        Successful = false,
+				        Information = "There was a problem when verifying your login credentials!"
+			        }
+		        });
+	        }
+
+	        var personIdOfLoggedUser = int.Parse(userExistsValidationResult.Information);
+
+			try
+	        {
+                var team = _context.Teams.FirstOrDefault(e => e.ID == request.TeamId && e.Status != TeamStatusEnum.Removed);
+		        if (team == null)
+		        {
+			        return Task.FromResult(new GRPCSelectedTeamResponse()
+			        {
+				        Response = new GRPCValidationResponse()
+				        {
+					        Successful = false,
+					        Information = "Couldn't find selected team or it has been removed!",
+				        },
+			        });
+				}
+
+		        var member = _context.TeamMembers.FirstOrDefault(e => e.PersonID == personIdOfLoggedUser && e.TeamID == request.TeamId);
+
+		        if (member == null)
+		        {
+					return Task.FromResult(new GRPCSelectedTeamResponse()
+					{
+						Response = new GRPCValidationResponse()
+						{
+							Successful = false,
+							Information = "User not found! Try again",
+						},
+					});
+		        }
+				return Task.FromResult(new GRPCSelectedTeamResponse
+			        {
+				        Id = team.ID,
+				        TeamName = team.TeamName,
+				        Descirption = team.Description,
+				        Status = (int)team.Status,
+				        Role = (int)member.Role,
+                        Response = new GRPCValidationResponse()
+                        {
+	                        Successful = true,
+	                        Information = "",
+                        }
+				});
+	        }
+	        catch (Exception ex)
+	        {
+				_logger.LogCritical($"Error in function GetSelectedTeam: Date of error: {DateTime.Now} Error: {ex}");
+
+				return Task.FromResult(new GRPCSelectedTeamResponse()
+				{
+					Response = new GRPCValidationResponse()
+					{
+						Successful = false,
+						Information = "There was an error while getting selected team! Please try again!",
+					},
+				});
+			}
         }
     }
 }

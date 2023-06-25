@@ -54,7 +54,7 @@
             <Frame BackgroundColor="Transparent" BorderColor="#0d529c" Padding="0"
                    CornerRadius="10" Margin="0, 15, 0, 0">
                 <StackLayout Orientation="Horizontal">
-                    <Entry Text="{Binding RegisterNewUser.ConfirmPassword}" Placeholder="Password" TextColor="Black" FontAttributes="Bold"
+                    <Entry Text="{Binding RegisterNewUser.ConfirmPassword}" Placeholder="Confirm Password" TextColor="Black" FontAttributes="Bold"
                            VerticalOptions="Center" HorizontalOptions="FillAndExpand" Margin="0,0,20,0" IsPassword="True" />
                 </StackLayout>
             </Frame>
