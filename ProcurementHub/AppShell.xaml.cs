@@ -19,5 +19,6 @@ public partial class AppShell : Shell
 		Routing.RegisterRoute(nameof(JoinTeamPage), typeof(JoinTeamPage));
 		Routing.RegisterRoute(nameof(CreateNewTeamPage), typeof(CreateNewTeamPage));
 		Routing.RegisterRoute(nameof(ProfileManagementPage), typeof(ProfileManagementPage));
-    }
+		Routing.RegisterRoute(nameof(TeamSettingsPage), typeof(TeamSettingsPage));
+	}
 }

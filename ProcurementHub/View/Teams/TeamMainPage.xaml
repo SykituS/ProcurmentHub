@@ -13,6 +13,7 @@
             <RowDefinition Height="40" />
             <RowDefinition Height="40" />
             <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <StackLayout Grid.Row="1">
             <Label VerticalOptions="Center" HorizontalOptions="Center" Text="{Binding Model.TeamName}" 
@@ -30,13 +31,23 @@
                 </Label.Text>
             </Label>-->
         </StackLayout>
-        <StackLayout Grid.Row="4" Padding="0" Margin="0">
-            <Button Text="Start new order" BorderColor="#0d529c"  BackgroundColor="#0d529c" FontAttributes="Bold" CornerRadius="10"
-                WidthRequest="250" Margin="0,0,0,5" />
-            <Button Text="Team members" BorderColor="#0d529c"  BackgroundColor="#0d529c" FontAttributes="Bold" CornerRadius="10"
-                WidthRequest="250" Margin="0,0,0,5"/>
-            <Button Text="Team settings" BorderColor="#0d529c"  BackgroundColor="#0d529c" FontAttributes="Bold" CornerRadius="10"
-                WidthRequest="250" Margin="0,0,0,5" IsVisible="{Binding Model.IsAdmin}"/>
+        <StackLayout Grid.Row="5" Padding="0" Margin="0">
+            <Label VerticalOptions="Center" HorizontalOptions="Center" Text="Options" 
+                   FontSize="24" FontAttributes="Bold" FontFamily="Arial" />
+            <Button Text="Start new order" BorderColor="#0d529c"  BackgroundColor="#0d529c" TextColor="White" FontAttributes="Bold" CornerRadius="10"
+                    WidthRequest="250" Margin="0,5,0,5" Command="{Binding StartNewOrderCommand}"/>
+            <Button Text="Members" BorderColor="#0d529c"  BackgroundColor="#0d529c" TextColor="White" FontAttributes="Bold" CornerRadius="10"
+                WidthRequest="250" Margin="0,0,0,5" Command="{Binding GoToTeamMembersPageCommand}"/>
+            <Button Text="Statistics" BorderColor="#0d529c"  BackgroundColor="#0d529c" TextColor="White" FontAttributes="Bold" CornerRadius="10"
+                    WidthRequest="250" Margin="0,0,0,5" Command="{Binding GoToTeamStatisticsPageCommand}"/>
+
+        </StackLayout>
+        <StackLayout Grid.Row="6" Padding="0" Margin="0" IsVisible="{Binding Model.IsAdmin}">
+            <Label VerticalOptions="Center" HorizontalOptions="Center" Text="Admin options" 
+                   FontSize="24" FontAttributes="Bold" FontFamily="Arial" />
+            <Button Text="Team settings" BorderColor="#0d529c"  BackgroundColor="#0d529c" TextColor="White" FontAttributes="Bold" CornerRadius="10"
+                    WidthRequest="250" Margin="0,5,0,5" 
+                    Command="{Binding GoToTeamSettingsPageCommand}" IsVisible="{Binding Model.IsAdmin}"/>
         </StackLayout>
     </Grid>
 </ContentPage>

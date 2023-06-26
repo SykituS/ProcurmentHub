@@ -87,13 +87,15 @@ public static class MauiProgram
 		#region Teams
 
 		builder.Services.AddTransient<TeamsService>();
-		builder.Services.AddTransient<TeamMainPage>();
 
+		builder.Services.AddTransient<TeamMainPage>();
+		builder.Services.AddTransient<TeamSettingsPage>();
 		builder.Services.AddTransient<CreateNewTeamPage>();
 		builder.Services.AddTransient<JoinTeamPage>();
 
 		builder.Services.AddTransient<TeamMainViewModel>();
 		builder.Services.AddTransient<JoinTeamViewModel>();
+		builder.Services.AddTransient<TeamSettingsViewModel>();
 		builder.Services.AddTransient<CreateNewTeamViewModel>();
 
 		#endregion

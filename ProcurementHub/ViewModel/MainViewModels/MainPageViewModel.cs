@@ -75,20 +75,41 @@ namespace ProcurementHub.ViewModel
             if (teams == null)
                 return;
 
-            var result = await TeamsService.GetSelectedTeam(teams.ID);
+            if (IsBusy)
+	            return;
 
-            if (result.Successful)
+            IsBusy = true;
+
+			try
             {
-	            var teamMainModel = result.ResultValues;
+	            var result = await TeamsService.GetSelectedTeam(teams.ID);
 
-				await Shell.Current.GoToAsync(nameof(TeamMainPage), true, new Dictionary<string, object>
+	            if (result.Successful)
 	            {
-	                {"TeamMainModel", teamMainModel }
-	            });
-            }
-            else
+		            var teamMainModel = result.ResultValues;
+
+		            await Shell.Current.GoToAsync(nameof(TeamMainPage), true, new Dictionary<string, object>
+		            {
+			            {"TeamMainModel", teamMainModel }
+		            });
+	            }
+	            else
+	            {
+		            await Shell.Current.DisplayAlert("Error", result.Information, "OK");
+	            }
+			}
+			catch (RpcException ex)
             {
-	            await Shell.Current.DisplayAlert("Error", result.Information, "OK");
+	            await Shell.Current.DisplayAlert("Error", "Error while connecting to the server", "OK");
+            }
+            catch (Exception ex)
+            {
+	            Debug.WriteLine(ex);
+	            await Shell.Current.DisplayAlert("Error", "Unexpected error occurred! Please try again!", "OK");
+            }
+            finally
+            {
+	            IsBusy = false;
             }
 		}
 
