@@ -17,12 +17,6 @@ namespace ProcurementHub.ViewModel.TeamsViewModels
 
 		[ObservableProperty]
 	    private TeamSettingsModel _model;
-
-	    [RelayCommand]
-	    async Task GoBackToMainPanel()
-	    {
-
-		    await Shell.Current.GoToAsync("..");
-		}
+		
 	}
 }
