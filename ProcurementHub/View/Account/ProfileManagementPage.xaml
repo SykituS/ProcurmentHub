@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="ProcurementHub.View.Account.ProfileManagementPage"
-             xmlns:accountViewModels="clr-namespace:ProcurementHub.ViewModel.AccountViewModels"
-             x:DataType="accountViewModels:ProfileManagementViewModel">
+<ContentPage
+    x:Class="ProcurementHub.View.Account.ProfileManagementPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:accountViewModels="clr-namespace:ProcurementHub.ViewModel.AccountViewModels"
+    x:DataType="accountViewModels:ProfileManagementViewModel">
     <Shell.BackButtonBehavior>
         <BackButtonBehavior IsEnabled="False" IsVisible="False" />
     </Shell.BackButtonBehavior>
@@ -17,26 +18,72 @@
             <RowDefinition Height="50" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <Label Grid.Row="1" Text="{Binding Model.ProfileWelcomeText}" HorizontalOptions="Center" FontSize="Title" FontAttributes="Bold"/>
-        <StackLayout Grid.Row="3" Orientation="Vertical" HorizontalOptions="CenterAndExpand">
-            <Button Grid.Row="4" Text="Log out" BorderColor="#0d529c"  BackgroundColor="#0d529c" TextColor="White" FontAttributes="Bold" CornerRadius="10"
-                    WidthRequest="200" Margin="0,15,0,0" Command="{Binding SignOutCommand}" LineBreakMode="WordWrap"/>
+        <Label
+            Grid.Row="1"
+            FontAttributes="Bold"
+            FontSize="Title"
+            HorizontalOptions="Center"
+            Text="{Binding Model.ProfileWelcomeText}" />
+        <StackLayout
+            Grid.Row="3"
+            HorizontalOptions="CenterAndExpand"
+            Orientation="Vertical">
+            <Button
+                Grid.Row="4"
+                Margin="0,15,0,0"
+                BackgroundColor="#0d529c"
+                BorderColor="#0d529c"
+                Command="{Binding SignOutCommand}"
+                CornerRadius="10"
+                FontAttributes="Bold"
+                LineBreakMode="WordWrap"
+                Text="Log out"
+                TextColor="White"
+                WidthRequest="200" />
 
         </StackLayout>
 
-        <Grid Grid.Row="6"
-              ColumnDefinitions="*,*,*"
-              ColumnSpacing="5"
-              RowDefinitions="*,Auto"
-              RowSpacing="0"
-              Margin="0,0,0,5">
+        <Grid
+            Grid.Row="6"
+            Margin="0,0,0,5"
+            ColumnDefinitions="*,*,*"
+            ColumnSpacing="5"
+            RowDefinitions="*,Auto"
+            RowSpacing="0">
 
-            <Button Text="Create team" Grid.Row="1" Grid.Column="0" FontAttributes="Bold" FontSize="12"
-                    BorderColor="#0d529c"  BackgroundColor="#0d529c" TextColor="White"  Command="{Binding GoToCreateNewTeamCommand}" LineBreakMode="WordWrap"/>
-            <Button Text="Join team" Grid.Row="1" Grid.Column="1" FontAttributes="Bold" FontSize="12"
-                    BorderColor="#0d529c"  BackgroundColor="#0d529c" TextColor="White" Command="{Binding GoToJoinTeamCommand}" LineBreakMode="WordWrap"/>
-            <Button Text="Dashboard" Grid.Row="1" Grid.Column="2" FontAttributes="Bold" FontSize="12"
-                    BorderColor="#0d529c"  BackgroundColor="#0d529c" TextColor="White" Command="{Binding GoToDashboardCommand}" LineBreakMode="WordWrap"/>
+            <Button
+                Grid.Row="1"
+                Grid.Column="0"
+                BackgroundColor="#0d529c"
+                BorderColor="#0d529c"
+                Command="{Binding GoToCreateNewTeamCommand}"
+                FontAttributes="Bold"
+                FontSize="12"
+                LineBreakMode="WordWrap"
+                Text="Create team"
+                TextColor="White" />
+            <Button
+                Grid.Row="1"
+                Grid.Column="1"
+                BackgroundColor="#0d529c"
+                BorderColor="#0d529c"
+                Command="{Binding GoToJoinTeamCommand}"
+                FontAttributes="Bold"
+                FontSize="12"
+                LineBreakMode="WordWrap"
+                Text="Join team"
+                TextColor="White" />
+            <Button
+                Grid.Row="1"
+                Grid.Column="2"
+                BackgroundColor="#0d529c"
+                BorderColor="#0d529c"
+                Command="{Binding GoToDashboardCommand}"
+                FontAttributes="Bold"
+                FontSize="12"
+                LineBreakMode="WordWrap"
+                Text="Dashboard"
+                TextColor="White" />
 
 
         </Grid>

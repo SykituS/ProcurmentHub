@@ -1,10 +1,16 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="ProcurementHub.View.Main.LoadingPage"
-             Title="LoadingPage"
-             Shell.FlyoutBehavior="Disabled">
+<ContentPage
+    x:Class="ProcurementHub.View.Main.LoadingPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    Title="LoadingPage"
+    Shell.FlyoutBehavior="Disabled">
     <StackLayout>
-        <ActivityIndicator IsRunning="True" HeightRequest="40" WidthRequest="40" HorizontalOptions="Center"  VerticalOptions="Center" />
+        <ActivityIndicator
+            HeightRequest="40"
+            HorizontalOptions="Center"
+            IsRunning="True"
+            VerticalOptions="Center"
+            WidthRequest="40" />
     </StackLayout>
 </ContentPage>

@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="ProcurementHub.View.Teams.TeamMainPage"
-             xmlns:viewmodel="clr-namespace:ProcurementHub.ViewModel.TeamsViewModels"
-             x:DataType="viewmodel:TeamMainViewModel">
+<ContentPage
+    x:Class="ProcurementHub.View.Teams.TeamMainPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:viewmodel="clr-namespace:ProcurementHub.ViewModel.TeamsViewModels"
+    x:DataType="viewmodel:TeamMainViewModel">
     <Shell.NavBarIsVisible>False</Shell.NavBarIsVisible>
     <Grid>
         <Grid.RowDefinitions>
@@ -16,12 +17,22 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <StackLayout Grid.Row="1">
-            <Label VerticalOptions="Center" HorizontalOptions="Center" Text="{Binding Model.TeamName}" 
-               FontSize="48" FontAttributes="Bold" FontFamily="Arial"/>
-            <Label VerticalOptions="Center" HorizontalOptions="Center" Text="{Binding Model.Description}" 
-               FontSize="24" FontAttributes="Bold" FontFamily="Arial" />
+            <Label
+                FontAttributes="Bold"
+                FontFamily="Arial"
+                FontSize="48"
+                HorizontalOptions="Center"
+                Text="{Binding Model.TeamName}"
+                VerticalOptions="Center" />
+            <Label
+                FontAttributes="Bold"
+                FontFamily="Arial"
+                FontSize="24"
+                HorizontalOptions="Center"
+                Text="{Binding Model.Description}"
+                VerticalOptions="Center" />
 
-            <!--<Label VerticalOptions="Center" 
+            <!--<Label VerticalOptions="Center"
                    HorizontalOptions="Center"
                    Grid.Row="3">
                 <Label.Text>
@@ -31,23 +42,72 @@
                 </Label.Text>
             </Label>-->
         </StackLayout>
-        <StackLayout Grid.Row="5" Padding="0" Margin="0">
-            <Label VerticalOptions="Center" HorizontalOptions="Center" Text="Options" 
-                   FontSize="24" FontAttributes="Bold" FontFamily="Arial" />
-            <Button Text="Start new order" BorderColor="#0d529c"  BackgroundColor="#0d529c" TextColor="White" FontAttributes="Bold" CornerRadius="10"
-                    WidthRequest="250" Margin="0,5,0,5" Command="{Binding StartNewOrderCommand}"/>
-            <Button Text="Members" BorderColor="#0d529c"  BackgroundColor="#0d529c" TextColor="White" FontAttributes="Bold" CornerRadius="10"
-                WidthRequest="250" Margin="0,0,0,5" Command="{Binding GoToTeamMembersPageCommand}"/>
-            <Button Text="Statistics" BorderColor="#0d529c"  BackgroundColor="#0d529c" TextColor="White" FontAttributes="Bold" CornerRadius="10"
-                    WidthRequest="250" Margin="0,0,0,5" Command="{Binding GoToTeamStatisticsPageCommand}"/>
+        <StackLayout
+            Grid.Row="5"
+            Margin="0"
+            Padding="0">
+            <Label
+                FontAttributes="Bold"
+                FontFamily="Arial"
+                FontSize="24"
+                HorizontalOptions="Center"
+                Text="Options"
+                VerticalOptions="Center" />
+            <Button
+                Margin="0,5,0,5"
+                BackgroundColor="#0d529c"
+                BorderColor="#0d529c"
+                Command="{Binding StartNewOrderCommand}"
+                CornerRadius="10"
+                FontAttributes="Bold"
+                Text="Start new order"
+                TextColor="White"
+                WidthRequest="250" />
+            <Button
+                Margin="0,0,0,5"
+                BackgroundColor="#0d529c"
+                BorderColor="#0d529c"
+                Command="{Binding GoToTeamMembersPageCommand}"
+                CornerRadius="10"
+                FontAttributes="Bold"
+                Text="Members"
+                TextColor="White"
+                WidthRequest="250" />
+            <Button
+                Margin="0,0,0,5"
+                BackgroundColor="#0d529c"
+                BorderColor="#0d529c"
+                Command="{Binding GoToTeamStatisticsPageCommand}"
+                CornerRadius="10"
+                FontAttributes="Bold"
+                Text="Statistics"
+                TextColor="White"
+                WidthRequest="250" />
 
         </StackLayout>
-        <StackLayout Grid.Row="6" Padding="0" Margin="0" IsVisible="{Binding Model.IsAdmin}">
-            <Label VerticalOptions="Center" HorizontalOptions="Center" Text="Admin options" 
-                   FontSize="24" FontAttributes="Bold" FontFamily="Arial" />
-            <Button Text="Team settings" BorderColor="#0d529c"  BackgroundColor="#0d529c" TextColor="White" FontAttributes="Bold" CornerRadius="10"
-                    WidthRequest="250" Margin="0,5,0,5" 
-                    Command="{Binding GoToTeamSettingsPageCommand}" IsVisible="{Binding Model.IsAdmin}"/>
+        <StackLayout
+            Grid.Row="6"
+            Margin="0"
+            Padding="0"
+            IsVisible="{Binding Model.IsAdmin}">
+            <Label
+                FontAttributes="Bold"
+                FontFamily="Arial"
+                FontSize="24"
+                HorizontalOptions="Center"
+                Text="Admin options"
+                VerticalOptions="Center" />
+            <Button
+                Margin="0,5,0,5"
+                BackgroundColor="#0d529c"
+                BorderColor="#0d529c"
+                Command="{Binding GoToTeamSettingsPageCommand}"
+                CornerRadius="10"
+                FontAttributes="Bold"
+                IsVisible="{Binding Model.IsAdmin}"
+                Text="Team settings"
+                TextColor="White"
+                WidthRequest="250" />
         </StackLayout>
     </Grid>
 </ContentPage>

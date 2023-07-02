@@ -1,11 +1,12 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8" ?>
 
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:model="clr-namespace:GrpcShared.Models;assembly=GrpcShared"
-             xmlns:viewmodel="clr-namespace:ProcurementHub.ViewModel"
-             x:DataType="viewmodel:MainPageViewModel"
-             x:Class="ProcurementHub.View.Main.MainPage">
+<ContentPage
+    x:Class="ProcurementHub.View.Main.MainPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:model="clr-namespace:GrpcShared.Models;assembly=GrpcShared"
+    xmlns:viewmodel="clr-namespace:ProcurementHub.ViewModel"
+    x:DataType="viewmodel:MainPageViewModel">
     <Shell.BackButtonBehavior>
         <BackButtonBehavior IsEnabled="False" IsVisible="False" />
     </Shell.BackButtonBehavior>
@@ -24,15 +25,20 @@
                     <CollectionView.ItemTemplate>
                         <DataTemplate x:DataType="model:Teams">
                             <Grid Padding="10">
-                                <Frame HeightRequest="125" BackgroundColor="Transparent" BorderColor="#0d529c" HasShadow="True">
+                                <Frame
+                                    BackgroundColor="Transparent"
+                                    BorderColor="#0d529c"
+                                    HasShadow="True"
+                                    HeightRequest="125">
                                     <Frame.GestureRecognizers>
-                                        <TapGestureRecognizer
-                                            Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:MainPageViewModel}}, Path=GoToTeamCommand}"
-                                            CommandParameter="{Binding .}" />
+                                        <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:MainPageViewModel}}, Path=GoToTeamCommand}" CommandParameter="{Binding .}" />
                                     </Frame.GestureRecognizers>
                                     <Grid Padding="0">
                                         <VerticalStackLayout>
-                                            <Label Text="{Binding TeamName}" FontAttributes="Bold" FontSize="Large" />
+                                            <Label
+                                                FontAttributes="Bold"
+                                                FontSize="Large"
+                                                Text="{Binding TeamName}" />
                                             <Label Text="{Binding Description}" />
                                         </VerticalStackLayout>
                                     </Grid>
@@ -44,12 +50,42 @@
             </ContentView>
         </RefreshView>
 
-        <Button Text="Create team" Grid.Row="1" Grid.Column="0" FontAttributes="Bold" Margin="5,0,0,5" FontSize="12"
-                BorderColor="#0d529c"  BackgroundColor="#0d529c" TextColor="White" Command="{Binding GoToCreateNewTeamCommand}" LineBreakMode="WordWrap"/>
-        <Button Text="Join team" Grid.Row="1" Grid.Column="1" FontAttributes="Bold" Margin="0,0,0,5" FontSize="12"
-                BorderColor="#0d529c"  BackgroundColor="#0d529c" TextColor="White" Command="{Binding GoToJoinTeamCommand}" LineBreakMode="WordWrap"/>
-        <Button Text="Profile" Grid.Row="1" Grid.Column="2" FontAttributes="Bold" Margin="0,0,5,5" FontSize="12"
-                BorderColor="#0d529c"  BackgroundColor="#0d529c" TextColor="White" Command="{Binding GoToProfileCommand}" LineBreakMode="WordWrap"/>
+        <Button
+            Grid.Row="1"
+            Grid.Column="0"
+            Margin="5,0,0,5"
+            BackgroundColor="#0d529c"
+            BorderColor="#0d529c"
+            Command="{Binding GoToCreateNewTeamCommand}"
+            FontAttributes="Bold"
+            FontSize="12"
+            LineBreakMode="WordWrap"
+            Text="Create team"
+            TextColor="White" />
+        <Button
+            Grid.Row="1"
+            Grid.Column="1"
+            Margin="0,0,0,5"
+            BackgroundColor="#0d529c"
+            BorderColor="#0d529c"
+            Command="{Binding GoToJoinTeamCommand}"
+            FontAttributes="Bold"
+            FontSize="12"
+            LineBreakMode="WordWrap"
+            Text="Join team"
+            TextColor="White" />
+        <Button
+            Grid.Row="1"
+            Grid.Column="2"
+            Margin="0,0,5,5"
+            BackgroundColor="#0d529c"
+            BorderColor="#0d529c"
+            Command="{Binding GoToProfileCommand}"
+            FontAttributes="Bold"
+            FontSize="12"
+            LineBreakMode="WordWrap"
+            Text="Profile"
+            TextColor="White" />
 
     </Grid>
 </ContentPage>
