@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using Grpc.Net.Client;
 using GrpcShared;
-using GrpcShared.Models;
 using Microsoft.Extensions.Logging;
 using ProcurementHub.Infrastructure;
 using ProcurementHub.Services;
@@ -9,8 +8,11 @@ using ProcurementHub.View;
 using ProcurementHub.View.Account;
 using ProcurementHub.View.Main;
 using ProcurementHub.View.Teams;
+using ProcurementHub.View.Teams.TeamRestaurants;
 using ProcurementHub.ViewModel.AccountViewModels;
 using ProcurementHub.ViewModel.TeamsViewModels;
+using ProcurementHub.ViewModel.TeamsViewModels.TeamRestaurantsViewModels;
+using TeamRestaurants = GrpcShared.Models.TeamRestaurants;
 
 namespace ProcurementHub;
 
@@ -85,6 +87,22 @@ public static class MauiProgram
 		#endregion
 
 		#region Teams
+
+		#region TeamRestaurants
+
+		builder.Services.AddTransient<TeamRestaurantsService>();
+
+		builder.Services.AddTransient<TeamRestaurants>();
+		builder.Services.AddTransient<TeamRestaurantsAddEdit>();
+		builder.Services.AddTransient<TeamRestaurantItems>();
+		builder.Services.AddTransient<TeamRestaurantItemAddEdit>();
+
+		builder.Services.AddTransient<TeamRestaurantsViewModel>();
+		builder.Services.AddTransient<TeamRestaurantsAddEditViewModel>();
+		builder.Services.AddTransient<TeamRestaurantItemsViewModel>();
+		builder.Services.AddTransient<TeamRestaurantItemAddEditViewModel>();
+
+		#endregion
 
 		builder.Services.AddTransient<TeamsService>();
 
