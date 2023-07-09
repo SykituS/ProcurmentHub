@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using GrpcShared;
 using ProcurementHub.Model;
+using ProcurementHub.Model.CustomModels;
 
 namespace ProcurementHub.Services
 {

@@ -5,7 +5,8 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:viewmodel="clr-namespace:ProcurementHub.ViewModel"
-    x:DataType="viewmodel:LoginViewModel"
+    xmlns:accountViewModels="clr-namespace:ProcurementHub.ViewModel.AccountViewModels"
+    x:DataType="accountViewModels:LoginViewModel"
     Shell.FlyoutBehavior="Disabled">
     <Shell.BackButtonBehavior>
         <BackButtonBehavior IsEnabled="False" IsVisible="False" />

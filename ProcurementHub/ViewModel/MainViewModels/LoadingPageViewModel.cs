@@ -1,24 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.Json.Serialization;
-using System.Threading.Tasks;
-using GrpcShared.Models;
-using Newtonsoft.Json;
-using ProcurementHub.Controls;
+﻿using Newtonsoft.Json;
+using ProcurementHub.Model.Models;
 using ProcurementHub.View.Account;
 using ProcurementHub.View.Main;
 
-namespace ProcurementHub.ViewModel
+namespace ProcurementHub.ViewModel.MainViewModels
 {
     public partial class LoadingPageViewModel
     {
-        IConnectivity connectivity;
+        IConnectivity _connectivity;
 
         public LoadingPageViewModel(IConnectivity connectivity)
         {
-            this.connectivity = connectivity;
+            this._connectivity = connectivity;
             CheckInternetConnection();
             CheckUserLoginDetails();
             CheckConnectionTogRPC();
@@ -45,7 +38,7 @@ namespace ProcurementHub.ViewModel
 
         private async void CheckInternetConnection()
         {
-            while (connectivity.NetworkAccess == NetworkAccess.Internet)
+            while (_connectivity.NetworkAccess == NetworkAccess.Internet)
             {
                 await Shell.Current.DisplayAlert("No connectivity!",
                     $"Please check internet and try again.", "OK");

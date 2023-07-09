@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using ProcurementService.DbModels;
 
 namespace GrpcShared.Models
 {

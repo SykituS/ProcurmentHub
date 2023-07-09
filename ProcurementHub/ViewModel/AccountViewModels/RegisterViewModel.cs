@@ -1,18 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Text;
-using System.Threading.Tasks;
-using GrpcShared;
-using GrpcShared.Models;
-using ProcurementHub.Model;
+﻿using GrpcShared;
+using ProcurementHub.Model.CustomModels;
+using ProcurementHub.Model.Models;
 using ProcurementHub.Services;
-using ProcurementHub.View.Account;
 
-namespace ProcurementHub.ViewModel
+namespace ProcurementHub.ViewModel.AccountViewModels
 {
-    public partial class RegisterViewModel : BaseViewModel
+    public partial class RegisterViewModel : BaseViewModels.BaseViewModel
     {
         public RegisterViewModel(Procurement.ProcurementClient procurementClient) : base(procurementClient)
         {

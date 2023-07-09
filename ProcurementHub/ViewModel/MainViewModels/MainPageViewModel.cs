@@ -1,31 +1,26 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Grpc.Core;
+﻿using Grpc.Core;
 using GrpcShared;
-using GrpcShared.Models;
+using ProcurementHub.Model.Models;
 using ProcurementHub.Services;
 using ProcurementHub.View.Account;
 using ProcurementHub.View.Teams;
 
-namespace ProcurementHub.ViewModel
+namespace ProcurementHub.ViewModel.MainViewModels
 {
-    public partial class MainPageViewModel : BaseViewModel
+    public partial class MainPageViewModel : BaseViewModels.BaseViewModel
     {
         public ObservableCollection<Teams> Teams { get; set; } = new();
-        private TeamsService TeamsService;
+        private TeamsService _teamsService;
 
         public MainPageViewModel(Procurement.ProcurementClient procurementClient, TeamsService teamsService) : base(procurementClient)
         {
-            TeamsService = teamsService;
+            _teamsService = teamsService;
             GetTeamsAsync();
             Title = "Main Page";
         }
 
         [ObservableProperty]
-        bool isRefreshing;
+        bool _isRefreshing;
 
         [RelayCommand]
         async Task GetTeamsAsync()
@@ -37,7 +32,7 @@ namespace ProcurementHub.ViewModel
 
             try
             {
-                var result = await TeamsService.GetTeamListAsync();
+                var result = await _teamsService.GetTeamListAsync();
 
                 if (result.Successful)
                 {
@@ -82,7 +77,7 @@ namespace ProcurementHub.ViewModel
 
 			try
             {
-	            var result = await TeamsService.GetSelectedTeam(teams.ID);
+	            var result = await _teamsService.GetSelectedTeam(teams.ID);
 
 	            if (result.Successful)
 	            {

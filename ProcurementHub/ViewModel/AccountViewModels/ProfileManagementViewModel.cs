@@ -5,13 +5,14 @@ using System.Text;
 using System.Threading.Tasks;
 using GrpcShared;
 using ProcurementHub.Model;
+using ProcurementHub.Model.CustomModels;
 using ProcurementHub.View.Account;
 using ProcurementHub.View.Main;
 using ProcurementHub.View.Teams;
 
 namespace ProcurementHub.ViewModel.AccountViewModels
 {
-    public partial class ProfileManagementViewModel : BaseViewModel
+    public partial class ProfileManagementViewModel : BaseViewModels.BaseViewModel
     {
         public ProfileManagementViewModel(Procurement.ProcurementClient procurementClient) : base(procurementClient)
         {

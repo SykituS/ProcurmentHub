@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Google.Protobuf.WellKnownTypes;
 using GrpcShared;
-using GrpcShared.Models;
+using ProcurementHub.Model.Models;
 
 namespace ProcurementHub.Services
 {

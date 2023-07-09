@@ -1,5 +1,6 @@
 ﻿using GrpcShared.Models;
 using Microsoft.EntityFrameworkCore;
+using ProcurementService.DbModels;
 
 namespace ProcurementService.Data
 {
@@ -15,5 +16,9 @@ namespace ProcurementService.Data
         public DbSet<Users> Users { get; set; }
         public DbSet<Teams> Teams { get; set; }
         public DbSet<TeamMembers> TeamMembers { get; set; }
+        public DbSet<TeamRestaurants> TeamRestaurants { get; set; }
+        public DbSet<TeamRestaurantsItems> TeamRestaurantsItems { get; set; }
+        public DbSet<TeamOrders> TeamOrders { get; set; }
+        public DbSet<TeamOrdersItems> TeamOrdersItems { get; set; }
     }
 }

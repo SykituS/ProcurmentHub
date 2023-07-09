@@ -1,3 +1,5 @@
+using ForgotPasswordViewModel = ProcurementHub.ViewModel.AccountViewModels.ForgotPasswordViewModel;
+
 namespace ProcurementHub.View.Account;
 
 public partial class ForgotPasswordPage : ContentPage

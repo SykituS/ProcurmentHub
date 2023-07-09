@@ -5,14 +5,14 @@ using System.Text;
 using System.Threading.Tasks;
 using Grpc.Core;
 using GrpcShared;
-using GrpcShared.Models;
 using ProcurementHub.Model;
+using ProcurementHub.Model.CustomModels;
 using ProcurementHub.View.Teams;
 
 namespace ProcurementHub.ViewModel.TeamsViewModels
 {
     [QueryProperty(nameof(Model), "TeamMainModel")]
-    public partial class TeamMainViewModel : BaseViewModel
+    public partial class TeamMainViewModel : BaseViewModels.BaseViewModel
     {
         public TeamMainViewModel(Procurement.ProcurementClient procurementClient) : base(procurementClient)
         {

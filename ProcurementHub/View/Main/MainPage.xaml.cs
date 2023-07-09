@@ -1,4 +1,4 @@
-﻿using GrpcShared.Models;
+﻿using MainPageViewModel = ProcurementHub.ViewModel.MainViewModels.MainPageViewModel;
 
 namespace ProcurementHub.View.Main;
 

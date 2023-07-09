@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using ProcurementService.Data;
 using ProcurementService.Data.Query;
+using ProcurementService.DbModels;
 using ProcurementService.Functions;
 
 namespace ProcurementService.Services

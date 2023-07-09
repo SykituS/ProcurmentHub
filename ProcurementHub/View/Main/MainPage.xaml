@@ -4,9 +4,10 @@
     x:Class="ProcurementHub.View.Main.MainPage"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:model="clr-namespace:GrpcShared.Models;assembly=GrpcShared"
     xmlns:viewmodel="clr-namespace:ProcurementHub.ViewModel"
-    x:DataType="viewmodel:MainPageViewModel">
+    xmlns:mainViewModels="clr-namespace:ProcurementHub.ViewModel.MainViewModels"
+    xmlns:models="clr-namespace:ProcurementHub.Model.Models"
+    x:DataType="mainViewModels:MainPageViewModel">
     <Shell.BackButtonBehavior>
         <BackButtonBehavior IsEnabled="False" IsVisible="False" />
     </Shell.BackButtonBehavior>
@@ -23,7 +24,7 @@
             <ContentView>
                 <CollectionView ItemsSource="{Binding Teams}">
                     <CollectionView.ItemTemplate>
-                        <DataTemplate x:DataType="model:Teams">
+                        <DataTemplate x:DataType="models:Teams">
                             <Grid Padding="10">
                                 <Frame
                                     BackgroundColor="Transparent"
@@ -31,7 +32,7 @@
                                     HasShadow="True"
                                     HeightRequest="125">
                                     <Frame.GestureRecognizers>
-                                        <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:MainPageViewModel}}, Path=GoToTeamCommand}" CommandParameter="{Binding .}" />
+                                        <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type mainViewModels:MainPageViewModel}}, Path=GoToTeamCommand}" CommandParameter="{Binding .}" />
                                     </Frame.GestureRecognizers>
                                     <Grid Padding="0">
                                         <VerticalStackLayout>

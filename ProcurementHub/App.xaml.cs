@@ -1,4 +1,4 @@
-﻿using GrpcShared.Models;
+﻿using ProcurementHub.Model.Models;
 
 namespace ProcurementHub;
 

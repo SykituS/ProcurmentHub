@@ -1,11 +1,6 @@
-﻿using GrpcShared.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using ProcurementHub.Model.Models;
 
-namespace ProcurementHub.Model
+namespace ProcurementHub.Model.CustomModels
 {
 	public class TeamMainModel
     {

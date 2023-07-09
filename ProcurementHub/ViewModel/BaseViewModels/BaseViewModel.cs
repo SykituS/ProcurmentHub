@@ -1,6 +1,6 @@
 ﻿using GrpcShared;
 
-namespace ProcurementHub.ViewModel
+namespace ProcurementHub.ViewModel.BaseViewModels
 {
     [INotifyPropertyChanged]
     public partial class BaseViewModel
@@ -13,11 +13,11 @@ namespace ProcurementHub.ViewModel
         }
 
         [ObservableProperty]
-        bool isBusy;
+        bool _isBusy;
 
         [ObservableProperty]
-        string title;
+        string _title;
 
-        public bool IsNotBusy => !isBusy;
+        public bool IsNotBusy => !_isBusy;
     }
 }

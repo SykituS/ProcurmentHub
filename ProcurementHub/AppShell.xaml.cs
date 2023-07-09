@@ -3,7 +3,7 @@ using ProcurementHub.View.Account;
 using ProcurementHub.View.Main;
 using ProcurementHub.View.Teams;
 using ProcurementHub.View.Teams.TeamRestaurants;
-using TeamRestaurants = GrpcShared.Models.TeamRestaurants;
+using TeamRestaurants = ProcurementHub.Model.Models.TeamRestaurants;
 
 namespace ProcurementHub;
 

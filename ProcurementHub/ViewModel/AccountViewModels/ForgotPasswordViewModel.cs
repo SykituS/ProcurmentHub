@@ -1,15 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using GrpcShared;
-using GrpcShared.Models;
-using ProcurementHub.Model;
+﻿using GrpcShared;
+using ProcurementHub.Model.CustomModels;
 
-namespace ProcurementHub.ViewModel
+namespace ProcurementHub.ViewModel.AccountViewModels
 {
-    public partial class ForgotPasswordViewModel : BaseViewModel
+    public partial class ForgotPasswordViewModel : BaseViewModels.BaseViewModel
     {
         public ForgotPasswordViewModel(Procurement.ProcurementClient procurementClient) : base(procurementClient)
         {

@@ -1,24 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Text;
-using System.Text.Json.Serialization;
-using System.Threading.Tasks;
-using Grpc.Core;
+﻿using Grpc.Core;
 using GrpcShared;
-using GrpcShared.Models;
 using Newtonsoft.Json;
 using ProcurementHub.Controls;
-using ProcurementHub.Infrastructure;
-using ProcurementHub.Model;
+using ProcurementHub.Model.CustomModels;
+using ProcurementHub.Model.Models;
 using ProcurementHub.Services;
 using ProcurementHub.View.Account;
 using ProcurementHub.View.Main;
 
-namespace ProcurementHub.ViewModel
+namespace ProcurementHub.ViewModel.AccountViewModels
 {
-    public partial class LoginViewModel : BaseViewModel
+    public partial class LoginViewModel : BaseViewModels.BaseViewModel
     {
         private LoginService _loginService;
         public LoginViewModel(Procurement.ProcurementClient procurementClient, LoginService loginService) : base(procurementClient)

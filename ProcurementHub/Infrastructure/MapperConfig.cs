@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using GrpcShared;
-using GrpcShared.Models;
+using ProcurementHub.Model.Models;
 
 namespace ProcurementHub.Infrastructure
 {

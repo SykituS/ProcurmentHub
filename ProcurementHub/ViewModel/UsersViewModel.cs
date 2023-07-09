@@ -1,12 +1,12 @@
 ﻿using GrpcShared;
-using GrpcShared.Models;
+using ProcurementHub.Model.Models;
 using ProcurementHub.Services;
 using ProcurementHub.View.Account;
 
 namespace ProcurementHub.ViewModel
 {
     [QueryProperty(nameof(Users), "Users")]
-    public partial class UsersViewModel : BaseViewModel
+    public partial class UsersViewModel : BaseViewModels.BaseViewModel
     {
         //public ObservableCollection<Users> Users { get; set; } = new();
 

@@ -4,7 +4,8 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:viewmodel="clr-namespace:ProcurementHub.ViewModel"
-    x:DataType="viewmodel:RegisterViewModel"
+    xmlns:accountViewModels="clr-namespace:ProcurementHub.ViewModel.AccountViewModels"
+    x:DataType="accountViewModels:RegisterViewModel"
     Shell.FlyoutBehavior="Disabled">
     <Grid Margin="20,0,20,0">
         <Grid.RowDefinitions>

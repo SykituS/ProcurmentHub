@@ -10,9 +10,13 @@ using ProcurementHub.View.Main;
 using ProcurementHub.View.Teams;
 using ProcurementHub.View.Teams.TeamRestaurants;
 using ProcurementHub.ViewModel.AccountViewModels;
+using ProcurementHub.ViewModel.MainViewModels;
 using ProcurementHub.ViewModel.TeamsViewModels;
 using ProcurementHub.ViewModel.TeamsViewModels.TeamRestaurantsViewModels;
-using TeamRestaurants = GrpcShared.Models.TeamRestaurants;
+using ForgotPasswordViewModel = ProcurementHub.ViewModel.AccountViewModels.ForgotPasswordViewModel;
+using LoginViewModel = ProcurementHub.ViewModel.AccountViewModels.LoginViewModel;
+using MainPageViewModel = ProcurementHub.ViewModel.MainViewModels.MainPageViewModel;
+using RegisterViewModel = ProcurementHub.ViewModel.AccountViewModels.RegisterViewModel;
 
 namespace ProcurementHub;
 
@@ -88,21 +92,6 @@ public static class MauiProgram
 
 		#region Teams
 
-		#region TeamRestaurants
-
-		builder.Services.AddTransient<TeamRestaurantsService>();
-
-		builder.Services.AddTransient<TeamRestaurants>();
-		builder.Services.AddTransient<TeamRestaurantsAddEdit>();
-		builder.Services.AddTransient<TeamRestaurantItems>();
-		builder.Services.AddTransient<TeamRestaurantItemAddEdit>();
-
-		builder.Services.AddTransient<TeamRestaurantsViewModel>();
-		builder.Services.AddTransient<TeamRestaurantsAddEditViewModel>();
-		builder.Services.AddTransient<TeamRestaurantItemsViewModel>();
-		builder.Services.AddTransient<TeamRestaurantItemAddEditViewModel>();
-
-		#endregion
 
 		builder.Services.AddTransient<TeamsService>();
 
@@ -118,6 +107,21 @@ public static class MauiProgram
 
 		#endregion
 
+		#region TeamRestaurants
+
+		builder.Services.AddTransient<TeamRestaurantsService>();
+
+		builder.Services.AddTransient<TeamRestaurants>();
+		builder.Services.AddTransient<TeamRestaurantsAddEdit>();
+		builder.Services.AddTransient<TeamRestaurantItems>();
+		builder.Services.AddTransient<TeamRestaurantItemAddEdit>();
+
+		builder.Services.AddTransient<TeamRestaurantsViewModel>();
+		builder.Services.AddTransient<TeamRestaurantsAddEditViewModel>();
+		builder.Services.AddTransient<TeamRestaurantItemsViewModel>();
+		builder.Services.AddTransient<TeamRestaurantItemAddEditViewModel>();
+
+		#endregion
 
 
 		return builder.Build();

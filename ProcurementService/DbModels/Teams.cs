@@ -1,4 +1,6 @@
-﻿namespace GrpcShared.Models
+﻿using ProcurementService.DbModels;
+
+namespace GrpcShared.Models
 {
     public class Teams
     {

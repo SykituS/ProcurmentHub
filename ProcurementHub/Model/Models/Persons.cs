@@ -1,4 +1,4 @@
-﻿namespace GrpcShared.Models
+﻿namespace ProcurementHub.Model.Models
 {
     public class Persons
     {

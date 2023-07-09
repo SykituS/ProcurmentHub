@@ -4,12 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using GrpcShared;
-using GrpcShared.Models;
+using ProcurementHub.Model.Models;
 using ProcurementHub.Services;
 
 namespace ProcurementHub.ViewModel
 {
-    public partial class PersonsViewModel : BaseViewModel
+    public partial class PersonsViewModel : BaseViewModels.BaseViewModel
     {
         public ObservableCollection<Persons> Persons { get; set; } = new();
 

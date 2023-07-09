@@ -5,24 +5,24 @@ using System.Text;
 using System.Threading.Tasks;
 using Grpc.Core;
 using GrpcShared;
-using GrpcShared.Models;
+using ProcurementHub.Model.Models;
 using ProcurementHub.Services;
 using ProcurementHub.View.Main;
 
 namespace ProcurementHub.ViewModel.TeamsViewModels
 {
-    public partial class CreateNewTeamViewModel : BaseViewModel
+    public partial class CreateNewTeamViewModel : BaseViewModels.BaseViewModel
     {
-        private TeamsService TeamsService;
+        private TeamsService _teamsService;
 
         public CreateNewTeamViewModel(Procurement.ProcurementClient procurementClient, TeamsService teamsService) :
             base(procurementClient)
         {
-            TeamsService = teamsService;
+            _teamsService = teamsService;
             Title = "Create new team";
         }
 
-        [ObservableProperty] private Teams team = new();
+        [ObservableProperty] private Teams _team = new();
 
         [RelayCommand]
         async Task GoBackToMainPage()
@@ -39,7 +39,7 @@ namespace ProcurementHub.ViewModel.TeamsViewModels
             IsBusy = true;
             try
             {
-                var result = await TeamsService.CreateNewTeamAsync(team);
+                var result = await _teamsService.CreateNewTeamAsync(_team);
 
                 if (result.Successful)
                 {

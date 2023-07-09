@@ -4,8 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using GrpcShared;
-using GrpcShared.Models;
 using ProcurementHub.Model;
+using ProcurementHub.Model.CustomModels;
+using ProcurementHub.Model.Models;
 
 namespace ProcurementHub.Services
 {
