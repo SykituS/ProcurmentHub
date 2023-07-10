@@ -24,10 +24,10 @@ public partial class AppShell : Shell
 		Routing.RegisterRoute(nameof(ProfileManagementPage), typeof(ProfileManagementPage));
 
 		Routing.RegisterRoute(nameof(TeamSettingsPage), typeof(TeamSettingsPage));
-		Routing.RegisterRoute(nameof(TeamRestaurants), typeof(TeamRestaurants));
-		Routing.RegisterRoute(nameof(TeamRestaurantsAddEdit), typeof(TeamRestaurantsAddEdit));
-		Routing.RegisterRoute(nameof(TeamRestaurantItems), typeof(TeamRestaurantItems));
-		Routing.RegisterRoute(nameof(TeamRestaurantItemAddEdit), typeof(TeamRestaurantItemAddEdit));
+		Routing.RegisterRoute(nameof(TeamRestaurantsPage), typeof(TeamRestaurantsPage));
+		Routing.RegisterRoute(nameof(TeamRestaurantsAddEditPage), typeof(TeamRestaurantsAddEditPage));
+		Routing.RegisterRoute(nameof(TeamRestaurantItemsPage), typeof(TeamRestaurantItemsPage));
+		Routing.RegisterRoute(nameof(TeamRestaurantItemAddEditPage), typeof(TeamRestaurantItemAddEditPage));
 
 
 

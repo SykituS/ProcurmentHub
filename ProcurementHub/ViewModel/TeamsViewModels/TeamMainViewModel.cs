@@ -8,6 +8,7 @@ using GrpcShared;
 using ProcurementHub.Model;
 using ProcurementHub.Model.CustomModels;
 using ProcurementHub.View.Teams;
+using ProcurementHub.View.Teams.TeamRestaurants;
 
 namespace ProcurementHub.ViewModel.TeamsViewModels
 {
@@ -88,6 +89,15 @@ namespace ProcurementHub.ViewModel.TeamsViewModels
         {
 	        Debug.WriteLine("Changing page to team statistics page");
 
+		}
+
+        [RelayCommand]
+        async Task GoToTeamRestaurantPage()
+        {
+			await Shell.Current.GoToAsync(nameof(TeamRestaurantsPage), true, new Dictionary<string, object>
+			{
+				{"TeamMainModel", _model }
+			});
 		}
 	}
 }

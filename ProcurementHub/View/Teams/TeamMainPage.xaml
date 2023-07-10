@@ -15,6 +15,7 @@
             <RowDefinition Height="40" />
             <RowDefinition Height="*" />
             <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <StackLayout Grid.Row="1">
             <Label
@@ -83,10 +84,33 @@
                 Text="Statistics"
                 TextColor="White"
                 WidthRequest="250" />
-
         </StackLayout>
+
         <StackLayout
             Grid.Row="6"
+            Margin="0"
+            Padding="0">
+            <Label
+                FontAttributes="Bold"
+                FontFamily="Arial"
+                FontSize="24"
+                HorizontalOptions="Center"
+                Text="Manage restaurants"
+                VerticalOptions="Center" />
+            <Button
+                Margin="0,5,0,5"
+                BackgroundColor="#0d529c"
+                BorderColor="#0d529c"
+                Command="{Binding GoToTeamRestaurantPageCommand}"
+                CornerRadius="10"
+                FontAttributes="Bold"
+                Text="Restaurants"
+                TextColor="White"
+                WidthRequest="250" />
+        </StackLayout>
+
+        <StackLayout
+            Grid.Row="7"
             Margin="0"
             Padding="0"
             IsVisible="{Binding Model.IsAdmin}">

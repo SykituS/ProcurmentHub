@@ -7,7 +7,7 @@ using GrpcShared;
 
 namespace ProcurementHub.ViewModel.TeamsViewModels.TeamRestaurantsViewModels
 {
-    class TeamRestaurantItemAddEditViewModel : BaseViewModels.BaseViewModel
+	public partial class TeamRestaurantItemAddEditViewModel : BaseViewModels.BaseViewModel
 	{
 		public TeamRestaurantItemAddEditViewModel(Procurement.ProcurementClient procurementClient) : base(procurementClient)
 		{

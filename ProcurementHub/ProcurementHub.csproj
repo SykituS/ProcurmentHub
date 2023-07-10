@@ -76,6 +76,18 @@
 	  <Compile Update="View\Account\LoginPage.xaml.cs">
 	    <DependentUpon>LoginPage.xaml</DependentUpon>
 	  </Compile>
+	  <Compile Update="View\Teams\TeamRestaurantsPage\TeamRestaurantItemAddEditPage.xaml.cs">
+	    <DependentUpon>TeamRestaurantItemAddEditPage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="View\Teams\TeamRestaurantsPage\TeamRestaurantItemsPage.xaml.cs">
+	    <DependentUpon>TeamRestaurantItemsPage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="View\Teams\TeamRestaurantsPage\TeamRestaurantsAddEditPage.xaml.cs">
+	    <DependentUpon>TeamRestaurantsAddEditPage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="View\Teams\TeamRestaurantsPage\TeamRestaurantsPage.xaml.cs">
+	    <DependentUpon>TeamRestaurantsPage.xaml</DependentUpon>
+	  </Compile>
 	</ItemGroup>
 
 	<ItemGroup>
@@ -118,16 +130,16 @@
 	  <MauiXaml Update="View\Teams\TeamMembersPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="View\Teams\TeamRestaurants\TeamRestaurantItemAddEdit.xaml">
+	  <MauiXaml Update="View\Teams\TeamRestaurantsPage\TeamRestaurantItemAddEditPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="View\Teams\TeamRestaurants\TeamRestaurantItems.xaml">
+	  <MauiXaml Update="View\Teams\TeamRestaurantsPage\TeamRestaurantItemsPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="View\Teams\TeamRestaurants\TeamRestaurants.xaml">
+	  <MauiXaml Update="View\Teams\TeamRestaurantsPage\TeamRestaurantsPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="View\Teams\TeamRestaurants\TeamRestaurantsAddEdit.xaml">
+	  <MauiXaml Update="View\Teams\TeamRestaurantsPage\TeamRestaurantsAddEditPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="View\Teams\TeamSettingsPage.xaml">

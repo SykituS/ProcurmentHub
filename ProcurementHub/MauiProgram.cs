@@ -107,14 +107,14 @@ public static class MauiProgram
 
 		#endregion
 
-		#region TeamRestaurants
+		#region TeamRestaurantsPage
 
 		builder.Services.AddTransient<TeamRestaurantsService>();
 
-		builder.Services.AddTransient<TeamRestaurants>();
-		builder.Services.AddTransient<TeamRestaurantsAddEdit>();
-		builder.Services.AddTransient<TeamRestaurantItems>();
-		builder.Services.AddTransient<TeamRestaurantItemAddEdit>();
+		builder.Services.AddTransient<TeamRestaurantsPage>();
+		builder.Services.AddTransient<TeamRestaurantsAddEditPage>();
+		builder.Services.AddTransient<TeamRestaurantItemsPage>();
+		builder.Services.AddTransient<TeamRestaurantItemAddEditPage>();
 
 		builder.Services.AddTransient<TeamRestaurantsViewModel>();
 		builder.Services.AddTransient<TeamRestaurantsAddEditViewModel>();

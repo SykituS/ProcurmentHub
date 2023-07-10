@@ -4,10 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using GrpcShared;
+using ProcurementHub.Model.CustomModels;
+using ProcurementHub.Services;
 
 namespace ProcurementHub.ViewModel.TeamsViewModels.TeamRestaurantsViewModels
 {
-    class TeamRestaurantItemsViewModel : BaseViewModels.BaseViewModel
+    public partial class TeamRestaurantItemsViewModel : BaseViewModels.BaseViewModel
 	{
 		public TeamRestaurantItemsViewModel(Procurement.ProcurementClient procurementClient) : base(procurementClient)
 		{
