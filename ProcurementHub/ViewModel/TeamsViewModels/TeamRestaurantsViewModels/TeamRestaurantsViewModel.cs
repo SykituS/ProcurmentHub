@@ -80,13 +80,24 @@ namespace ProcurementHub.ViewModel.TeamsViewModels.TeamRestaurantsViewModels
 			{
 				{"TeamRestaurant", model }
 			});
+
+			//Open edit page with model of restaurant
+			//await Shell.Current.GoToAsync(nameof(TeamRestaurantsAddEditPage), true, new Dictionary<string, object>
+			//{
+			//	{"TeamMainModel", _model },
+			//	{"TeamRestaurant", model }
+			//});
 		}
 
 		[RelayCommand]
 		async Task GoToAddNewRestaurant()
 		{
 			Debug.WriteLine("going to add new restaurant");
-
+			await Shell.Current.GoToAsync(nameof(TeamRestaurantsAddEditPage), true, new Dictionary<string, object>
+			{
+				{"TeamMainModel", _model },
+				{"TeamRestaurant", null }
+			});
 		}
 	}
 }
