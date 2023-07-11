@@ -7,15 +7,11 @@
     xmlns:viewmodel="clr-namespace:ProcurementHub.ViewModel.TeamsViewModels.TeamRestaurantsViewModels"
     x:DataType="viewmodel:TeamRestaurantsViewModel">
     <Grid
-        ColumnDefinitions="*,*,*"
         ColumnSpacing="5"
         RowDefinitions="*,Auto"
         RowSpacing="0">
 
-        <RefreshView
-            Grid.ColumnSpan="3"
-            Command="{Binding}"
-            IsRefreshing="{Binding IsRefreshing}">
+        <RefreshView Command="{Binding}" IsRefreshing="{Binding IsRefreshing}">
             <ContentView>
                 <CollectionView ItemsSource="{Binding TeamRestaurants}">
                     <CollectionView.ItemTemplate>
@@ -64,5 +60,16 @@
                 </CollectionView>
             </ContentView>
         </RefreshView>
+        <Button
+            Grid.Row="1"
+            Margin="5,0,5,5"
+            BackgroundColor="#0d529c"
+            BorderColor="#0d529c"
+            Command="{Binding GoToAddNewRestaurantCommand}"
+            FontAttributes="Bold"
+            FontSize="14"
+            LineBreakMode="WordWrap"
+            Text="Add new restaurant"
+            TextColor="White" />
     </Grid>
 </ContentPage>

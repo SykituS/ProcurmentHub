@@ -26,27 +26,42 @@
                 Text="{Binding Model.Description}"
                 VerticalOptions="Center" />
             <Label
+                Margin="0,50,0,0"
                 FontAttributes="Bold"
                 FontFamily="Arial"
                 FontSize="24"
                 HorizontalOptions="Center"
-                Text="{Binding Model.Status}"
-                VerticalOptions="Center" />
+                VerticalOptions="Center">
+                <Label.Text>
+                    <MultiBinding StringFormat="Status: {0}">
+                        <Binding Path="Model.Status" />
+                    </MultiBinding>
+                </Label.Text>
+            </Label>
             <Label
                 FontAttributes="Bold"
                 FontFamily="Arial"
                 FontSize="24"
                 HorizontalOptions="Center"
-                Text="{Binding Model.TeamJoinCode}"
-                VerticalOptions="Center" />
+                VerticalOptions="Center">
+                <Label.Text>
+                    <MultiBinding StringFormat="Join Code: {0}">
+                        <Binding Path="Model.TeamJoinCode" />
+                    </MultiBinding>
+                </Label.Text>
+            </Label>
             <Label
                 FontAttributes="Bold"
                 FontFamily="Arial"
                 FontSize="24"
                 HorizontalOptions="Center"
-                Text="{Binding Model.TeamJoinPassword}"
-                VerticalOptions="Center" />
-
+                VerticalOptions="Center">
+                <Label.Text>
+                    <MultiBinding StringFormat="Join Password: {0}">
+                        <Binding Path="Model.TeamJoinPassword" />
+                    </MultiBinding>
+                </Label.Text>
+            </Label>
         </StackLayout>
     </Grid>
 </ContentPage>

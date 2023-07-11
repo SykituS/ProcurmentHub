@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using GrpcShared;
 using ProcurementHub.Model.CustomModels;
 using ProcurementHub.Services;
+using ProcurementHub.View.Teams.TeamRestaurants;
 
 namespace ProcurementHub.ViewModel.TeamsViewModels.TeamRestaurantsViewModels
 {
@@ -33,7 +34,7 @@ namespace ProcurementHub.ViewModel.TeamsViewModels.TeamRestaurantsViewModels
 			Debug.WriteLine("Getting restaurants");
 			var restaurant = new TeamRestaurantsModel
 			{
-				ID = 2,
+				ID = 1,
 				Name = "McDonald",
 				Address = "Jan Paweł II 23/5",
 				Description = "",
@@ -43,13 +44,49 @@ namespace ProcurementHub.ViewModel.TeamsViewModels.TeamRestaurantsViewModels
 				UpdatedOn = "25, June 2023",
 				UpdatedBy = new PersonsModel() {FullName = "Test Test"}
 			};
+			var restaurant2 = new TeamRestaurantsModel
+			{
+				ID = 2,
+				Name = "Sushi",
+				Address = "Rewolucji 1939",
+				Description = "Test",
+				CreatedOn = "15, June 2023",
+				CreatedBy = new PersonsModel() { FullName = "Adam Borowicz" },
+				IsUpdated = false,
+				UpdatedOn = "25, June 2023",
+				UpdatedBy = new PersonsModel() { FullName = "Test Test" }
+			};
+			var restaurant3 = new TeamRestaurantsModel
+			{
+				ID = 3,
+				Name = "McDonald",
+				Address = "Jan Paweł II 23/5",
+				Description = "",
+				CreatedOn = "23, June 2023",
+				CreatedBy = new PersonsModel() { FullName = "Jan Testowy" },
+				IsUpdated = true,
+				UpdatedOn = "25, June 2023",
+				UpdatedBy = new PersonsModel() { FullName = "Test Test" }
+			};
 			TeamRestaurants.Add(restaurant);
+			TeamRestaurants.Add(restaurant2);
+			TeamRestaurants.Add(restaurant3);
 		}
 
 		[RelayCommand]
 		async Task GoToRestaurant(TeamRestaurantsModel model)
 		{
-			Debug.WriteLine("Changing page to team restaurant items");
+			await Shell.Current.GoToAsync(nameof(TeamRestaurantItemsPage), true, new Dictionary<string, object>
+			{
+				{"TeamRestaurant", model }
+			});
+		}
+
+		[RelayCommand]
+		async Task GoToAddNewRestaurant()
+		{
+			Debug.WriteLine("going to add new restaurant");
+
 		}
 	}
 }
