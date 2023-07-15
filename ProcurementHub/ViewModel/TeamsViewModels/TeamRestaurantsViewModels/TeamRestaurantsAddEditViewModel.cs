@@ -19,17 +19,11 @@ namespace ProcurementHub.ViewModel.TeamsViewModels.TeamRestaurantsViewModels
 		private TeamMainModel _model;
 
 		[ObservableProperty]
-		private TeamRestaurantsModel _teamRestaurantsModel;
+		private TeamRestaurantsModel _teamRestaurantsModel = new ();
 
 		public TeamRestaurantsAddEditViewModel(Procurement.ProcurementClient procurementClient, TeamRestaurantsService teamRestaurantsService) : base(procurementClient)
 		{
 			_teamRestaurantsService = teamRestaurantsService;
-
-			if (_teamRestaurantsModel == null)
-			{
-				Debug.WriteLine("NULL");
-
-			}
 		}
 
 		[RelayCommand]
@@ -41,7 +35,7 @@ namespace ProcurementHub.ViewModel.TeamsViewModels.TeamRestaurantsViewModels
 		[RelayCommand]
 		async Task GoBackToTeamRestaurants()
 		{
-
+			await Shell.Current.GoToAsync("..");
 		}
 	}
 }

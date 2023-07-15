@@ -7,6 +7,7 @@ using GrpcShared;
 using ProcurementHub.Model.CustomModels;
 using ProcurementHub.Model.Models;
 using ProcurementHub.Services;
+using ProcurementHub.View.Teams.TeamRestaurants;
 
 namespace ProcurementHub.ViewModel.TeamsViewModels.TeamRestaurantsViewModels
 {
@@ -38,15 +39,21 @@ namespace ProcurementHub.ViewModel.TeamsViewModels.TeamRestaurantsViewModels
 		[RelayCommand]
 		async Task GoToEditRestaurantItem(TeamRestaurantItemsModel model)
 		{
-			Debug.WriteLine("going to edit page");
-
+			await Shell.Current.GoToAsync(nameof(TeamRestaurantItemAddEditPage), true, new Dictionary<string, object>
+			{
+				{"TeamRestaurant", _model },
+				{"TeamRestaurantItem", model }
+			});
 		}
 
 		[RelayCommand]
 		async Task GoToAddRestaurantItem()
 		{
-			Debug.WriteLine("going to add page");
-
+			await Shell.Current.GoToAsync(nameof(TeamRestaurantItemAddEditPage), true, new Dictionary<string, object>
+			{
+				{"TeamRestaurant", _model },
+				{"TeamRestaurantItem", null }
+			});
 		}
 	}
 }

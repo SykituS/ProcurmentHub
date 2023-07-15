@@ -31,10 +31,16 @@
                                                 FontAttributes="Bold"
                                                 FontSize="Large"
                                                 Text="{Binding Name}" />
-                                            <Label Text="{Binding Address}" />
+                                            <Label FontAttributes="Bold">
+                                                <Label.Text>
+                                                    <MultiBinding StringFormat="Address: {0}">
+                                                        <Binding Path="Address" />
+                                                    </MultiBinding>
+                                                </Label.Text>
+                                            </Label>
                                             <Label FontAttributes="Italic" FontSize="14">
                                                 <Label.Text>
-                                                    <MultiBinding StringFormat="Created: {0} | {1}">
+                                                    <MultiBinding StringFormat="Created by: {0} | {1}">
                                                         <Binding Path="CreatedBy.FullName" />
                                                         <Binding Path="CreatedOn" />
                                                     </MultiBinding>
@@ -45,7 +51,7 @@
                                                 FontSize="14"
                                                 IsVisible="{Binding IsUpdated}">
                                                 <Label.Text>
-                                                    <MultiBinding StringFormat="Updated: {0} | {1}">
+                                                    <MultiBinding StringFormat="Updated by: {0} | {1}">
                                                         <Binding Path="UpdatedBy.FullName" />
                                                         <Binding Path="UpdatedOn" />
                                                     </MultiBinding>

@@ -10,10 +10,40 @@
     <Shell.NavBarIsVisible>False</Shell.NavBarIsVisible>
     <Grid
         ColumnSpacing="5"
-        RowDefinitions="*,Auto"
+        RowDefinitions="Auto,*,Auto"
         RowSpacing="0">
 
-        <RefreshView Command="{Binding GetRestaurantItemsCommand}" IsRefreshing="{Binding IsRefreshing}">
+        <Frame
+            Margin="0,0,0,0"
+            Padding="5,5,0,0"
+            BackgroundColor="Transparent"
+            BorderColor="#0d529c"
+            HasShadow="True"
+            HeightRequest="100">
+            <Grid Padding="0">
+                <VerticalStackLayout>
+                    <Label FontAttributes="Bold" FontSize="Large">
+                        <Label.Text>
+                            <MultiBinding StringFormat="Items for restaurant: {0}">
+                                <Binding Path="Model.Name" />
+                            </MultiBinding>
+                        </Label.Text>
+                    </Label>
+                    <Label>
+                        <Label.Text>
+                            <MultiBinding StringFormat="Address: {0}">
+                                <Binding Path="Model.Address" />
+                            </MultiBinding>
+                        </Label.Text>
+                    </Label>
+                </VerticalStackLayout>
+            </Grid>
+        </Frame>
+
+        <RefreshView
+            Grid.Row="1"
+            Command="{Binding GetRestaurantItemsCommand}"
+            IsRefreshing="{Binding IsRefreshing}">
             <ContentView>
                 <CollectionView ItemsSource="{Binding TeamRestaurantItems}">
                     <CollectionView.ItemTemplate>
@@ -46,7 +76,7 @@
         </RefreshView>
 
         <Button
-            Grid.Row="1"
+            Grid.Row="2"
             Margin="5,0,5,5"
             BackgroundColor="#0d529c"
             BorderColor="#0d529c"
