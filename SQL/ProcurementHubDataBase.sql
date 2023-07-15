@@ -68,6 +68,7 @@ CREATE TABLE TeamRestaurants (
 	Name varchar(255) NOT NULL,
 	Address varchar(255) NOT NULL,
 	Description varchar(255),
+	IsDeleted bit NOT NULL,
 	CreatedByID int NOT NULL,
 	CreatedOn datetime not null,
 	UpdatedByID int not null,

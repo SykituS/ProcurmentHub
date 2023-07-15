@@ -96,7 +96,7 @@ namespace ProcurementHub.ViewModel.TeamsViewModels.TeamRestaurantsViewModels
 			await Shell.Current.GoToAsync(nameof(TeamRestaurantsAddEditPage), true, new Dictionary<string, object>
 			{
 				{"TeamMainModel", _model },
-				{"TeamRestaurant", null }
+				{"TeamRestaurant", new TeamRestaurantsModel() }
 			});
 		}
 	}

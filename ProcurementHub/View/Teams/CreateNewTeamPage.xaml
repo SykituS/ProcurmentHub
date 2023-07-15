@@ -62,7 +62,7 @@
                         Margin="0,0,0,0"
                         FontAttributes="Bold"
                         HorizontalOptions="FillAndExpand"
-                        Placeholder="Description"
+                        Placeholder="Description (optional)"
                         Text="{Binding Team.Description, Mode=TwoWay}"
                         TextColor="#1c1002"
                         VerticalOptions="Center" />

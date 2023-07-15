@@ -11,6 +11,7 @@ service Procurement {
   rpc CreateNewTeam (GRPCCreateNewTeam) returns (GRPCValidationResponse);
   rpc JoinToTeam (GRPCJoinToTeam) returns (GRPCTeamValidationResponse);
   rpc GetSelectedTeam (GRPCGetSelectedTeamRequest) returns (GRPCSelectedTeamResponse);
+  rpc CreateOrUpdateRestaurant (GRPCCreateOrUpdateRestaurantRequest) returns (GRPCValidationResponse);
 }
 
 message GRPCValidationResponse {
@@ -107,4 +108,14 @@ message GRPCSelectedTeamResponse {
 	int32 status = 4;
 	int32 role = 5;
 	GRPCValidationResponse response = 6;
+}
+
+message GRPCCreateOrUpdateRestaurantRequest {
+	int32 id = 1;
+	int32 teamId = 2;
+	string name = 3;
+	string address = 4;
+	string description = 5;
+	GRPCLoginInformationForUser LoggedUser = 6;
+	bool isDeleted = 7;
 }

@@ -66,7 +66,7 @@ namespace ProcurementHub.Services
                 {
                     TeamJoinPassword = team.TeamJoinPassword,
                     TeamName = team.TeamName,
-                    Descirption = team.Description,
+                    Descirption = team.Description ?? "",
                 },
                 User = new GRPCLoginInformationForUser()
                 {
