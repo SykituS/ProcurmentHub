@@ -52,7 +52,7 @@ namespace ProcurementHub.ViewModel.TeamsViewModels.TeamRestaurantsViewModels
 			await Shell.Current.GoToAsync(nameof(TeamRestaurantItemAddEditPage), true, new Dictionary<string, object>
 			{
 				{"TeamRestaurant", _model },
-				{"TeamRestaurantItem", null }
+				{"TeamRestaurantItem", new TeamRestaurantItemsModel() }
 			});
 		}
 	}
