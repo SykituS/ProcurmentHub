@@ -3,6 +3,8 @@ syntax = "proto3";
 option csharp_namespace = "GrpcShared";
 package Procurement;
 
+import "google/protobuf/timestamp.proto";
+
 service Procurement {
   rpc LoginUserToApplication (GRPCLoginUser) returns (GRPCLoggedUser);
   rpc RegisterUser (GRPCRegisterNewUser) returns (GRPCValidationResponse);
@@ -10,8 +12,9 @@ service Procurement {
   rpc GetTeamsList (GRPCLoginInformationForUser) returns (GRPCTeamsList);
   rpc CreateNewTeam (GRPCCreateNewTeam) returns (GRPCValidationResponse);
   rpc JoinToTeam (GRPCJoinToTeam) returns (GRPCTeamValidationResponse);
-  rpc GetSelectedTeam (GRPCGetSelectedTeamRequest) returns (GRPCSelectedTeamResponse);
+  rpc GetSelectedTeam (GRPCGetInformationForGivenTeamRequest) returns (GRPCSelectedTeamResponse);
   rpc CreateOrUpdateRestaurant (GRPCCreateOrUpdateRestaurantRequest) returns (GRPCValidationResponse);
+  rpc GetTeamRestaurantList (GRPCGetInformationForGivenTeamRequest) returns (GRPCTeamRestaurnatsListResponse);
 }
 
 message GRPCValidationResponse {
@@ -96,7 +99,7 @@ message GRPCTeamValidationResponse {
 	GRPCTeam team = 2;
 }
 
-message GRPCGetSelectedTeamRequest {
+message GRPCGetInformationForGivenTeamRequest {
 	GRPCLoginInformationForUser loggedUser = 1;
 	int32 teamId = 2;
 }
@@ -118,4 +121,20 @@ message GRPCCreateOrUpdateRestaurantRequest {
 	string description = 5;
 	GRPCLoginInformationForUser LoggedUser = 6;
 	bool isDeleted = 7;
+}
+
+message GRPCRestaurant {
+	int32 id = 1;
+	string name = 2;
+	string address = 3;
+	string description = 4;
+	GRPCPerson CreatedBy = 5;
+	google.protobuf.Timestamp CreatedOn = 6;
+	GRPCPerson UpdatedBy = 7;
+	google.protobuf.Timestamp UpdatedOn = 8;
+}
+
+message GRPCTeamRestaurnatsListResponse {
+	repeated GRPCRestaurant restaurantList = 1;
+	GRPCValidationResponse response = 2;
 }

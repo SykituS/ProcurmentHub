@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics;
 using System.Net;
+using Google.Protobuf.WellKnownTypes;
 using Grpc.Core;
 using GrpcShared;
 using GrpcShared.Models;
@@ -453,7 +454,7 @@ namespace ProcurementService.Services
 			}
 		}
 
-		public override Task<GRPCSelectedTeamResponse> GetSelectedTeam(GRPCGetSelectedTeamRequest request, ServerCallContext context)
+		public override Task<GRPCSelectedTeamResponse> GetSelectedTeam(GRPCGetInformationForGivenTeamRequest request, ServerCallContext context)
 		{
 			_logger.LogInformation("Start of call GetSelectedTeam: " + DateTime.Now);
 
@@ -566,9 +567,10 @@ namespace ProcurementService.Services
 					restaurant.Name = request.Name;
 					restaurant.TeamID = request.TeamId;
 
-					restaurant.UpdatedById = personIdOfLoggedUser;
-					restaurant.UpdatedOn = DateTime.Now;
+					var datetimeNow = DateTime.UtcNow;
 
+					restaurant.UpdatedById = personIdOfLoggedUser;
+					restaurant.UpdatedOn = datetimeNow;
 					if (request.Id != 0)
 					{
 						restaurant.IsDeleted = request.IsDeleted;
@@ -578,7 +580,7 @@ namespace ProcurementService.Services
 					{
 						restaurant.IsDeleted = false;
 						restaurant.CreatedById = personIdOfLoggedUser;
-						restaurant.CreatedOn = DateTime.Now;
+						restaurant.CreatedOn = datetimeNow;
 						_context.Entry(restaurant).State = EntityState.Added;
 					}
 				}
@@ -589,7 +591,7 @@ namespace ProcurementService.Services
 					return Task.FromResult(new GRPCValidationResponse()
 					{
 						Successful = false,
-						Information = "There was a problem when creating new restaurant"
+						Information = "There was a problem when updating restaurant"
 
 					});
 				}
@@ -617,6 +619,88 @@ namespace ProcurementService.Services
 
 				});
 
+			}
+		}
+
+		public override Task<GRPCTeamRestaurnatsListResponse> GetTeamRestaurantList(GRPCGetInformationForGivenTeamRequest request, ServerCallContext context)
+		{
+			_logger.LogInformation("Start of call GetTeamRestaurantList: " + DateTime.Now);
+			var userExistsValidationResult =
+				_verifyLogin.CheckIfUsersExists(request.LoggedUser.Username, request.LoggedUser.Password, Guid.Parse(request.LoggedUser.Id));
+
+			if (!userExistsValidationResult.Successful)
+			{
+				_logger.LogInformation("End of call GetTeamRestaurantList: " + DateTime.Now);
+
+				return Task.FromResult(new GRPCTeamRestaurnatsListResponse
+				{
+					Response = new GRPCValidationResponse()
+					{
+						Successful = false,
+						Information = "There was a problem when verifying your login credentials!"
+					}
+				});
+			}
+
+			try
+			{
+				var restaurants = _context.TeamRestaurants
+					.Where(e => e.TeamID == request.TeamId && !e.IsDeleted)
+					.Include(e => e.CreatedBy)
+					.Include(e => e.UpdatedBy)
+					.ToList();
+
+				var result = new List<GRPCRestaurant>();
+				foreach (var item in restaurants)
+				{
+					result.Add(new GRPCRestaurant
+					{
+						Id = item.ID,
+						Name = item.Name,
+						Address = item.Address,
+						Description = item.Description,
+						CreatedBy = new GRPCPerson
+						{
+							Id = item.CreatedBy.Id,
+							FirstName = item.CreatedBy.FirstName,
+							LastName = item.CreatedBy.LastName,
+							Email = item.CreatedBy.Email,
+						},
+						CreatedOn = item.CreatedOn.ToUniversalTime().ToTimestamp(),
+						UpdatedBy = new GRPCPerson()
+						{
+							Id = item.UpdatedBy.Id,
+							FirstName = item.UpdatedBy.FirstName,
+							LastName = item.UpdatedBy.LastName,
+							Email = item.UpdatedBy.Email,
+						},
+						UpdatedOn = item.UpdatedOn.ToUniversalTime().ToTimestamp()
+					});
+				}
+
+				_logger.LogInformation("End of call GetTeamRestaurantList: " + DateTime.Now);
+
+				return Task.FromResult(new GRPCTeamRestaurnatsListResponse()
+				{
+					RestaurantList = { result },
+					Response = new GRPCValidationResponse
+					{
+						Successful = true,
+					}
+				});
+			}
+			catch (Exception ex)
+			{
+				_logger.LogCritical($"Error in function GetTeamRestaurantList: Date of error: {DateTime.Now} Error: {ex}");
+
+				return Task.FromResult(new GRPCTeamRestaurnatsListResponse
+				{
+					Response = new GRPCValidationResponse()
+					{
+						Successful = false,
+						Information = "There was an error while getting list of restaurants! Please try again!",
+					}
+				});
 			}
 		}
 	}

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Grpc.Core;
 using GrpcShared;
 using ProcurementHub.Model.CustomModels;
 using ProcurementHub.Services;
@@ -14,15 +15,15 @@ namespace ProcurementHub.ViewModel.TeamsViewModels.TeamRestaurantsViewModels
     public partial class TeamRestaurantsViewModel : BaseViewModels.BaseViewModel
 	{
 		public ObservableCollection<TeamRestaurantsModel> TeamRestaurants { get; set; } = new();
-		private TeamRestaurantsService _teamRestaurantsService;
+		private readonly TeamRestaurantsService _teamRestaurantsService;
 
 		[ObservableProperty]
+		[NotifyCanExecuteChangedFor(nameof(GetRestaurantCommand))]
 		private TeamMainModel _model;
 
 		public TeamRestaurantsViewModel(Procurement.ProcurementClient procurementClient, TeamRestaurantsService teamRestaurantsService) : base(procurementClient)
 		{
 			_teamRestaurantsService = teamRestaurantsService;
-			GetRestaurant();
 		}
 
 		[ObservableProperty]
@@ -31,46 +32,42 @@ namespace ProcurementHub.ViewModel.TeamsViewModels.TeamRestaurantsViewModels
 		[RelayCommand]
 		async Task GetRestaurant()
 		{
-			Debug.WriteLine("Getting restaurants");
-			var restaurant = new TeamRestaurantsModel
+			if (IsBusy)
+				return;
+
+			IsBusy = true;
+
+			try
 			{
-				ID = 1,
-				Name = "McDonald",
-				Address = "Jan Paweł II 23/5",
-				Description = "",
-				CreatedOn = "23, June 2023",
-				CreatedBy = new PersonsModel() {FullName = "Jan Testowy"},
-				IsUpdated = true,
-				UpdatedOn = "25, June 2023",
-				UpdatedBy = new PersonsModel() {FullName = "Test Test"}
-			};
-			var restaurant2 = new TeamRestaurantsModel
+				var result = await _teamRestaurantsService.GetRestaurantListAsync(_model.ID);
+
+				if (result.Successful)
+				{
+					if (TeamRestaurants.Count != 0)
+						TeamRestaurants.Clear();
+
+					foreach (var team in result.ResultValues)
+						TeamRestaurants.Add(team);
+				}
+				else
+				{
+					await Shell.Current.DisplayAlert("Error", result.Information, "OK");
+				}
+			}
+			catch (RpcException ex)
 			{
-				ID = 2,
-				Name = "Sushi",
-				Address = "Rewolucji 1939",
-				Description = "Test",
-				CreatedOn = "15, June 2023",
-				CreatedBy = new PersonsModel() { FullName = "Adam Borowicz" },
-				IsUpdated = false,
-				UpdatedOn = "25, June 2023",
-				UpdatedBy = new PersonsModel() { FullName = "Test Test" }
-			};
-			var restaurant3 = new TeamRestaurantsModel
+				await Shell.Current.DisplayAlert("Error", "Error while connecting to the server", "OK");
+			}
+			catch (Exception ex)
 			{
-				ID = 3,
-				Name = "McDonald",
-				Address = "Jan Paweł II 23/5",
-				Description = "",
-				CreatedOn = "23, June 2023",
-				CreatedBy = new PersonsModel() { FullName = "Jan Testowy" },
-				IsUpdated = true,
-				UpdatedOn = "25, June 2023",
-				UpdatedBy = new PersonsModel() { FullName = "Test Test" }
-			};
-			TeamRestaurants.Add(restaurant);
-			TeamRestaurants.Add(restaurant2);
-			TeamRestaurants.Add(restaurant3);
+				Debug.WriteLine(ex);
+				await Shell.Current.DisplayAlert("Error", "Unexpected error occurred! Please try again!", "OK");
+			}
+			finally
+			{
+				IsBusy = false;
+				IsRefreshing = false;
+			}
 		}
 
 		[RelayCommand]
@@ -98,6 +95,11 @@ namespace ProcurementHub.ViewModel.TeamsViewModels.TeamRestaurantsViewModels
 				{"TeamMainModel", _model },
 				{"TeamRestaurant", new TeamRestaurantsModel() }
 			});
+		}
+
+		partial void OnModelChanged(TeamMainModel model)
+		{
+			GetRestaurant();
 		}
 	}
 }

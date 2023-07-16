@@ -7,6 +7,7 @@ using Grpc.Core;
 using GrpcShared;
 using ProcurementHub.Model.CustomModels;
 using ProcurementHub.Services;
+using ProcurementHub.View.Teams.TeamRestaurants;
 
 namespace ProcurementHub.ViewModel.TeamsViewModels.TeamRestaurantsViewModels
 {
@@ -37,6 +38,19 @@ namespace ProcurementHub.ViewModel.TeamsViewModels.TeamRestaurantsViewModels
 			try
 			{
 				var result = await _teamRestaurantsService.CreateOrUpdateRestaurantAsync(_teamRestaurantsModel, _model.ID);
+
+				if (result.Successful)
+				{
+					await Shell.Current.DisplayAlert("Success", result.Information, "OK");
+					await Shell.Current.GoToAsync(nameof(TeamRestaurantsPage), true, new Dictionary<string, object>
+					{
+						{"TeamMainModel", _model }
+					});
+				}
+				else
+				{
+					await Shell.Current.DisplayAlert("Error", result.Information, "OK");
+				}
 			}
 			catch (RpcException ex)
 			{

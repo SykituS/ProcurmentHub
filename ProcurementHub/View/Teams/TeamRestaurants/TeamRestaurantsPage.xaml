@@ -11,7 +11,7 @@
         RowDefinitions="*,Auto"
         RowSpacing="0">
 
-        <RefreshView Command="{Binding}" IsRefreshing="{Binding IsRefreshing}">
+        <RefreshView Command="{Binding GetRestaurantCommand}" IsRefreshing="{Binding IsRefreshing}">
             <ContentView>
                 <CollectionView ItemsSource="{Binding TeamRestaurants}">
                     <CollectionView.ItemTemplate>
@@ -40,9 +40,8 @@
                                             </Label>
                                             <Label FontAttributes="Italic" FontSize="14">
                                                 <Label.Text>
-                                                    <MultiBinding StringFormat="Created by: {0} | {1}">
+                                                    <MultiBinding StringFormat="Created by: {0}">
                                                         <Binding Path="CreatedBy.FullName" />
-                                                        <Binding Path="CreatedOn" />
                                                     </MultiBinding>
                                                 </Label.Text>
                                             </Label>
@@ -51,9 +50,8 @@
                                                 FontSize="14"
                                                 IsVisible="{Binding IsUpdated}">
                                                 <Label.Text>
-                                                    <MultiBinding StringFormat="Updated by: {0} | {1}">
+                                                    <MultiBinding StringFormat="Updated by: {0}">
                                                         <Binding Path="UpdatedBy.FullName" />
-                                                        <Binding Path="UpdatedOn" />
                                                     </MultiBinding>
                                                 </Label.Text>
                                             </Label>
