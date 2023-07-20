@@ -99,32 +99,36 @@ namespace ProcurementHub.Services
 			return result;
 		}
 
-        //public async Task<ValidationResponse> CreateOrUpdateRestaurantItemAsync(TeamRestaurantItemsModel teamRestaurantsModel, int teamRestaurantId)
-        //{
-        //    var reply = await ProcurementClient.CreateOrUpdateRestaurantAsync(new GRPCCreateOrUpdateRestaurantRequest
-        //    {
-        //        Id = teamRestaurantsModel.ID,
-        //        TeamId = teamId,
-        //        Name = teamRestaurantsModel.Name,
-        //        Address = teamRestaurantsModel.Address,
-        //        Description = teamRestaurantsModel.Description ?? "",
-        //        LoggedUser = new GRPCLoginInformationForUser
-        //        {
-        //            Id = App.LoggedUserInApplication.Id.ToString(),
-        //            Password = App.LoggedUserInApplication.PasswordHash,
-        //            Username = App.LoggedUserInApplication.UserName,
-        //        },
-        //        IsDeleted = teamRestaurantsModel.IsDeleted,
+		public async Task<ValidationResponse> CreateOrUpdateRestaurantItemAsync(TeamRestaurantItemsModel teamRestaurantsModel, int teamRestaurantId)
+		{
+			var reply = await ProcurementClient.CreateOrUpdateRestaurantItemAsync(new GRPCCreateOrUpdateRestaurantItemRequest()
+			{
+				Id = teamRestaurantsModel.ID,
+				RestaurantId = teamRestaurantId,
+				Name = teamRestaurantsModel.Name,
+				Price = new money()
+				{
+					CurrencyCode = teamRestaurantsModel.CurrencyType,
+					Price = teamRestaurantsModel.Price.ToString(),
+				},
+				Description = teamRestaurantsModel.Description ?? "",
+				LoggedUser = new GRPCLoginInformationForUser
+				{
+					Id = App.LoggedUserInApplication.Id.ToString(),
+					Password = App.LoggedUserInApplication.PasswordHash,
+					Username = App.LoggedUserInApplication.UserName,
+				},
+				IsDeleted = teamRestaurantsModel.IsDeleted,
 
-        //    });
+			});
 
-        //    var result = new ValidationResponse()
-        //    {
-        //        Successful = reply.Successful,
-        //        Information = reply.Information,
-        //    };
+			var result = new ValidationResponse()
+			{
+				Successful = reply.Successful,
+				Information = reply.Information,
+			};
 
-        //    return result;
-        //}
-    }
+			return result;
+		}
+	}
 }

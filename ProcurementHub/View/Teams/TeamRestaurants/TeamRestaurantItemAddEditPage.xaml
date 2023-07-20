@@ -45,7 +45,7 @@
                         Margin="0,0,0,0"
                         FontAttributes="Bold"
                         HorizontalOptions="FillAndExpand"
-                        Placeholder="Team name"
+                        Placeholder="Item name"
                         Text="{Binding TeamRestaurantItemsModel.Name, Mode=TwoWay}"
                         TextColor="#1c1002"
                         VerticalOptions="Center" />
@@ -81,8 +81,8 @@
                         Margin="0,0,0,0"
                         FontAttributes="Bold"
                         HorizontalOptions="FillAndExpand"
-                        Placeholder="Address"
-                        Text="{Binding TeamRestaurantItemsModel.Price, Mode=TwoWay}"
+                        Placeholder="Currency type"
+                        Text="{Binding TeamRestaurantItemsModel.CurrencyType, Mode=TwoWay}"
                         TextColor="#1c1002"
                         VerticalOptions="Center" />
                 </StackLayout>
@@ -95,13 +95,10 @@
                 CornerRadius="10"
                 HorizontalOptions="FillAndExpand">
                 <StackLayout Orientation="Horizontal">
-                    <Entry
+                    <Stepper
                         Margin="0,0,0,0"
-                        FontAttributes="Bold"
+                        BindingContext="{Binding TeamRestaurantItemsModel.Price, Mode=TwoWay}"
                         HorizontalOptions="FillAndExpand"
-                        Placeholder="Address"
-                        Text="{Binding TeamRestaurantItemsModel.CurrencyType, Mode=TwoWay}"
-                        TextColor="#1c1002"
                         VerticalOptions="Center" />
                 </StackLayout>
             </Frame>

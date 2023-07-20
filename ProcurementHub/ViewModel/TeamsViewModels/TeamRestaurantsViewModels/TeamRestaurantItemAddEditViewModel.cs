@@ -7,6 +7,7 @@ using Grpc.Core;
 using GrpcShared;
 using ProcurementHub.Model.CustomModels;
 using ProcurementHub.Services;
+using ProcurementHub.View.Teams.TeamRestaurants;
 
 namespace ProcurementHub.ViewModel.TeamsViewModels.TeamRestaurantsViewModels
 {
@@ -36,14 +37,14 @@ namespace ProcurementHub.ViewModel.TeamsViewModels.TeamRestaurantsViewModels
             IsBusy = true;
             try
             {
-                var result = await _teamRestaurantsService.Crea(_teamRestaurantsModel, _model.ID);
+                var result = await _teamRestaurantsService.CreateOrUpdateRestaurantItemAsync(_teamRestaurantItemsModel, _restaurantModel.ID);
 
                 if (result.Successful)
                 {
                     await Shell.Current.DisplayAlert("Success", result.Information, "OK");
                     await Shell.Current.GoToAsync(nameof(TeamRestaurantsPage), true, new Dictionary<string, object>
                     {
-                        {"TeamMainModel", _model }
+                        {"TeamMainModel", _restaurantModel }
                     });
                 }
                 else
@@ -70,6 +71,11 @@ namespace ProcurementHub.ViewModel.TeamsViewModels.TeamRestaurantsViewModels
 		async Task GoBackToTeamRestaurantItems()
 		{
 			await Shell.Current.GoToAsync("..");
+		}
+
+		partial void OnTeamRestaurantItemsModelChanging(TeamRestaurantItemsModel value)
+		{
+			value.CurrencyType = "PLN";
 		}
 	}
 }

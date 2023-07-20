@@ -20,8 +20,7 @@ service Procurement {
 
 message money {
 	string currencyCode = 1;
-	int64 units = 2;
-	int32 nanos = 3;
+	string price = 2;
 }
 
 message GRPCValidationResponse {
