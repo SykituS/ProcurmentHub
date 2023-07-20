@@ -14,6 +14,9 @@ namespace GrpcShared.Models
 		public string Name { get; set; }
 		public string? Description { get; set; }
 		public decimal Price { get; set; }
+
+		//TODO: add currency type to DB
+
 		public int CreatedById { get; set; }
 		public DateTime CreatedOn { get; set; }
 		public int UpdatedById { get; set; }
