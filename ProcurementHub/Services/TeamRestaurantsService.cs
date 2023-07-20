@@ -98,5 +98,33 @@ namespace ProcurementHub.Services
 			result.Successful = true;
 			return result;
 		}
-	}
+
+        //public async Task<ValidationResponse> CreateOrUpdateRestaurantItemAsync(TeamRestaurantItemsModel teamRestaurantsModel, int teamRestaurantId)
+        //{
+        //    var reply = await ProcurementClient.CreateOrUpdateRestaurantAsync(new GRPCCreateOrUpdateRestaurantRequest
+        //    {
+        //        Id = teamRestaurantsModel.ID,
+        //        TeamId = teamId,
+        //        Name = teamRestaurantsModel.Name,
+        //        Address = teamRestaurantsModel.Address,
+        //        Description = teamRestaurantsModel.Description ?? "",
+        //        LoggedUser = new GRPCLoginInformationForUser
+        //        {
+        //            Id = App.LoggedUserInApplication.Id.ToString(),
+        //            Password = App.LoggedUserInApplication.PasswordHash,
+        //            Username = App.LoggedUserInApplication.UserName,
+        //        },
+        //        IsDeleted = teamRestaurantsModel.IsDeleted,
+
+        //    });
+
+        //    var result = new ValidationResponse()
+        //    {
+        //        Successful = reply.Successful,
+        //        Information = reply.Information,
+        //    };
+
+        //    return result;
+        //}
+    }
 }

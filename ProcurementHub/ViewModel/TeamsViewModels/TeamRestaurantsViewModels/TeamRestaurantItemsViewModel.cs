@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Grpc.Core;
 using GrpcShared;
 using ProcurementHub.Model.CustomModels;
 using ProcurementHub.Model.Models;
@@ -23,7 +24,6 @@ namespace ProcurementHub.ViewModel.TeamsViewModels.TeamRestaurantsViewModels
 		public TeamRestaurantItemsViewModel(Procurement.ProcurementClient procurementClient, TeamRestaurantsService teamRestaurantsService) : base(procurementClient)
 		{
 			_teamRestaurantsService = teamRestaurantsService;
-			GetRestaurantItems();
 		}
 
 		[ObservableProperty]
@@ -32,9 +32,45 @@ namespace ProcurementHub.ViewModel.TeamsViewModels.TeamRestaurantsViewModels
 		[RelayCommand]
 		async Task GetRestaurantItems()
 		{
-			Debug.WriteLine("Getting restaurant items");
+            if (IsBusy)
+                return;
 
-		}
+            IsBusy = true;
+
+            try
+            {
+                //TODO: Change getting data from restaurant to restaurant item
+                //var result = await _teamRestaurantsService.GetRestaurantListAsync(_model.ID);
+
+                //if (result.Successful)
+                //{
+                //    if (TeamRestaurants.Count != 0)
+                //        TeamRestaurants.Clear();
+
+                //    foreach (var team in result.ResultValues)
+                //        TeamRestaurants.Add(team);
+                //}
+                //else
+                //{
+                //    await Shell.Current.DisplayAlert("Error", result.Information, "OK");
+                //}
+            }
+            catch (RpcException ex)
+            {
+                await Shell.Current.DisplayAlert("Error", "Error while connecting to the server", "OK");
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+                await Shell.Current.DisplayAlert("Error", "Unexpected error occurred! Please try again!", "OK");
+            }
+            finally
+            {
+                IsBusy = false;
+                IsRefreshing = false;
+            }
+
+        }
 
 		[RelayCommand]
 		async Task GoToEditRestaurantItem(TeamRestaurantItemsModel model)
@@ -55,5 +91,10 @@ namespace ProcurementHub.ViewModel.TeamsViewModels.TeamRestaurantsViewModels
 				{"TeamRestaurantItem", new TeamRestaurantItemsModel() }
 			});
 		}
-	}
+
+        async partial void OnModelChanged(TeamRestaurantsModel value)
+        {
+            await GetRestaurantItems();
+        }
+    }
 }
