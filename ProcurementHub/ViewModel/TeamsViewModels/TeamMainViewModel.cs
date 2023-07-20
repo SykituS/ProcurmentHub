@@ -31,7 +31,9 @@ namespace ProcurementHub.ViewModel.TeamsViewModels
         [RelayCommand]
         async Task GoToTeamSettingsPage()
         {
-	        if (IsBusy)
+			//TODO: Find out how to create some sort of update so that users can easily see if there is new order in progress 
+            //https://learn.microsoft.com/en-us/dotnet/maui/user-interface/controls/button#press-and-release-the-button
+            if (IsBusy)
 		        return;
 
 	        IsBusy = true;

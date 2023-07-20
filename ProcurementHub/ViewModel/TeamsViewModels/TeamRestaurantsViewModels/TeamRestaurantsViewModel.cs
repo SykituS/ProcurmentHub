@@ -97,9 +97,9 @@ namespace ProcurementHub.ViewModel.TeamsViewModels.TeamRestaurantsViewModels
 			});
 		}
 
-		partial void OnModelChanged(TeamMainModel model)
+		async partial void OnModelChanged(TeamMainModel value)
 		{
-			GetRestaurant();
+			await GetRestaurant();
 		}
 	}
 }
