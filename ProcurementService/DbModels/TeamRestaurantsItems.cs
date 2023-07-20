@@ -14,6 +14,8 @@ namespace GrpcShared.Models
 		public string Name { get; set; }
 		public string? Description { get; set; }
 		public decimal Price { get; set; }
+		public string CurrencyType { get; set; }
+		public bool IsDeleted { get; set; }
 		public int CreatedById { get; set; }
 		public DateTime CreatedOn { get; set; }
 		public int UpdatedById { get; set; }

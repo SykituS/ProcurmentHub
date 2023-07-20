@@ -15,6 +15,13 @@ service Procurement {
   rpc GetSelectedTeam (GRPCGetInformationForGivenTeamRequest) returns (GRPCSelectedTeamResponse);
   rpc CreateOrUpdateRestaurant (GRPCCreateOrUpdateRestaurantRequest) returns (GRPCValidationResponse);
   rpc GetTeamRestaurantList (GRPCGetInformationForGivenTeamRequest) returns (GRPCTeamRestaurnatsListResponse);
+  rpc CreateOrUpdateRestaurantItem (GRPCCreateOrUpdateRestaurantItemRequest) returns (GRPCValidationResponse);
+}
+
+message money {
+	string currencyCode = 1;
+	int64 units = 2;
+	int32 nanos = 3;
 }
 
 message GRPCValidationResponse {
@@ -137,4 +144,14 @@ message GRPCRestaurant {
 message GRPCTeamRestaurnatsListResponse {
 	repeated GRPCRestaurant restaurantList = 1;
 	GRPCValidationResponse response = 2;
+}
+
+message GRPCCreateOrUpdateRestaurantItemRequest {
+	int32 id = 1;
+	int32 restaurantId = 2;
+	string name = 3;
+	money price = 4;
+	string description = 5;
+	bool isDeleted = 6;
+	GRPCLoginInformationForUser LoggedUser = 7;
 }

@@ -85,6 +85,8 @@ CREATE TABLE TeamRestaurantsItems (
 	Name varchar(255) NOT NULL,
 	Description varchar(255),
 	Price money NOT NULL,
+	CurrencyType varchar(15),
+	IsDeleted bit NOT NULL,
 	CreatedByID int NOT NULL,
 	CreatedOn datetime not null,
 	UpdatedByID int not null,

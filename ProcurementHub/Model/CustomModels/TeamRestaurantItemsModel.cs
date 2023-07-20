@@ -13,6 +13,7 @@ namespace ProcurementHub.Model.CustomModels
 	    public string Name { get; set; }
 	    public string Description { get; set; }
 	    public decimal Price { get; set; }
+		public string CurrencyType { get; set; }
 	    public DateTime CreatedOn { get; set; }
 	    public DateTime UpdatedOn { get; set; }
 		
