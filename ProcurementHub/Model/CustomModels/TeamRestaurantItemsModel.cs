@@ -15,10 +15,11 @@ namespace ProcurementHub.Model.CustomModels
 	    public decimal Price { get; set; }
 		public string CurrencyType { get; set; }
 		public bool IsDeleted { get; set; }
-	    public DateTime CreatedOn { get; set; }
-	    public DateTime UpdatedOn { get; set; }
-		
+		public DateTime CreatedOn { get; set; }
 	    public PersonsModel CreatedBy { get; set; }
+		
+		public bool IsUpdated { get; set; }
+	    public DateTime UpdatedOn { get; set; }
 	    public PersonsModel UpdatedBy { get; set; }
 	}
 }

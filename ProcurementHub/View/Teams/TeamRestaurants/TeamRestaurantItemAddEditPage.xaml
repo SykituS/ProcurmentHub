@@ -95,10 +95,13 @@
                 CornerRadius="10"
                 HorizontalOptions="FillAndExpand">
                 <StackLayout Orientation="Horizontal">
-                    <Stepper
+                    <Entry
                         Margin="0,0,0,0"
-                        BindingContext="{Binding TeamRestaurantItemsModel.Price, Mode=TwoWay}"
+                        FontAttributes="Bold"
                         HorizontalOptions="FillAndExpand"
+                        Placeholder="Price"
+                        Text="{Binding TeamRestaurantItemsModel.Price, Mode=TwoWay}"
+                        TextColor="#1c1002"
                         VerticalOptions="Center" />
                 </StackLayout>
             </Frame>

@@ -39,21 +39,20 @@ namespace ProcurementHub.ViewModel.TeamsViewModels.TeamRestaurantsViewModels
 
             try
             {
-                //TODO: Change getting data from restaurant to restaurant item
-                //var result = await _teamRestaurantsService.GetRestaurantListAsync(_model.ID);
+                var result = await _teamRestaurantsService.GetRestaurantItemsListAsync(_model.ID);
 
-                //if (result.Successful)
-                //{
-                //    if (TeamRestaurants.Count != 0)
-                //        TeamRestaurants.Clear();
+                if (result.Successful)
+                {
+                    if (TeamRestaurantItems.Count != 0)
+	                    TeamRestaurantItems.Clear();
 
-                //    foreach (var team in result.ResultValues)
-                //        TeamRestaurants.Add(team);
-                //}
-                //else
-                //{
-                //    await Shell.Current.DisplayAlert("Error", result.Information, "OK");
-                //}
+                    foreach (var item in result.ResultValues)
+	                    TeamRestaurantItems.Add(item);
+                }
+                else
+                {
+                    await Shell.Current.DisplayAlert("Error", result.Information, "OK");
+                }
             }
             catch (RpcException ex)
             {

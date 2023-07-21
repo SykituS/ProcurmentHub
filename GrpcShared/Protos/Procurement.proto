@@ -12,10 +12,11 @@ service Procurement {
   rpc GetTeamsList (GRPCLoginInformationForUser) returns (GRPCTeamsList);
   rpc CreateNewTeam (GRPCCreateNewTeam) returns (GRPCValidationResponse);
   rpc JoinToTeam (GRPCJoinToTeam) returns (GRPCTeamValidationResponse);
-  rpc GetSelectedTeam (GRPCGetInformationForGivenTeamRequest) returns (GRPCSelectedTeamResponse);
+  rpc GetSelectedTeam (GRPCGetInformationForGivenIdRequest) returns (GRPCSelectedTeamResponse);
   rpc CreateOrUpdateRestaurant (GRPCCreateOrUpdateRestaurantRequest) returns (GRPCValidationResponse);
-  rpc GetTeamRestaurantList (GRPCGetInformationForGivenTeamRequest) returns (GRPCTeamRestaurnatsListResponse);
+  rpc GetTeamRestaurantList (GRPCGetInformationForGivenIdRequest) returns (GRPCTeamRestaurnatsListResponse);
   rpc CreateOrUpdateRestaurantItem (GRPCCreateOrUpdateRestaurantItemRequest) returns (GRPCValidationResponse);
+  rpc GetTeamRestaurantItemList (GRPCGetInformationForGivenIdRequest) returns (GRPCTeamRestaurnatItemsListResponse);
 }
 
 message money {
@@ -105,9 +106,9 @@ message GRPCTeamValidationResponse {
 	GRPCTeam team = 2;
 }
 
-message GRPCGetInformationForGivenTeamRequest {
+message GRPCGetInformationForGivenIdRequest {
 	GRPCLoginInformationForUser loggedUser = 1;
-	int32 teamId = 2;
+	int32 id = 2;
 }
 
 message GRPCSelectedTeamResponse {
@@ -153,4 +154,20 @@ message GRPCCreateOrUpdateRestaurantItemRequest {
 	string description = 5;
 	bool isDeleted = 6;
 	GRPCLoginInformationForUser LoggedUser = 7;
+}
+
+message GRPCRestaurantItem {
+	int32 id = 1;
+	string name = 2;
+	money price = 3;
+	string description = 4;
+	GRPCPerson CreatedBy = 5;
+	google.protobuf.Timestamp CreatedOn = 6;
+	GRPCPerson UpdatedBy = 7;
+	google.protobuf.Timestamp UpdatedOn = 8;
+}
+
+message GRPCTeamRestaurnatItemsListResponse {
+	repeated GRPCRestaurantItem restaurantItemList = 1;
+	GRPCValidationResponse response = 2;
 }

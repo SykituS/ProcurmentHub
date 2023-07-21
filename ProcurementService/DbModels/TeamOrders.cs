@@ -20,7 +20,7 @@ namespace GrpcShared.Models
 		public DateTime OrderFinishedOn { get; set; }
 
 		public Teams Team { get; set; }
-		public TeamRestaurants TeamRestaurants { get; set; }
+		public TeamRestaurants TeamRestaurant { get; set; }
 		public Persons OrderStartedBy { get; set; }
 		public Persons OrderPayedBy { get; set; }
 	}

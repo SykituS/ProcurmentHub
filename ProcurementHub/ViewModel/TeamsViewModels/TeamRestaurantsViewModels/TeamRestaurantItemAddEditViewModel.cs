@@ -42,9 +42,9 @@ namespace ProcurementHub.ViewModel.TeamsViewModels.TeamRestaurantsViewModels
                 if (result.Successful)
                 {
                     await Shell.Current.DisplayAlert("Success", result.Information, "OK");
-                    await Shell.Current.GoToAsync(nameof(TeamRestaurantsPage), true, new Dictionary<string, object>
+                    await Shell.Current.GoToAsync(nameof(TeamRestaurantItemsPage), true, new Dictionary<string, object>
                     {
-                        {"TeamMainModel", _restaurantModel }
+                        {"TeamRestaurant", _restaurantModel }
                     });
                 }
                 else

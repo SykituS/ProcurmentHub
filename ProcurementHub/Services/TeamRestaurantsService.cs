@@ -15,6 +15,7 @@ namespace ProcurementHub.Services
 		}
 
 		private List<TeamRestaurantsModel> _restaurants = new();
+		private List<TeamRestaurantItemsModel> _restaurantItems = new();
 
 		public async Task<ValidationResponse> CreateOrUpdateRestaurantAsync(TeamRestaurantsModel teamRestaurantsModel, int teamId)
 		{
@@ -46,7 +47,7 @@ namespace ProcurementHub.Services
 
 		public async Task<ValidationResponseWithResult<List<TeamRestaurantsModel>>> GetRestaurantListAsync(int teamId)
 		{
-			var reply = await ProcurementClient.GetTeamRestaurantListAsync(new GRPCGetInformationForGivenTeamRequest
+			var reply = await ProcurementClient.GetTeamRestaurantListAsync(new GRPCGetInformationForGivenIdRequest
 			{
 				LoggedUser = new GRPCLoginInformationForUser
 				{
@@ -54,7 +55,7 @@ namespace ProcurementHub.Services
 					Password = App.LoggedUserInApplication.PasswordHash,
 					Username = App.LoggedUserInApplication.UserName,
 				},
-				TeamId = teamId
+				Id = teamId
 			});
 
 			var result = new ValidationResponseWithResult<List<TeamRestaurantsModel>>();
@@ -128,6 +129,62 @@ namespace ProcurementHub.Services
 				Information = reply.Information,
 			};
 
+			return result;
+		}
+
+		public async Task<ValidationResponseWithResult<List<TeamRestaurantItemsModel>>> GetRestaurantItemsListAsync(int restaurantId)
+		{
+			var reply = await ProcurementClient.GetTeamRestaurantItemListAsync(new GRPCGetInformationForGivenIdRequest
+			{
+				LoggedUser = new GRPCLoginInformationForUser
+				{
+					Id = App.LoggedUserInApplication.Id.ToString(),
+					Password = App.LoggedUserInApplication.PasswordHash,
+					Username = App.LoggedUserInApplication.UserName,
+				},
+				Id = restaurantId
+			});
+
+			var result = new ValidationResponseWithResult<List<TeamRestaurantItemsModel>>();
+
+			if (!reply.Response.Successful)
+			{
+				result.Successful = false;
+				result.Information = reply.Response.Information;
+				return result;
+			}
+
+			foreach (var item in reply.RestaurantItemList)
+			{
+				_restaurantItems.Add(new TeamRestaurantItemsModel
+				{
+					ID = item.Id,
+					Name = item.Name,
+					Price = decimal.Parse(item.Price.Price),
+					CurrencyType = item.Price.CurrencyCode,
+					Description = item.Description,
+					CreatedBy = new PersonsModel
+					{
+						Id = item.CreatedBy.Id,
+						FirstName = item.CreatedBy.FirstName,
+						LastName = item.CreatedBy.LastName,
+						Email = item.CreatedBy.Email,
+						FullName = $"{item.CreatedBy.FirstName} {item.CreatedBy.LastName}",
+					},
+					IsUpdated = item.CreatedOn != item.UpdatedOn,
+					UpdatedBy = new PersonsModel
+					{
+						Id = item.UpdatedBy.Id,
+						FirstName = item.UpdatedBy.FirstName,
+						LastName = item.UpdatedBy.LastName,
+						Email = item.UpdatedBy.Email,
+						FullName = $"{item.UpdatedBy.FirstName} {item.UpdatedBy.LastName}",
+					},
+				});
+			}
+
+			result.ResultValues = _restaurantItems;
+			result.Successful = true;
 			return result;
 		}
 	}

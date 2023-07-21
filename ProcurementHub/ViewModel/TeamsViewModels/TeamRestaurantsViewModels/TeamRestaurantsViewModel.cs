@@ -46,8 +46,8 @@ namespace ProcurementHub.ViewModel.TeamsViewModels.TeamRestaurantsViewModels
 					if (TeamRestaurants.Count != 0)
 						TeamRestaurants.Clear();
 
-					foreach (var team in result.ResultValues)
-						TeamRestaurants.Add(team);
+					foreach (var restaurant in result.ResultValues)
+						TeamRestaurants.Add(restaurant);
 				}
 				else
 				{

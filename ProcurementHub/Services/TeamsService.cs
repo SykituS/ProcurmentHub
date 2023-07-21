@@ -127,7 +127,7 @@ namespace ProcurementHub.Services
 
         public async Task<ValidationResponseWithResult<TeamMainModel>> GetSelectedTeam(int teamId)
         {
-	        var reply = await ProcurementClient.GetSelectedTeamAsync(new GRPCGetInformationForGivenTeamRequest
+	        var reply = await ProcurementClient.GetSelectedTeamAsync(new GRPCGetInformationForGivenIdRequest
 			{
 		        LoggedUser = new GRPCLoginInformationForUser()
 		        {
@@ -135,7 +135,7 @@ namespace ProcurementHub.Services
 			        Password = App.LoggedUserInApplication.PasswordHash,
 			        Username = App.LoggedUserInApplication.UserName,
 		        },
-		        TeamId = teamId,
+		        Id = teamId,
 	        });
 
             var result = new ValidationResponseWithResult<TeamMainModel>
