@@ -123,6 +123,7 @@ public static class MauiProgram
 
 		#endregion
 
+		//TODO: Register order pages and create models and view models for them
 
 		return builder.Build();
 	}

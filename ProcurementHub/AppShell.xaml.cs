@@ -1,6 +1,7 @@
 ﻿using GrpcShared;
 using ProcurementHub.View.Account;
 using ProcurementHub.View.Main;
+using ProcurementHub.View.Orders;
 using ProcurementHub.View.Teams;
 using ProcurementHub.View.Teams.TeamRestaurants;
 using TeamRestaurants = ProcurementHub.Model.Models.TeamRestaurants;
@@ -29,6 +30,7 @@ public partial class AppShell : Shell
 		Routing.RegisterRoute(nameof(TeamRestaurantItemsPage), typeof(TeamRestaurantItemsPage));
 		Routing.RegisterRoute(nameof(TeamRestaurantItemAddEditPage), typeof(TeamRestaurantItemAddEditPage));
 
+		Routing.RegisterRoute(nameof(CreateNewOrderPage), typeof(CreateNewOrderPage));
 
 
 	}

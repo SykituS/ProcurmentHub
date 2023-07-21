@@ -76,6 +76,21 @@
 	  <Compile Update="View\Account\LoginPage.xaml.cs">
 	    <DependentUpon>LoginPage.xaml</DependentUpon>
 	  </Compile>
+	  <Compile Update="View\Orders\OrderDetailsPage.xaml.cs">
+	    <DependentUpon>OrderDetailsPage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="View\Orders\OrderSelectPayingPersonPage.xaml.cs">
+	    <DependentUpon>OrderSelectPayingPersonPage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="View\Orders\OrderStartPage.xaml.cs">
+	    <DependentUpon>OrderStartPage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="View\Orders\OrderSelectItemsPage.xaml.cs">
+	    <DependentUpon>OrderSelectItemsPage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="View\Orders\OrderSumUpPage.xaml.cs">
+	    <DependentUpon>OrderSumUpPage.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="View\Teams\TeamRestaurantsPage\TeamRestaurantItemAddEditPage.xaml.cs">
 	    <DependentUpon>TeamRestaurantItemAddEditPage.xaml</DependentUpon>
 	  </Compile>
@@ -109,13 +124,25 @@
 	  <MauiXaml Update="View\Main\LoadingPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="View\Orders\CreateNewOrderPage.xaml">
+	  <MauiXaml Update="View\Orders\OrderDetailsPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="View\Orders\PersonalOrderStatisticPage.xaml">
+	  <MauiXaml Update="View\Orders\OrderSelectPayingPersonPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="View\Orders\TeamOrdersStatisticPage.xaml">
+	  <MauiXaml Update="View\Orders\OrderStartPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="View\Orders\OrderSelectItemsPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="View\Orders\OrderSumUpPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="View\Statistic\PersonalOrderStatisticPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="View\Statistic\TeamOrdersStatisticPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="View\Teams\CreateNewTeamPage.xaml">
@@ -145,6 +172,10 @@
 	  <MauiXaml Update="View\Teams\TeamSettingsPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="ViewModel\Orders\" />
 	</ItemGroup>
 
 	<ProjectExtensions><VisualStudio><UserProperties XamarinHotReloadDebuggerTimeoutExceptionProcurementHubHideInfoBar="True" /></VisualStudio></ProjectExtensions>
