@@ -1,8 +1,8 @@
 namespace ProcurementHub.View.Orders;
 
-public partial class CreateNewOrderPage : ContentPage
+public partial class OrderStartPage : ContentPage
 {
-	public CreateNewOrderPage()
+	public OrderStartPage()
 	{
 		InitializeComponent();
 	}

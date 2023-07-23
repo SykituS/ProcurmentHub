@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ProcurementHub.View.Orders;
+namespace ProcurementHub.View.Main;
 
-public partial class OrderSumUpPage : ContentPage
+public partial class OrderWaitPage : ContentPage
 {
-	public OrderSumUpPage()
+	public OrderWaitPage()
 	{
 		InitializeComponent();
 	}

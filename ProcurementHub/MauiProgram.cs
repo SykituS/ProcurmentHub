@@ -7,10 +7,12 @@ using ProcurementHub.Services;
 using ProcurementHub.View;
 using ProcurementHub.View.Account;
 using ProcurementHub.View.Main;
+using ProcurementHub.View.Orders;
 using ProcurementHub.View.Teams;
 using ProcurementHub.View.Teams.TeamRestaurants;
 using ProcurementHub.ViewModel.AccountViewModels;
 using ProcurementHub.ViewModel.MainViewModels;
+using ProcurementHub.ViewModel.Orders;
 using ProcurementHub.ViewModel.TeamsViewModels;
 using ProcurementHub.ViewModel.TeamsViewModels.TeamRestaurantsViewModels;
 using ForgotPasswordViewModel = ProcurementHub.ViewModel.AccountViewModels.ForgotPasswordViewModel;
@@ -123,7 +125,25 @@ public static class MauiProgram
 
 		#endregion
 
-		//TODO: Register order pages and create models and view models for them
+		#region Orders
+
+		builder.Services.AddTransient<OrderServices>();
+
+		builder.Services.AddTransient<OrderStartPage>();
+		builder.Services.AddTransient<OrderSelectItemsPage>();
+		builder.Services.AddTransient<OrderCartPage>();
+		builder.Services.AddTransient<OrderSelectPayingPersonPage>();
+		builder.Services.AddTransient<OrderWaitPage>();
+		builder.Services.AddTransient<OrderDetailsPage>();
+
+		builder.Services.AddTransient<OrderStartViewModel>();
+		builder.Services.AddTransient<OrderSelectItemsViewModel>();
+		builder.Services.AddTransient<OrderCartViewModel>();
+		builder.Services.AddTransient<OrderSelectPayingPersonViewModel>();
+		builder.Services.AddTransient<OrderWaitViewModel>();
+		builder.Services.AddTransient<OrderDetailsViewModel>();
+
+		#endregion
 
 		return builder.Build();
 	}

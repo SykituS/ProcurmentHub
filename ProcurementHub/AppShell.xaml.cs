@@ -30,7 +30,12 @@ public partial class AppShell : Shell
 		Routing.RegisterRoute(nameof(TeamRestaurantItemsPage), typeof(TeamRestaurantItemsPage));
 		Routing.RegisterRoute(nameof(TeamRestaurantItemAddEditPage), typeof(TeamRestaurantItemAddEditPage));
 
-		Routing.RegisterRoute(nameof(CreateNewOrderPage), typeof(CreateNewOrderPage));
+		Routing.RegisterRoute(nameof(OrderStartPage), typeof(OrderStartPage));
+		Routing.RegisterRoute(nameof(OrderSelectItemsPage), typeof(OrderSelectItemsPage));
+		Routing.RegisterRoute(nameof(OrderCartPage), typeof(OrderCartPage));
+		Routing.RegisterRoute(nameof(OrderSelectPayingPersonPage), typeof(OrderSelectPayingPersonPage));
+		Routing.RegisterRoute(nameof(OrderWaitPage), typeof(OrderWaitPage));
+		Routing.RegisterRoute(nameof(OrderDetailsPage), typeof(OrderDetailsPage));
 
 
 	}

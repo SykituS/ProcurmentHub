@@ -76,6 +76,9 @@
 	  <Compile Update="View\Account\LoginPage.xaml.cs">
 	    <DependentUpon>LoginPage.xaml</DependentUpon>
 	  </Compile>
+	  <Compile Update="View\Orders\OrderWaitPage.xaml.cs">
+	    <DependentUpon>OrderWaitPage.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="View\Orders\OrderDetailsPage.xaml.cs">
 	    <DependentUpon>OrderDetailsPage.xaml</DependentUpon>
 	  </Compile>
@@ -88,8 +91,8 @@
 	  <Compile Update="View\Orders\OrderSelectItemsPage.xaml.cs">
 	    <DependentUpon>OrderSelectItemsPage.xaml</DependentUpon>
 	  </Compile>
-	  <Compile Update="View\Orders\OrderSumUpPage.xaml.cs">
-	    <DependentUpon>OrderSumUpPage.xaml</DependentUpon>
+	  <Compile Update="View\Orders\OrderCartPage.xaml.cs">
+	    <DependentUpon>OrderCartPage.xaml</DependentUpon>
 	  </Compile>
 	  <Compile Update="View\Teams\TeamRestaurantsPage\TeamRestaurantItemAddEditPage.xaml.cs">
 	    <DependentUpon>TeamRestaurantItemAddEditPage.xaml</DependentUpon>
@@ -136,7 +139,7 @@
 	  <MauiXaml Update="View\Orders\OrderSelectItemsPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="View\Orders\OrderSumUpPage.xaml">
+	  <MauiXaml Update="View\Orders\OrderCartPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="View\Statistic\PersonalOrderStatisticPage.xaml">
@@ -172,10 +175,6 @@
 	  <MauiXaml Update="View\Teams\TeamSettingsPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	</ItemGroup>
-
-	<ItemGroup>
-	  <Folder Include="ViewModel\Orders\" />
 	</ItemGroup>
 
 	<ProjectExtensions><VisualStudio><UserProperties XamarinHotReloadDebuggerTimeoutExceptionProcurementHubHideInfoBar="True" /></VisualStudio></ProjectExtensions>
