@@ -7,6 +7,7 @@ using Grpc.Core;
 using GrpcShared;
 using ProcurementHub.Model;
 using ProcurementHub.Model.CustomModels;
+using ProcurementHub.View.Orders;
 using ProcurementHub.View.Teams;
 using ProcurementHub.View.Teams.TeamRestaurants;
 
@@ -25,8 +26,11 @@ namespace ProcurementHub.ViewModel.TeamsViewModels
         [RelayCommand]
         async Task StartNewOrder()
         {
-            Debug.WriteLine("Starting new order");
-        }
+			await Shell.Current.GoToAsync(nameof(OrderStartPage), true, new Dictionary<string, object>
+			{
+				{"TeamMainModel", _model }
+			});
+		}
 
         [RelayCommand]
         async Task GoToTeamSettingsPage()

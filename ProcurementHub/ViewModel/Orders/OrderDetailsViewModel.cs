@@ -3,10 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using GrpcShared;
+using ProcurementHub.ViewModel.BaseViewModels;
 
 namespace ProcurementHub.ViewModel.Orders
 {
-	internal class OrderDetailsViewModel
+	public partial class OrderDetailsViewModel : BaseViewModel
 	{
+		public OrderDetailsViewModel(Procurement.ProcurementClient procurementClient) : base(procurementClient)
+		{
+		}
 	}
 }

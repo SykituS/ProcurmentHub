@@ -18,7 +18,6 @@ namespace ProcurementHub.ViewModel.TeamsViewModels.TeamRestaurantsViewModels
 		private readonly TeamRestaurantsService _teamRestaurantsService;
 
 		[ObservableProperty]
-		[NotifyCanExecuteChangedFor(nameof(GetRestaurantCommand))]
 		private TeamMainModel _model;
 
 		public TeamRestaurantsViewModel(Procurement.ProcurementClient procurementClient, TeamRestaurantsService teamRestaurantsService) : base(procurementClient)
