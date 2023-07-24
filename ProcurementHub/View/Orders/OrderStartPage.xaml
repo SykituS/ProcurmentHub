@@ -15,7 +15,7 @@
             <ContentView>
                 <CollectionView ItemsSource="{Binding RestaurantsForOrder}">
                     <CollectionView.ItemTemplate>
-                        <DataTemplate x:DataType="customModels:OrderStartModel">
+                        <DataTemplate x:DataType="customModels:TeamRestaurantsModel">
                             <Grid Padding="10">
                                 <Frame
                                     BackgroundColor="Transparent"

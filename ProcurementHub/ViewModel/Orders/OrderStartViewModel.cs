@@ -7,6 +7,7 @@ using Grpc.Core;
 using GrpcShared;
 using ProcurementHub.Model.CustomModels;
 using ProcurementHub.Services;
+using ProcurementHub.View.Orders;
 using ProcurementHub.View.Teams;
 using ProcurementHub.ViewModel.BaseViewModels;
 
@@ -15,15 +16,17 @@ namespace ProcurementHub.ViewModel.Orders
 	[QueryProperty(nameof(TeamModel), "TeamMainModel")]
 	public partial class OrderStartViewModel : BaseViewModel
 	{
-		public ObservableCollection<OrderStartModel> RestaurantsForOrder { get; set; } = new();
+		public ObservableCollection<TeamRestaurantsModel> RestaurantsForOrder { get; set; } = new();
 		private readonly TeamRestaurantsService _teamRestaurantsService;
+		private readonly OrderServices _orderServices;
 
 		[ObservableProperty]
 		private TeamMainModel _teamModel;
 
-		public OrderStartViewModel(Procurement.ProcurementClient procurementClient, TeamRestaurantsService teamRestaurantsService) : base(procurementClient)
+		public OrderStartViewModel(Procurement.ProcurementClient procurementClient, TeamRestaurantsService teamRestaurantsService, OrderServices orderServices) : base(procurementClient)
 		{
 			_teamRestaurantsService = teamRestaurantsService;
+			_orderServices = orderServices;
 		}
 
 		[ObservableProperty]
@@ -47,13 +50,7 @@ namespace ProcurementHub.ViewModel.Orders
 						RestaurantsForOrder.Clear();
 
 					foreach (var restaurant in result.ResultValues)
-						RestaurantsForOrder.Add(new OrderStartModel
-						{
-							ID = restaurant.ID,
-							Name = restaurant.Name,
-							Address = restaurant.Address,
-							Description = restaurant.Description
-						});
+						RestaurantsForOrder.Add(restaurant);
 				}
 				else
 				{
@@ -79,10 +76,39 @@ namespace ProcurementHub.ViewModel.Orders
 		[RelayCommand]
 		async Task StartOrderWithThisRestaurant(TeamRestaurantsModel model)
 		{
-			//TODO: Make call to gRPC service to create new order 
+			if (IsBusy)
+				return;
 
-			//TODO: Move user to page where he can select items
-			//await Shell.Current.GoToAsync(nameof(TeamRestaurantItemsPage), true, new Dictionary<string, object>
+			IsBusy = true;
+
+			try
+			{
+				var result = await _orderServices.StartNewOrder(TeamModel.ID, model.ID);
+
+				if (result.Successful)
+				{
+					Debug.WriteLine($"Order started! {result.ResultValues.ID}");
+				}
+				else
+				{
+					await Shell.Current.DisplayAlert("Error", result.Information, "OK");
+				}
+			}
+			catch (RpcException ex)
+			{
+				await Shell.Current.DisplayAlert("Error", "Error while connecting to the server", "OK");
+			}
+			catch (Exception ex)
+			{
+				Debug.WriteLine(ex);
+				await Shell.Current.DisplayAlert("Error", "Unexpected error occurred! Please try again!", "OK");
+			}
+			finally
+			{
+				IsBusy = false;
+			}
+
+			//await Shell.Current.GoToAsync(nameof(OrderSelectItemsPage), true, new Dictionary<string, object>
 			//{
 			//	{"TeamRestaurant", model }
 			//});

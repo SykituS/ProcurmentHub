@@ -15,9 +15,9 @@ namespace GrpcShared.Models
 		public TeamOrderStatusEnum Status { get; set; }
 		public int OrderStartedByID { get; set; }
 		public DateTime OrderStartedOn { get; set; }
-		public decimal TotalPriceOfOrder { get; set; }
-		public int OrderPayedByID { get; set; }
-		public DateTime OrderFinishedOn { get; set; }
+		public decimal? TotalPriceOfOrder { get; set; }
+		public int? OrderPayedByID { get; set; }
+		public DateTime? OrderFinishedOn { get; set; }
 
 		public Teams Team { get; set; }
 		public TeamRestaurants TeamRestaurant { get; set; }

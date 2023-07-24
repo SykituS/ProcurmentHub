@@ -1,4 +1,6 @@
 ﻿
+using ProcurementHub.Model.Enums;
+
 namespace ProcurementHub.Model.Models
 {
     public class TeamMembers
@@ -12,9 +14,5 @@ namespace ProcurementHub.Model.Models
         public Persons Person { get; set; }
     }
 
-    public enum TeamRoleEnum
-    {
-        TeamMember,
-        TeamAdministrator,
-    }
+    
 }

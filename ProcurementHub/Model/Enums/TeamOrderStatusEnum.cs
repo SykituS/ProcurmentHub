@@ -4,10 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ProcurementHub.Model.CustomModels
+namespace ProcurementHub.Model.Enums
 {
-	public class OrderStartModel
+	public enum TeamOrderStatusEnum
 	{
-		
+		Started,
+		InProgress,
+		Closed,
 	}
 }

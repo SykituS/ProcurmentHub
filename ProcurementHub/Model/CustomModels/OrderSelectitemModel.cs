@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ProcurementHub.Model.CustomModels
 {
-	internal class OrderSelectitemModel
+	public class OrderSelectItemModel
 	{
 	}
 }

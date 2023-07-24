@@ -1,4 +1,5 @@
-﻿using ProcurementHub.Model.Models;
+﻿using ProcurementHub.Model.Enums;
+using ProcurementHub.Model.Models;
 
 namespace ProcurementHub.Model.CustomModels
 {
@@ -9,10 +10,10 @@ namespace ProcurementHub.Model.CustomModels
 		public string Description { get; set; }
 		public TeamStatusEnum Status { get; set; }
 		public TeamRoleEnum Role { get; set; }
-
-		//TODO: Setup information about order if there is any
-		public int? OrderId { get; set; }
+		
+		public Guid? OrderId { get; set; }
 		public bool IsAnyOrderActive => OrderId != null;
+		public DateTime OrderStartedOn { get; set; }
 
 		public bool IsAdmin => Role == TeamRoleEnum.TeamAdministrator;
     }

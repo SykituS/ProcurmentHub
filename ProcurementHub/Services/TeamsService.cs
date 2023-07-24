@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using GrpcShared;
 using ProcurementHub.Model;
 using ProcurementHub.Model.CustomModels;
+using ProcurementHub.Model.Enums;
 using ProcurementHub.Model.Models;
 
 namespace ProcurementHub.Services

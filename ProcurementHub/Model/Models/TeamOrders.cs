@@ -1,4 +1,6 @@
-﻿namespace ProcurementHub.Model.Models
+﻿using ProcurementHub.Model.Enums;
+
+namespace ProcurementHub.Model.Models
 {
 	public class TeamOrders
 	{
@@ -18,10 +20,5 @@
 		public Persons OrderPayedBy { get; set; }
 	}
 
-	public enum TeamOrderStatusEnum
-	{
-		Started,
-		InProgress,
-		Closed,
-	}
+	
 }

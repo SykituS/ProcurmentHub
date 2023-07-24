@@ -878,5 +878,75 @@ namespace ProcurementService.Services
 				});
 			}
 		}
+
+		public override Task<GRPCOrderInformationsResponse> StartNewOrder(GRPCStartNewOrderRequest request, ServerCallContext context)
+		{
+			_logger.LogInformation("Start of call StartNewOrder: " + DateTime.Now);
+			var userExistsValidationResult =
+				_verifyLogin.CheckIfUsersExists(request.LoggedUser.Username, request.LoggedUser.Password, Guid.Parse(request.LoggedUser.Id));
+
+			if (!userExistsValidationResult.Successful)
+			{
+				_logger.LogInformation("End of call StartNewOrder: " + DateTime.Now);
+
+				return Task.FromResult(new GRPCOrderInformationsResponse()
+				{
+					Response = new GRPCValidationResponse()
+					{
+						Successful = false,
+						Information = "There was a problem when verifying your login credentials!"
+					}
+				});
+			}
+
+			var personIdOfLoggedUser = int.Parse(userExistsValidationResult.Information);
+			var datetimeNow = DateTime.UtcNow;
+
+			try
+			{
+				var order = new TeamOrders
+				{
+					ID = Guid.NewGuid(),
+					TeamID = request.TeamId,
+					TeamRestaurantID = request.RestaurantId,
+					Status = TeamOrderStatusEnum.InProgress,
+					OrderStartedByID = personIdOfLoggedUser,
+					OrderStartedOn = datetimeNow,
+				};
+
+				_context.Entry(order).State = EntityState.Added;
+				_context.SaveChanges();
+
+				return Task.FromResult(new GRPCOrderInformationsResponse()
+				{
+					Order = new GRPCOrderInformations
+					{
+						Id = order.ID.ToString(),
+						TeamId = order.TeamID,
+						RestaurantId = order.TeamRestaurantID,
+						Status = (int)order.Status,
+						OrderStartedBy = order.OrderStartedByID,
+						StartedOn = order.OrderStartedOn.ToTimestamp(),
+					},
+					Response = new GRPCValidationResponse()
+					{
+						Successful = true,
+					}
+				});
+			}
+			catch (Exception ex)
+			{
+				_logger.LogCritical($"Error in function StartNewOrder: Date of error: {DateTime.Now} Error: {ex}");
+
+				return Task.FromResult(new GRPCOrderInformationsResponse()
+				{
+					Response = new GRPCValidationResponse()
+					{
+						Successful = false,
+						Information = "There was an error while starting new order! Please try again!"
+					}
+				});
+			}
+		}
 	}
 }

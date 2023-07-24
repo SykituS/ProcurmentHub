@@ -17,6 +17,7 @@ service Procurement {
   rpc GetTeamRestaurantList (GRPCGetInformationForGivenIdRequest) returns (GRPCTeamRestaurnatsListResponse);
   rpc CreateOrUpdateRestaurantItem (GRPCCreateOrUpdateRestaurantItemRequest) returns (GRPCValidationResponse);
   rpc GetTeamRestaurantItemList (GRPCGetInformationForGivenIdRequest) returns (GRPCTeamRestaurnatItemsListResponse);
+  rpc StartNewOrder (GRPCStartNewOrderRequest) returns (GRPCOrderInformationsResponse);
 }
 
 message money {
@@ -169,5 +170,25 @@ message GRPCRestaurantItem {
 
 message GRPCTeamRestaurnatItemsListResponse {
 	repeated GRPCRestaurantItem restaurantItemList = 1;
+	GRPCValidationResponse response = 2;
+}
+
+message GRPCStartNewOrderRequest {
+	int32 teamId = 1;
+	int32 restaurantId = 2;
+	GRPCLoginInformationForUser LoggedUser = 7;
+}
+
+message GRPCOrderInformations {
+	string id = 1;
+	int32 teamId = 2;
+	int32 restaurantId = 3;
+	int32 status = 4;
+	int32 orderStartedBy = 5;
+	google.protobuf.Timestamp startedOn = 6;
+}
+
+message GRPCOrderInformationsResponse {
+	GRPCOrderInformations order = 1;
 	GRPCValidationResponse response = 2;
 }

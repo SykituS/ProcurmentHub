@@ -1,4 +1,6 @@
-﻿namespace ProcurementHub.Model.Models
+﻿using ProcurementHub.Model.Enums;
+
+namespace ProcurementHub.Model.Models
 {
     public class Teams
     {
@@ -17,9 +19,5 @@
         public Persons UpdatedBy { get; set; }
     }
 
-    public enum TeamStatusEnum
-    {
-        Open,
-        Removed,
-    }
+    
 }

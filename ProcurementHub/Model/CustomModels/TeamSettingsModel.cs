@@ -1,4 +1,5 @@
-﻿using ProcurementHub.Model.Models;
+﻿using ProcurementHub.Model.Enums;
+using ProcurementHub.Model.Models;
 
 namespace ProcurementHub.Model.CustomModels
 {
