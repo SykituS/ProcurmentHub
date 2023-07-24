@@ -13,5 +13,11 @@ namespace ProcurementHub.ViewModel.Orders
 		public OrderSelectItemsViewModel(Procurement.ProcurementClient procurementClient) : base(procurementClient)
 		{
 		}
-	}
+
+        //TODO: Showing items for selected restaurant
+		//TODO: Adding items to cart
+		//TODO: Move user to sum up page
+		//TODO: Add possibility to remove items from cart
+
+    }
 }

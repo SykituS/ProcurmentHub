@@ -79,6 +79,9 @@ namespace ProcurementHub.ViewModel.Orders
 		[RelayCommand]
 		async Task StartOrderWithThisRestaurant(TeamRestaurantsModel model)
 		{
+			//TODO: Make call to gRPC service to create new order 
+
+			//TODO: Move user to page where he can select items
 			//await Shell.Current.GoToAsync(nameof(TeamRestaurantItemsPage), true, new Dictionary<string, object>
 			//{
 			//	{"TeamRestaurant", model }
