@@ -92,6 +92,16 @@
                     Text="Restaurants"
                     TextColor="White"
                     WidthRequest="250" />
+                <Button
+                    Margin="0,0,0,5"
+                    BackgroundColor="#0d529c"
+                    BorderColor="#0d529c"
+                    Command="{Binding GoBackToDashboardCommand}"
+                    CornerRadius="10"
+                    FontAttributes="Bold"
+                    Text="Go Back"
+                    TextColor="White"
+                    WidthRequest="250" />
             </StackLayout>
 
             <StackLayout

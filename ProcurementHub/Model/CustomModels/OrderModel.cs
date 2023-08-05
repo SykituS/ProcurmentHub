@@ -18,5 +18,6 @@ namespace ProcurementHub.Model.CustomModels
 	    public decimal TotalPriceOfOrder { get; set; }
 	    public int OrderPayedByID { get; set; }
 	    public DateTime OrderFinishedOn { get; set; }
+		public TeamRestaurantsModel Restaurants { get; set; }
     }
 }

@@ -1,9 +1,106 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8" ?>
 
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="ProcurementHub.View.Orders.OrderSelectItemsPage">
-    <ContentPage.Content>
-        
-    </ContentPage.Content>
+<ContentPage
+    x:Class="ProcurementHub.View.Orders.OrderSelectItemsPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:models="clr-namespace:ProcurementHub.Model.CustomModels"
+    xmlns:viewmodel="clr-namespace:ProcurementHub.ViewModel.Orders"
+    x:DataType="viewmodel:OrderSelectItemsViewModel">
+    <Shell.NavBarIsVisible>False</Shell.NavBarIsVisible>
+    <Grid
+        ColumnSpacing="5"
+        RowDefinitions="Auto,*,Auto"
+        RowSpacing="0">
+
+        <Frame
+            Margin="0,0,0,0"
+            Padding="5,5,0,0"
+            BackgroundColor="Transparent"
+            BorderColor="#0d529c"
+            HasShadow="True"
+            HeightRequest="100">
+            <Grid Padding="0">
+                <VerticalStackLayout>
+                    <Label FontAttributes="Bold" FontSize="Large">
+                        <Label.Text>
+                            <MultiBinding StringFormat="Items for restaurant: {0}">
+                                <Binding Path="OrderModel.Restaurants.Name" />
+                            </MultiBinding>
+                        </Label.Text>
+                    </Label>
+                    <Label>
+                        <Label.Text>
+                            <MultiBinding StringFormat="Address: {0}">
+                                <Binding Path="OrderModel.Restaurants.Address" />
+                            </MultiBinding>
+                        </Label.Text>
+                    </Label>
+                </VerticalStackLayout>
+            </Grid>
+        </Frame>
+
+        <RefreshView
+            Grid.Row="1"
+            Command="{Binding GetRestaurantItemsCommand}"
+            IsRefreshing="{Binding IsRefreshing}">
+            <ContentView>
+                <CollectionView ItemsSource="{Binding RestaurantsItems}">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="models:TeamRestaurantItemsModel">
+                            <!--<SwipeView>-->
+                            <!--<SwipeView.RightItems>
+                                    <SwipeItem
+                                        Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:OrderSelectItemsViewModel}}, Path=AddItemToCartCommand}"
+                                        CommandParameter="{Binding .}"
+                                        Text="Delete" />
+                                    <SwipeItem Text="Add" />
+                            -->
+                            <!--<SwipeItemView>
+                                        <Frame>
+                                            <Label Text="Test" />
+                                        </Frame>
+                                    </SwipeItemView>-->
+                            <!--
+                                </SwipeView.RightItems>-->
+                            <Grid Padding="10">
+                                <Frame
+                                    BackgroundColor="Transparent"
+                                    BorderColor="#0d529c"
+                                    HasShadow="True"
+                                    HeightRequest="125">
+                                    <Frame.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:OrderSelectItemsViewModel}}, Path=AddItemToCartCommand}" CommandParameter="{Binding .}" />
+                                    </Frame.GestureRecognizers>
+                                    <Grid Padding="0">
+                                        <VerticalStackLayout>
+                                            <Label
+                                                FontAttributes="Bold"
+                                                FontSize="Large"
+                                                Text="{Binding Name}" />
+                                            <Label Text="{Binding Description}" />
+                                            <Label Text="{Binding Price}" />
+                                        </VerticalStackLayout>
+                                    </Grid>
+                                </Frame>
+                            </Grid>
+                            <!--</SwipeView>-->
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </ContentView>
+        </RefreshView>
+
+        <Button
+            Grid.Row="2"
+            Margin="5,0,5,5"
+            BackgroundColor="#0d529c"
+            BorderColor="#0d529c"
+            Command="{Binding GoToCartCommand}"
+            FontAttributes="Bold"
+            FontSize="14"
+            LineBreakMode="WordWrap"
+            Text="Go to cart"
+            TextColor="White" />
+    </Grid>
 </ContentPage>

@@ -87,7 +87,12 @@ namespace ProcurementHub.ViewModel.Orders
 
 				if (result.Successful)
 				{
-					Debug.WriteLine($"Order started! {result.ResultValues.ID}");
+					result.ResultValues.Restaurants = model;
+					await Shell.Current.GoToAsync(nameof(OrderSelectItemsPage), true, new Dictionary<string, object>
+					{
+						{"TeamRestaurant", _teamModel },
+						{"OrderModel", result.ResultValues },
+					});
 				}
 				else
 				{
@@ -107,11 +112,6 @@ namespace ProcurementHub.ViewModel.Orders
 			{
 				IsBusy = false;
 			}
-
-			//await Shell.Current.GoToAsync(nameof(OrderSelectItemsPage), true, new Dictionary<string, object>
-			//{
-			//	{"TeamRestaurant", model }
-			//});
 		}
 
 		[RelayCommand]

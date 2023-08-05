@@ -7,6 +7,7 @@ using Grpc.Core;
 using GrpcShared;
 using ProcurementHub.Model;
 using ProcurementHub.Model.CustomModels;
+using ProcurementHub.View.Main;
 using ProcurementHub.View.Orders;
 using ProcurementHub.View.Teams;
 using ProcurementHub.View.Teams.TeamRestaurants;
@@ -104,6 +105,12 @@ namespace ProcurementHub.ViewModel.TeamsViewModels
 			{
 				{"TeamMainModel", _model }
 			});
+		}
+
+		[RelayCommand]
+        async Task GoBackToDashboard()
+        {
+	        await Shell.Current.GoToAsync(nameof(MainPage), true);
 		}
 	}
 }
