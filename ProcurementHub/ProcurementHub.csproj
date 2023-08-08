@@ -59,6 +59,7 @@
 
 	<ItemGroup>
 	  <PackageReference Include="AutoMapper" Version="12.0.1" />
+	  <PackageReference Include="CommunityToolkit.Maui" Version="2.0.0" />
 	  <PackageReference Include="CommunityToolkit.Mvvm" Version="8.0.0" />
 	  <PackageReference Include="Microsoft.Maui.Controls.Maps" Version="7.0.81" />
 	  <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />

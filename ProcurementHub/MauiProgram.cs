@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using CommunityToolkit.Maui;
 using Grpc.Net.Client;
 using GrpcShared;
 using Microsoft.Extensions.Logging;
@@ -27,13 +28,14 @@ public static class MauiProgram
 	public static MauiApp CreateMauiApp()
 	{
 		string baseAddress = DeviceInfo.Platform == DevicePlatform.Android
-			? "https://0.0.0.0:7170"
+			? "https://0.0.0.0:7170" //10.0.2.2
 			: "https://localhost:7170";
 
 
 		var builder = MauiApp.CreateBuilder();
 		builder
 			.UseMauiApp<App>()
+            .UseMauiCommunityToolkit()
 			.ConfigureFonts(fonts =>
 			{
 				fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");

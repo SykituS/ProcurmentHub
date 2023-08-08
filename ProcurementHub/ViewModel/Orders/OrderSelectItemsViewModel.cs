@@ -3,11 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using CommunityToolkit.Maui.Alerts;
+using CommunityToolkit.Maui.Core;
 using Grpc.Core;
 using GrpcShared;
 using ProcurementHub.Model.CustomModels;
 using ProcurementHub.Services;
 using ProcurementHub.ViewModel.BaseViewModels;
+using Font = Microsoft.Maui.Font;
 
 namespace ProcurementHub.ViewModel.Orders
 {
@@ -78,10 +81,25 @@ namespace ProcurementHub.ViewModel.Orders
 		//TODO: Move user to sum up page
 		//TODO: Add possibility to remove items from cart
 		[RelayCommand]
-		async Task AddItemToCart()
+		async Task AddItemToCart(TeamRestaurantItemsModel item)
 		{
+            var cancellationTokenSource = new CancellationTokenSource();
 
-		}
+            var snackbarOptions = new SnackbarOptions()
+            {
+                BackgroundColor = Colors.AliceBlue,
+                TextColor = Colors.Black,
+                CornerRadius = new CornerRadius(15),
+                Font = Font.SystemFontOfSize(14),
+            };
+
+            var text = "New item was added to cart";
+            var duration = TimeSpan.FromSeconds(3);
+
+            var snackbar = Snackbar.Make(text, null, duration: duration, visualOptions: snackbarOptions);
+
+            await snackbar.Show(cancellationTokenSource.Token);
+        }
 
 		[RelayCommand]
 		async Task GoToCart()

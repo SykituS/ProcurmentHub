@@ -48,21 +48,6 @@
                 <CollectionView ItemsSource="{Binding RestaurantsItems}">
                     <CollectionView.ItemTemplate>
                         <DataTemplate x:DataType="models:TeamRestaurantItemsModel">
-                            <!--<SwipeView>-->
-                            <!--<SwipeView.RightItems>
-                                    <SwipeItem
-                                        Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:OrderSelectItemsViewModel}}, Path=AddItemToCartCommand}"
-                                        CommandParameter="{Binding .}"
-                                        Text="Delete" />
-                                    <SwipeItem Text="Add" />
-                            -->
-                            <!--<SwipeItemView>
-                                        <Frame>
-                                            <Label Text="Test" />
-                                        </Frame>
-                                    </SwipeItemView>-->
-                            <!--
-                                </SwipeView.RightItems>-->
                             <Grid Padding="10">
                                 <Frame
                                     BackgroundColor="Transparent"
@@ -84,7 +69,6 @@
                                     </Grid>
                                 </Frame>
                             </Grid>
-                            <!--</SwipeView>-->
                         </DataTemplate>
                     </CollectionView.ItemTemplate>
                 </CollectionView>

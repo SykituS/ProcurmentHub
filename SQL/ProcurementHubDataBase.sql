@@ -81,7 +81,7 @@ CREATE TABLE TeamRestaurants (
 
 CREATE TABLE TeamRestaurantsItems (
 	ID int IDENTITY(1, 1) NOT NULL PRIMARY KEY,
-	TeamRestaurnatsID int NOT NULL,
+	TeamRestaurantID int NOT NULL,
 	Name varchar(255) NOT NULL,
 	Description varchar(255),
 	Price money NOT NULL,
@@ -92,7 +92,7 @@ CREATE TABLE TeamRestaurantsItems (
 	UpdatedByID int not null,
 	UpdatedOn datetime not null,
 
-	CONSTRAINT FK_TeamRestaurantsItems_TeamRestaurants FOREIGN KEY (TeamRestaurnatsID) REFERENCES TeamRestaurants(ID),
+	CONSTRAINT FK_TeamRestaurantsItems_TeamRestaurants FOREIGN KEY (TeamRestaurantID) REFERENCES TeamRestaurants(ID),
 	CONSTRAINT FK_TeamRestaurantsItems_PersonCreated FOREIGN KEY (CreatedByID) REFERENCES Persons(ID),
 	CONSTRAINT FK_TeamRestaurantsItems_PersonUpdated FOREIGN KEY (UpdatedByID) REFERENCES Persons(ID) 
 )
@@ -100,13 +100,13 @@ CREATE TABLE TeamRestaurantsItems (
 CREATE TABLE TeamOrders (
 	ID UNIQUEIDENTIFIER NOT NULL Primary key,
 	TeamID int NOT NULL,
-	TeamRestaurantsID int NOT NULL,
+	TeamRestaurantID int NOT NULL,
 	Status int NOT NULL,
 	OrderStartedByID int NOT NULL,
 	OrderStartedOn datetime NOT NULL,
 	TotalPriceOfOrder money,
-	OrderPayedByID int NOT NULL,
-	OrderFinishedOn datetime NOT NULL,
+	OrderPayedByID int,
+	OrderFinishedOn datetime,
 
 	CONSTRAINT FK_TeamOrders_Teams FOREIGN KEY (TeamID) REFERENCES Teams(ID),
 	CONSTRAINT FK_TeamOrders_TeamRestaurants FOREIGN KEY (TeamID) REFERENCES TeamRestaurants(ID),
