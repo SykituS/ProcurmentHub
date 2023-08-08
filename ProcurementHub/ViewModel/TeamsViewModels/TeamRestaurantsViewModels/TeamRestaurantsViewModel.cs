@@ -77,37 +77,47 @@ namespace ProcurementHub.ViewModel.TeamsViewModels.TeamRestaurantsViewModels
         }
 
 		[RelayCommand]
-		async Task GoToRestaurant(TeamRestaurantsModel model)
+		async Task OpenRestaurantPopup(TeamRestaurantsModel model)
         {
+			//Create and show popup
             var popup = new Popup()
             {
                 Content = new VerticalStackLayout()
                 {
+					Spacing = 5,
                     Children =
                     {
                         new Label() { Text = "Popup test", VerticalTextAlignment = TextAlignment.Center, FontSize = 24 },
-						new Button() { Text = "Click one", CornerRadius = 5, FontSize = 14, FontAttributes = FontAttributes.Bold },
-						new Button() { Text = "Click two", CornerRadius = 5, FontSize = 14, FontAttributes = FontAttributes.Bold },
+						new Button() { Text = "Edit item", CornerRadius = 5, FontSize = 14, FontAttributes = FontAttributes.Bold, Command = OpenEditItemPageCommand, CommandParameter = model, BackgroundColor = Color.FromArgb("#0d529c"), BorderColor = Color.FromArgb("#0d529c"), TextColor = Colors.White},
+						new Button() { Text = "Edit restaurant", CornerRadius = 5, FontSize = 14, FontAttributes = FontAttributes.Bold, Command = OpenEditRestaurantPageCommand, CommandParameter = model, BackgroundColor = Color.FromArgb("#0d529c"), BorderColor = Color.FromArgb("#0d529c"), TextColor = Colors.White},
                     }
                 }
             };
 
-			App.Current.MainPage.ShowPopup(popup);
-
-			//await Shell.Current.GoToAsync(nameof(TeamRestaurantItemsPage), true, new Dictionary<string, object>
-			//{
-			//	{"TeamRestaurant", model }
-			//});
-
-			//Open edit page with model of restaurant
-			//await Shell.Current.GoToAsync(nameof(TeamRestaurantsAddEditPage), true, new Dictionary<string, object>
-			//{
-			//	{"TeamMainModel", _model },
-			//	{"TeamRestaurant", model }
-			//});
+			await App.Current.MainPage.ShowPopupAsync(popup);
+			
 		}
 
 		[RelayCommand]
+        async Task OpenEditRestaurantPage(TeamRestaurantsModel model)
+        {
+			await Shell.Current.GoToAsync(nameof(TeamRestaurantsAddEditPage), true, new Dictionary<string, object>
+			{
+				{"TeamMainModel", _model },
+				{"TeamRestaurant", model }
+			});
+        }
+
+        [RelayCommand]
+        async Task OpenEditItemPage(TeamRestaurantsModel model)
+        {
+			await Shell.Current.GoToAsync(nameof(TeamRestaurantItemsPage), true, new Dictionary<string, object>
+			{
+				{"TeamRestaurant", model }
+			});
+		}
+
+        [RelayCommand]
 		async Task GoToAddNewRestaurant()
 		{
 			Debug.WriteLine("going to add new restaurant");
