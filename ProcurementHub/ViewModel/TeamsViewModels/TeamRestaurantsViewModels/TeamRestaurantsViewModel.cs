@@ -69,6 +69,12 @@ namespace ProcurementHub.ViewModel.TeamsViewModels.TeamRestaurantsViewModels
 			}
 		}
 
+        [RelayCommand]
+        async Task GoBack()
+        {
+            await Shell.Current.GoToAsync("..", true);
+        }
+
 		[RelayCommand]
 		async Task GoToRestaurant(TeamRestaurantsModel model)
 		{

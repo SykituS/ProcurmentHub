@@ -71,7 +71,13 @@ namespace ProcurementHub.ViewModel.TeamsViewModels.TeamRestaurantsViewModels
 
         }
 
-		[RelayCommand]
+        [RelayCommand]
+        async Task GoBack()
+        {
+            await Shell.Current.GoToAsync("..", true);
+        }
+
+        [RelayCommand]
 		async Task GoToEditRestaurantItem(TeamRestaurantItemsModel model)
 		{
 			await Shell.Current.GoToAsync(nameof(TeamRestaurantItemAddEditPage), true, new Dictionary<string, object>
