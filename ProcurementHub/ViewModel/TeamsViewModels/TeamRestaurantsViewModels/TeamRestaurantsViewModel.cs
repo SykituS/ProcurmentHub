@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using CommunityToolkit.Maui.Views;
 using Grpc.Core;
 using GrpcShared;
 using ProcurementHub.Model.CustomModels;
@@ -77,11 +78,26 @@ namespace ProcurementHub.ViewModel.TeamsViewModels.TeamRestaurantsViewModels
 
 		[RelayCommand]
 		async Task GoToRestaurant(TeamRestaurantsModel model)
-		{
-			await Shell.Current.GoToAsync(nameof(TeamRestaurantItemsPage), true, new Dictionary<string, object>
-			{
-				{"TeamRestaurant", model }
-			});
+        {
+            var popup = new Popup()
+            {
+                Content = new VerticalStackLayout()
+                {
+                    Children =
+                    {
+                        new Label() { Text = "Popup test", VerticalTextAlignment = TextAlignment.Center, FontSize = 24 },
+						new Button() { Text = "Click one", CornerRadius = 5, FontSize = 14, FontAttributes = FontAttributes.Bold },
+						new Button() { Text = "Click two", CornerRadius = 5, FontSize = 14, FontAttributes = FontAttributes.Bold },
+                    }
+                }
+            };
+
+			App.Current.MainPage.ShowPopup(popup);
+
+			//await Shell.Current.GoToAsync(nameof(TeamRestaurantItemsPage), true, new Dictionary<string, object>
+			//{
+			//	{"TeamRestaurant", model }
+			//});
 
 			//Open edit page with model of restaurant
 			//await Shell.Current.GoToAsync(nameof(TeamRestaurantsAddEditPage), true, new Dictionary<string, object>
