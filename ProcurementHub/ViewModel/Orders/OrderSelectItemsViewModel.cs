@@ -127,38 +127,6 @@ namespace ProcurementHub.ViewModel.Orders
             });
         }
 
-        async Task GetItemList()
-        {
-            if (IsBusy)
-                return;
-
-            IsBusy = true;
-            IsRefreshing = true;
-
-            try
-            {
-                var list = JsonConvert.DeserializeObject<ObservableCollection<TeamRestaurantItemsModel>>(_itemListJson);
-
-                if (OrderSelectedItems.Count != 0)
-                    OrderSelectedItems.Clear();
-
-                if (list != null)
-                {
-                    foreach (var item in list)
-                    {
-                        OrderSelectedItems.Add(item);
-                    }
-
-                }
-            }
-            finally
-            {
-                IsBusy = false;
-                IsRefreshing = false;
-            }
-
-        }
-
         async partial void OnOrderModelChanged(OrderModel value)
 		{
 			await GetRestaurantItems();
@@ -166,7 +134,19 @@ namespace ProcurementHub.ViewModel.Orders
 
         async partial void OnItemListJsonChanged(string value)
         {
-            await GetItemList();
+            var list = JsonConvert.DeserializeObject<ObservableCollection<TeamRestaurantItemsModel>>(_itemListJson);
+
+            if (OrderSelectedItems.Count != 0)
+                OrderSelectedItems.Clear();
+
+            if (list != null)
+            {
+                foreach (var item in list)
+                {
+                    OrderSelectedItems.Add(item);
+                }
+
+            }
         }
     }
 }

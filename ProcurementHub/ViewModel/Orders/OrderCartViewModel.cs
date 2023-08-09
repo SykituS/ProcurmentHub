@@ -94,13 +94,19 @@ namespace ProcurementHub.ViewModel.Orders
         [RelayCommand]
         async Task GoBackToSelectItem()
         {
-            await Shell.Current.GoToAsync("..", true);
+            var json = JsonConvert.SerializeObject(OrderSelectedItems);
+            await Shell.Current.GoToAsync(nameof(OrderSelectItemsPage), true, new Dictionary<string, object>
+            {
+                {"TeamMainModel", _teamModel },
+                {"OrderModel", _orderModel },
+                {"OrderSelectedItems", json },
+            });
         }
 
         [RelayCommand]
-        async Task RemoveItemFromCart()
+        async Task RemoveItemFromCart(TeamRestaurantItemsModel model)
         {
-
+            OrderSelectedItems.Remove(model);
         }
 
         [RelayCommand]
