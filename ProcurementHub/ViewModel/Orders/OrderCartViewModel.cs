@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using CommunityToolkit.Maui.Views;
 using GrpcShared;
 using Newtonsoft.Json;
 using ProcurementHub.Model.CustomModels;
@@ -71,15 +72,35 @@ namespace ProcurementHub.ViewModel.Orders
         }
 
         [RelayCommand]
-        async Task ManageSelectedItem()
+        async Task ManageSelectedItem(TeamRestaurantItemsModel model)
         {
+            var popup = new Popup()
+            {
+                Content = new VerticalStackLayout()
+                {
+                    Spacing = 5,
+                    Children =
+                    {
+                        new Label() { Text = "Options:", HorizontalTextAlignment = TextAlignment.Center, FontSize = 24 },
+                        new Button() { Text = "Delete item", CornerRadius = 5, FontSize = 14, FontAttributes = FontAttributes.Bold, Command = RemoveItemFromCartCommand, CommandParameter = model, BackgroundColor = Color.FromArgb("#0d529c"), BorderColor = Color.FromArgb("#0d529c"), TextColor = Colors.White},
+                        new Button() { Text = "Split item", CornerRadius = 5, FontSize = 14, FontAttributes = FontAttributes.Bold, BackgroundColor = Color.FromArgb("#0d529c"), BorderColor = Color.FromArgb("#0d529c"), TextColor = Colors.White},
+                    }
+                }
+            };
 
+            await App.Current.MainPage.ShowPopupAsync(popup);
         }
 
         [RelayCommand]
         async Task GoBackToSelectItem()
         {
             await Shell.Current.GoToAsync("..", true);
+        }
+
+        [RelayCommand]
+        async Task RemoveItemFromCart()
+        {
+
         }
 
         [RelayCommand]

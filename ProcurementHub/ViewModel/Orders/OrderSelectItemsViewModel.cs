@@ -19,13 +19,17 @@ namespace ProcurementHub.ViewModel.Orders
 {
 	[QueryProperty(nameof(TeamModel), "TeamMainModel")]
 	[QueryProperty(nameof(OrderModel), "OrderModel")]
+    [QueryProperty(nameof(ItemListJson), "OrderSelectedItems")]
 	public partial class OrderSelectItemsViewModel : BaseViewModel
 	{
 		public ObservableCollection<TeamRestaurantItemsModel> RestaurantsItems { get; set; } = new();
-        public List<TeamRestaurantItemsModel> SelectedItems { get; set; } = new();
+        public List<TeamRestaurantItemsModel> OrderSelectedItems { get; set; } = new();
 		private TeamRestaurantsService _teamRestaurantsService;
 
-		[ObservableProperty]
+        [ObservableProperty]
+        private string _itemListJson;
+
+        [ObservableProperty]
 		private TeamMainModel _teamModel;
 
 		[ObservableProperty]
@@ -98,7 +102,7 @@ namespace ProcurementHub.ViewModel.Orders
 
             var snackbar = Snackbar.Make(text, null, duration: duration, visualOptions: snackbarOptions);
 
-			SelectedItems.Add(item);
+            OrderSelectedItems.Add(item);
             await snackbar.Show(cancellationTokenSource.Token);
         }
 
@@ -114,7 +118,7 @@ namespace ProcurementHub.ViewModel.Orders
         [RelayCommand]
 		async Task GoToCart()
         {
-            var json = JsonConvert.SerializeObject(SelectedItems);
+            var json = JsonConvert.SerializeObject(OrderSelectedItems);
             await Shell.Current.GoToAsync(nameof(OrderCartPage), true, new Dictionary<string, object>
             {
                 {"TeamMainModel", _teamModel },
@@ -123,9 +127,46 @@ namespace ProcurementHub.ViewModel.Orders
             });
         }
 
-		async partial void OnOrderModelChanged(OrderModel value)
+        async Task GetItemList()
+        {
+            if (IsBusy)
+                return;
+
+            IsBusy = true;
+            IsRefreshing = true;
+
+            try
+            {
+                var list = JsonConvert.DeserializeObject<ObservableCollection<TeamRestaurantItemsModel>>(_itemListJson);
+
+                if (OrderSelectedItems.Count != 0)
+                    OrderSelectedItems.Clear();
+
+                if (list != null)
+                {
+                    foreach (var item in list)
+                    {
+                        OrderSelectedItems.Add(item);
+                    }
+
+                }
+            }
+            finally
+            {
+                IsBusy = false;
+                IsRefreshing = false;
+            }
+
+        }
+
+        async partial void OnOrderModelChanged(OrderModel value)
 		{
 			await GetRestaurantItems();
 		}
-	}
+
+        async partial void OnItemListJsonChanged(string value)
+        {
+            await GetItemList();
+        }
+    }
 }

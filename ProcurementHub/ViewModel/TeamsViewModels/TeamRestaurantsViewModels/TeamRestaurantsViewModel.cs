@@ -87,7 +87,7 @@ namespace ProcurementHub.ViewModel.TeamsViewModels.TeamRestaurantsViewModels
 					Spacing = 5,
                     Children =
                     {
-                        new Label() { Text = "Popup test", VerticalTextAlignment = TextAlignment.Center, FontSize = 24 },
+                        new Label() { Text = "Options:", HorizontalTextAlignment = TextAlignment.Center, FontSize = 24 },
 						new Button() { Text = "Edit item", CornerRadius = 5, FontSize = 14, FontAttributes = FontAttributes.Bold, Command = OpenEditItemPageCommand, CommandParameter = model, BackgroundColor = Color.FromArgb("#0d529c"), BorderColor = Color.FromArgb("#0d529c"), TextColor = Colors.White},
 						new Button() { Text = "Edit restaurant", CornerRadius = 5, FontSize = 14, FontAttributes = FontAttributes.Bold, Command = OpenEditRestaurantPageCommand, CommandParameter = model, BackgroundColor = Color.FromArgb("#0d529c"), BorderColor = Color.FromArgb("#0d529c"), TextColor = Colors.White},
                     }

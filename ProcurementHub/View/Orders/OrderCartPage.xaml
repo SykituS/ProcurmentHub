@@ -21,23 +21,10 @@
             Grid.ColumnSpan="2"
             BorderColor="#0d529c"
             HasShadow="True"
-            HeightRequest="100">
+            HeightRequest="60">
             <Grid Padding="0">
                 <VerticalStackLayout>
-                    <Label FontAttributes="Bold" FontSize="Large">
-                        <Label.Text>
-                            <MultiBinding StringFormat="Items for restaurant: {0}">
-                                <Binding Path="OrderModel.Restaurants.Name" />
-                            </MultiBinding>
-                        </Label.Text>
-                    </Label>
-                    <Label>
-                        <Label.Text>
-                            <MultiBinding StringFormat="Address: {0}">
-                                <Binding Path="OrderModel.Restaurants.Address" />
-                            </MultiBinding>
-                        </Label.Text>
-                    </Label>
+                    <Label FontAttributes="Bold" FontSize="Large" Text="Your cart" HorizontalTextAlignment="Center"/>
                 </VerticalStackLayout>
             </Grid>
         </Frame>
