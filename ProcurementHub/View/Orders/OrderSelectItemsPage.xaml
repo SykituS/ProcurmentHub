@@ -11,12 +11,14 @@
     <Grid
         ColumnSpacing="5"
         RowDefinitions="Auto,*,Auto"
+        ColumnDefinitions="*,*"
         RowSpacing="0">
 
         <Frame
             Margin="0,0,0,0"
             Padding="5,5,0,0"
             BackgroundColor="Transparent"
+            Grid.ColumnSpan="2"
             BorderColor="#0d529c"
             HasShadow="True"
             HeightRequest="100">
@@ -42,6 +44,7 @@
 
         <RefreshView
             Grid.Row="1"
+            Grid.ColumnSpan="2"
             Command="{Binding GetRestaurantItemsCommand}"
             IsRefreshing="{Binding IsRefreshing}">
             <ContentView>
@@ -77,6 +80,19 @@
 
         <Button
             Grid.Row="2"
+            Grid.Column="0"
+            Margin="5,0,5,5"
+            BackgroundColor="#0d529c"
+            BorderColor="#0d529c"
+            Command="{Binding LeaveOrderCommand}"
+            FontAttributes="Bold"
+            FontSize="14"
+            LineBreakMode="WordWrap"
+            Text="Leave Order"
+            TextColor="White" />
+        <Button
+            Grid.Row="2"
+            Grid.Column="1"
             Margin="5,0,5,5"
             BackgroundColor="#0d529c"
             BorderColor="#0d529c"

@@ -90,7 +90,7 @@ namespace ProcurementHub.ViewModel.Orders
 					result.ResultValues.Restaurants = model;
 					await Shell.Current.GoToAsync(nameof(OrderSelectItemsPage), true, new Dictionary<string, object>
 					{
-						{"TeamRestaurant", _teamModel },
+						{"TeamMainModel", _teamModel },
 						{"OrderModel", result.ResultValues },
 					});
 				}

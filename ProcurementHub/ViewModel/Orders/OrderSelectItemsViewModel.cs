@@ -7,18 +7,22 @@ using CommunityToolkit.Maui.Alerts;
 using CommunityToolkit.Maui.Core;
 using Grpc.Core;
 using GrpcShared;
+using Newtonsoft.Json;
 using ProcurementHub.Model.CustomModels;
 using ProcurementHub.Services;
+using ProcurementHub.View.Orders;
+using ProcurementHub.View.Teams;
 using ProcurementHub.ViewModel.BaseViewModels;
 using Font = Microsoft.Maui.Font;
 
 namespace ProcurementHub.ViewModel.Orders
 {
-	[QueryProperty(nameof(TeamModel), "TeamModel")]
+	[QueryProperty(nameof(TeamModel), "TeamMainModel")]
 	[QueryProperty(nameof(OrderModel), "OrderModel")]
 	public partial class OrderSelectItemsViewModel : BaseViewModel
 	{
 		public ObservableCollection<TeamRestaurantItemsModel> RestaurantsItems { get; set; } = new();
+        public List<TeamRestaurantItemsModel> SelectedItems { get; set; } = new();
 		private TeamRestaurantsService _teamRestaurantsService;
 
 		[ObservableProperty]
@@ -75,11 +79,7 @@ namespace ProcurementHub.ViewModel.Orders
 				IsRefreshing = false;
 			}
 		}
-
-		//TODO: Showing items for selected restaurant
-		//TODO: Adding items to cart
-		//TODO: Move user to sum up page
-		//TODO: Add possibility to remove items from cart
+		
 		[RelayCommand]
 		async Task AddItemToCart(TeamRestaurantItemsModel item)
 		{
@@ -98,14 +98,30 @@ namespace ProcurementHub.ViewModel.Orders
 
             var snackbar = Snackbar.Make(text, null, duration: duration, visualOptions: snackbarOptions);
 
+			SelectedItems.Add(item);
             await snackbar.Show(cancellationTokenSource.Token);
         }
 
-		[RelayCommand]
-		async Task GoToCart()
-		{
+        [RelayCommand]
+        async Task LeaveOrder()
+        {
+            await Shell.Current.GoToAsync(nameof(TeamMainPage), true, new Dictionary<string, object>
+            {
+                {"TeamMainModel", _teamModel }
+            });
+        }
 
-		}
+        [RelayCommand]
+		async Task GoToCart()
+        {
+            var json = JsonConvert.SerializeObject(SelectedItems);
+            await Shell.Current.GoToAsync(nameof(OrderCartPage), true, new Dictionary<string, object>
+            {
+                {"TeamMainModel", _teamModel },
+                {"OrderModel", _orderModel },
+                {"OrderSelectedItems", json },
+            });
+        }
 
 		async partial void OnOrderModelChanged(OrderModel value)
 		{
