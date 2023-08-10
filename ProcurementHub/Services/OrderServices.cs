@@ -50,5 +50,11 @@ namespace ProcurementHub.Services
 
 			return result;
 		}
-	}
+
+        public async Task<ValidationResponse> AddItemsToOrder()
+        {
+            var result = new ValidationResponseWithResult<OrderModel>();
+            return result;
+        }
+    }
 }

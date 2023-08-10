@@ -10,7 +10,7 @@ namespace ProcurementHub.Controls
 {
     public static class OrderCartControl
     {
-        public static Popup GeneratePopupForItemManagement(IRelayCommand removeItemFromCartCommand, IRelayCommand splitItemCommand, TeamRestaurantItemsModel model)
+        public static Popup GeneratePopupForItemManagement(IRelayCommand removeItemFromCartCommand, IRelayCommand splitItemCommand, OrderItemsModel model)
         {
             var popup = new Popup()
             {

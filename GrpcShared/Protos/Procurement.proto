@@ -18,6 +18,7 @@ service Procurement {
   rpc CreateOrUpdateRestaurantItem (GRPCCreateOrUpdateRestaurantItemRequest) returns (GRPCValidationResponse);
   rpc GetTeamRestaurantItemList (GRPCGetInformationForGivenIdRequest) returns (GRPCTeamRestaurnatItemsListResponse);
   rpc StartNewOrder (GRPCStartNewOrderRequest) returns (GRPCOrderInformationsResponse);
+  rpc AddItemsToOrder (GRPCOrderAddItems) returns (GRPCValidationResponse);
 }
 
 message money {
@@ -191,4 +192,19 @@ message GRPCOrderInformations {
 message GRPCOrderInformationsResponse {
 	GRPCOrderInformations order = 1;
 	GRPCValidationResponse response = 2;
+}
+
+message GRPCOrderAddItems { 
+	repeated GRPCOrderItem items = 1;
+}
+
+message GRPCOrderItem { 
+	int32 id = 1;
+	int32 teamOrdersId = 2;
+	int32 TeamRestaurantsItemsId = 3;
+	int32 Quantity = 4;
+	money totalPriceOfItem = 5;
+	string divideToken = 6;
+	int32 divideOnNumberOfPersons = 7;
+	money dividePrice = 8;
 }

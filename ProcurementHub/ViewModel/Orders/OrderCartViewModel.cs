@@ -22,7 +22,7 @@ namespace ProcurementHub.ViewModel.Orders
     [QueryProperty(nameof(ItemListJson), "OrderSelectedItems")]
     public partial class OrderCartViewModel : BaseViewModel
     {
-        public ObservableCollection<TeamRestaurantItemsModel> OrderSelectedItems { get; set; } = new();
+        public ObservableCollection<OrderItemsModel> OrderSelectedItems { get; set; } = new();
         private TeamRestaurantsService _teamRestaurantsService;
 
         [ObservableProperty]
@@ -55,7 +55,7 @@ namespace ProcurementHub.ViewModel.Orders
 
             try
             {
-                var list = JsonConvert.DeserializeObject<ObservableCollection<TeamRestaurantItemsModel>>(_itemListJson);
+                var list = JsonConvert.DeserializeObject<ObservableCollection<OrderItemsModel>>(_itemListJson);
 
                 if (OrderSelectedItems.Count != 0)
                     OrderSelectedItems.Clear();
@@ -78,7 +78,7 @@ namespace ProcurementHub.ViewModel.Orders
         }
 
         [RelayCommand]
-        async Task ManageSelectedItem(TeamRestaurantItemsModel model)
+        async Task ManageSelectedItem(OrderItemsModel model)
         {
             activePopup = OrderCartControl.GeneratePopupForItemManagement(RemoveItemFromCartCommand, SplitItemCommand, model);
             await App.Current.MainPage.ShowPopupAsync(activePopup);
@@ -105,9 +105,17 @@ namespace ProcurementHub.ViewModel.Orders
         }
 
         [RelayCommand]
-        void RemoveItemFromCart(TeamRestaurantItemsModel model)
+        void RemoveItemFromCart(OrderItemsModel model)
         {
-            OrderSelectedItems.Remove(model);
+            if (model.Quantity > 0)
+            {
+                model.Quantity--;
+            }
+            else
+            {
+                OrderSelectedItems.Remove(model);
+            }
+            
             activePopup.Close();
         }
 

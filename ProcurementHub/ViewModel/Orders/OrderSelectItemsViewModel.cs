@@ -24,7 +24,7 @@ namespace ProcurementHub.ViewModel.Orders
 	public partial class OrderSelectItemsViewModel : BaseViewModel
 	{
 		public ObservableCollection<TeamRestaurantItemsModel> RestaurantsItems { get; set; } = new();
-        public List<TeamRestaurantItemsModel> OrderSelectedItems { get; set; } = new();
+        public List<OrderItemsModel> OrderSelectedItems { get; set; } = new();
 		private TeamRestaurantsService _teamRestaurantsService;
 
         [ObservableProperty]
@@ -87,9 +87,28 @@ namespace ProcurementHub.ViewModel.Orders
 		
 		[RelayCommand]
 		async Task AddItemToCart(TeamRestaurantItemsModel item)
-		{
-            OrderSelectedItems.Add(item);
-            await SnackBarControl.CreateSnackBar("New item was added to cart");
+        {
+            var orderItem = OrderSelectedItems.FirstOrDefault(e => e.TeamRestaurantsItemID == item.ID);
+            if (orderItem == null)
+            {
+                orderItem = new OrderItemsModel
+                {
+                    TeamOrdersID = _orderModel.ID,
+                    TeamRestaurantsItemID = item.ID,
+                    TeamRestaurantsItemName = item.Name,
+                    TeamRestaurantsItemDescription = item.Description,
+                    TeamRestaurantsItemPrice = item.Price,
+                    Quantity = 1,
+                    TotalPriceOfItem = item.Price,
+                };
+                OrderSelectedItems.Add(orderItem);
+            }
+            else
+            {
+                orderItem.Quantity++;
+                orderItem.TotalPriceOfItem += item.Price;
+            }
+            await SnackBarControl.CreateSnackBar($"Item added to cart: {item.Name}");
         }
 
         [RelayCommand]
@@ -120,7 +139,7 @@ namespace ProcurementHub.ViewModel.Orders
 
         async partial void OnItemListJsonChanged(string value)
         {
-            var list = JsonConvert.DeserializeObject<ObservableCollection<TeamRestaurantItemsModel>>(_itemListJson);
+            var list = JsonConvert.DeserializeObject<ObservableCollection<OrderItemsModel>>(_itemListJson);
 
             if (OrderSelectedItems.Count != 0)
                 OrderSelectedItems.Clear();

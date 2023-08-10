@@ -948,5 +948,10 @@ namespace ProcurementService.Services
 				});
 			}
 		}
-	}
+
+        public override Task<GRPCValidationResponse> AddItemsToOrder(GRPCOrderAddItems request, ServerCallContext context)
+        {
+            return base.AddItemsToOrder(request, context);
+        }
+    }
 }
