@@ -80,7 +80,7 @@ namespace ProcurementHub.ViewModel.Orders
         [RelayCommand]
         async Task ManageSelectedItem(TeamRestaurantItemsModel model)
         {
-            activePopup = OrderCartPopups.GeneratePopupForItemManagement(RemoveItemFromCartCommand, SplitItemCommand, model);
+            activePopup = OrderCartControl.GeneratePopupForItemManagement(RemoveItemFromCartCommand, SplitItemCommand, model);
             await App.Current.MainPage.ShowPopupAsync(activePopup);
         }
 
@@ -88,22 +88,7 @@ namespace ProcurementHub.ViewModel.Orders
         async Task SplitItem()
         {
             //TODO: Implement splitting of item
-            var cancellationTokenSource = new CancellationTokenSource();
-
-            var snackbarOptions = new SnackbarOptions()
-            {
-                BackgroundColor = Colors.AliceBlue,
-                TextColor = Colors.Black,
-                CornerRadius = new CornerRadius(15),
-                Font = Font.SystemFontOfSize(14),
-            };
-
-            var text = "Splitting of item is not implemented yet!";
-            var duration = TimeSpan.FromSeconds(3);
-
-            var snackbar = Snackbar.Make(text, null, duration: duration, visualOptions: snackbarOptions);
-            
-            await snackbar.Show(cancellationTokenSource.Token);
+            await SnackBarControl.CreateSnackBar("Function not implemented yet");
             activePopup.Close();
         }
 
@@ -129,7 +114,7 @@ namespace ProcurementHub.ViewModel.Orders
         [RelayCommand]
         async Task ConfirmYourCart()
         {
-            activePopup = OrderCartPopups.GeneratePopupForCartConfirmation(FinishOrderCommand);
+            activePopup = OrderCartControl.GeneratePopupForCartConfirmation(FinishOrderCommand);
             await App.Current.MainPage.ShowPopupAsync(activePopup);
         }
 

@@ -8,6 +8,7 @@ using CommunityToolkit.Maui.Core;
 using Grpc.Core;
 using GrpcShared;
 using Newtonsoft.Json;
+using ProcurementHub.Controls;
 using ProcurementHub.Model.CustomModels;
 using ProcurementHub.Services;
 using ProcurementHub.View.Orders;
@@ -87,23 +88,8 @@ namespace ProcurementHub.ViewModel.Orders
 		[RelayCommand]
 		async Task AddItemToCart(TeamRestaurantItemsModel item)
 		{
-            var cancellationTokenSource = new CancellationTokenSource();
-
-            var snackbarOptions = new SnackbarOptions()
-            {
-                BackgroundColor = Colors.AliceBlue,
-                TextColor = Colors.Black,
-                CornerRadius = new CornerRadius(15),
-                Font = Font.SystemFontOfSize(14),
-            };
-
-            var text = "New item was added to cart";
-            var duration = TimeSpan.FromSeconds(3);
-
-            var snackbar = Snackbar.Make(text, null, duration: duration, visualOptions: snackbarOptions);
-
             OrderSelectedItems.Add(item);
-            await snackbar.Show(cancellationTokenSource.Token);
+            await SnackBarControl.CreateSnackBar("New item was added to cart");
         }
 
         [RelayCommand]

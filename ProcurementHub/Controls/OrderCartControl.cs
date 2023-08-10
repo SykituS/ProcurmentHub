@@ -8,7 +8,7 @@ using ProcurementHub.Model.CustomModels;
 
 namespace ProcurementHub.Controls
 {
-    public static class OrderCartPopups
+    public static class OrderCartControl
     {
         public static Popup GeneratePopupForItemManagement(IRelayCommand removeItemFromCartCommand, IRelayCommand splitItemCommand, TeamRestaurantItemsModel model)
         {
@@ -64,7 +64,6 @@ namespace ProcurementHub.Controls
                     }
                 }
             };
-
             return popup;
         }
     }
