@@ -32,6 +32,7 @@ namespace ProcurementHub.ViewModel.AccountViewModels
                 if (result.Successful)
                 {
                     await Shell.Current.DisplayAlert("Success!", "Account was created", "OK");
+                    await Shell.Current.GoToAsync("..", true);
                 }
                 else
                 {
