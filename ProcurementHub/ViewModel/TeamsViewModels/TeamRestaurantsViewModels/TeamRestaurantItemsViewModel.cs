@@ -12,16 +12,20 @@ using ProcurementHub.View.Teams.TeamRestaurants;
 
 namespace ProcurementHub.ViewModel.TeamsViewModels.TeamRestaurantsViewModels
 {
-	[QueryProperty(nameof(Model), "TeamRestaurant")]
+	[QueryProperty(nameof(RestaurantModel), "TeamRestaurant")]
+	[QueryProperty(nameof(TeamModel), "TeamMainModel")]
 	public partial class TeamRestaurantItemsViewModel : BaseViewModels.BaseViewModel
 	{
 		public ObservableCollection<TeamRestaurantItemsModel> TeamRestaurantItems { get; set; } = new();
 		private TeamRestaurantsService _teamRestaurantsService;
 
 		[ObservableProperty]
-		private TeamRestaurantsModel _model;
+		private TeamRestaurantsModel _restaurantModel;
 
-		public TeamRestaurantItemsViewModel(Procurement.ProcurementClient procurementClient, TeamRestaurantsService teamRestaurantsService) : base(procurementClient)
+        [ObservableProperty]
+        private TeamMainModel _teamModel;
+
+        public TeamRestaurantItemsViewModel(Procurement.ProcurementClient procurementClient, TeamRestaurantsService teamRestaurantsService) : base(procurementClient)
 		{
 			_teamRestaurantsService = teamRestaurantsService;
 		}
@@ -39,7 +43,7 @@ namespace ProcurementHub.ViewModel.TeamsViewModels.TeamRestaurantsViewModels
 
             try
             {
-                var result = await _teamRestaurantsService.GetRestaurantItemsListAsync(_model.ID);
+                var result = await _teamRestaurantsService.GetRestaurantItemsListAsync(_restaurantModel.ID);
 
                 if (result.Successful)
                 {
@@ -74,7 +78,10 @@ namespace ProcurementHub.ViewModel.TeamsViewModels.TeamRestaurantsViewModels
         [RelayCommand]
         async Task GoBack()
         {
-            await Shell.Current.GoToAsync("..", true);
+            await Shell.Current.GoToAsync(nameof(TeamRestaurantsPage), true, new Dictionary<string, object>
+            {
+                {"TeamMainModel", _teamModel }
+            });
         }
 
         [RelayCommand]
@@ -82,7 +89,7 @@ namespace ProcurementHub.ViewModel.TeamsViewModels.TeamRestaurantsViewModels
 		{
 			await Shell.Current.GoToAsync(nameof(TeamRestaurantItemAddEditPage), true, new Dictionary<string, object>
 			{
-				{"TeamRestaurant", _model },
+				{"TeamRestaurant", _restaurantModel },
 				{"TeamRestaurantItem", model }
 			});
 		}
@@ -92,12 +99,12 @@ namespace ProcurementHub.ViewModel.TeamsViewModels.TeamRestaurantsViewModels
 		{
 			await Shell.Current.GoToAsync(nameof(TeamRestaurantItemAddEditPage), true, new Dictionary<string, object>
 			{
-				{"TeamRestaurant", _model },
+				{"TeamRestaurant", _restaurantModel },
 				{"TeamRestaurantItem", new TeamRestaurantItemsModel() }
 			});
 		}
 
-        async partial void OnModelChanged(TeamRestaurantsModel value)
+        async partial void OnRestaurantModelChanged(TeamRestaurantsModel value)
         {
             await GetRestaurantItems();
         }

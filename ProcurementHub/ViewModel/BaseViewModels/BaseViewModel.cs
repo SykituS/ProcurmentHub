@@ -1,4 +1,5 @@
-﻿using GrpcShared;
+﻿using CommunityToolkit.Maui.Views;
+using GrpcShared;
 
 namespace ProcurementHub.ViewModel.BaseViewModels
 {
@@ -19,5 +20,7 @@ namespace ProcurementHub.ViewModel.BaseViewModels
         string _title;
 
         public bool IsNotBusy => !_isBusy;
+
+        internal Popup activePopUp;
     }
 }

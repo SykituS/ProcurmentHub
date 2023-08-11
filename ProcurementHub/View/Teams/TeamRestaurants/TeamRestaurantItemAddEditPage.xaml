@@ -100,7 +100,7 @@
                         FontAttributes="Bold"
                         HorizontalOptions="FillAndExpand"
                         Placeholder="Price"
-                        Text="{Binding TeamRestaurantItemsModel.Price, Mode=TwoWay}"
+                        Text="{Binding TeamRestaurantItemsModel.Price, Mode=TwoWay, StringFormat='{0:F2}'}"
                         TextColor="#1c1002"
                         VerticalOptions="Center" />
                 </StackLayout>

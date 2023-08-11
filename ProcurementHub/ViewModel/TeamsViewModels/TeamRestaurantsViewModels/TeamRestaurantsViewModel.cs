@@ -6,20 +6,22 @@ using System.Threading.Tasks;
 using CommunityToolkit.Maui.Views;
 using Grpc.Core;
 using GrpcShared;
+using ProcurementHub.Controls;
 using ProcurementHub.Model.CustomModels;
 using ProcurementHub.Services;
+using ProcurementHub.View.Teams;
 using ProcurementHub.View.Teams.TeamRestaurants;
 
 namespace ProcurementHub.ViewModel.TeamsViewModels.TeamRestaurantsViewModels
 {
-    [QueryProperty(nameof(Model), "TeamMainModel")]
+    [QueryProperty(nameof(TeamModel), "TeamMainModel")]
     public partial class TeamRestaurantsViewModel : BaseViewModels.BaseViewModel
 	{
 		public ObservableCollection<TeamRestaurantsModel> TeamRestaurants { get; set; } = new();
 		private readonly TeamRestaurantsService _teamRestaurantsService;
 
 		[ObservableProperty]
-		private TeamMainModel _model;
+		private TeamMainModel _teamModel;
 
 		public TeamRestaurantsViewModel(Procurement.ProcurementClient procurementClient, TeamRestaurantsService teamRestaurantsService) : base(procurementClient)
 		{
@@ -39,7 +41,7 @@ namespace ProcurementHub.ViewModel.TeamsViewModels.TeamRestaurantsViewModels
 
 			try
 			{
-				var result = await _teamRestaurantsService.GetRestaurantListAsync(_model.ID);
+				var result = await _teamRestaurantsService.GetRestaurantListAsync(_teamModel.ID);
 
 				if (result.Successful)
 				{
@@ -73,28 +75,18 @@ namespace ProcurementHub.ViewModel.TeamsViewModels.TeamRestaurantsViewModels
         [RelayCommand]
         async Task GoBack()
         {
-            await Shell.Current.GoToAsync("..", true);
+            await Shell.Current.GoToAsync(nameof(TeamMainPage), true, new Dictionary<string, object>
+            {
+                {"TeamMainModel", _teamModel },
+            });
         }
 
 		[RelayCommand]
 		async Task OpenRestaurantPopup(TeamRestaurantsModel model)
         {
-			//Create and show popup
-            var popup = new Popup()
-            {
-                Content = new VerticalStackLayout()
-                {
-					Spacing = 5,
-                    Children =
-                    {
-                        new Label() { Text = "Options:", HorizontalTextAlignment = TextAlignment.Center, FontSize = 24 },
-						new Button() { Text = "Edit item", CornerRadius = 5, FontSize = 14, FontAttributes = FontAttributes.Bold, Command = OpenEditItemPageCommand, CommandParameter = model, BackgroundColor = Color.FromArgb("#0d529c"), BorderColor = Color.FromArgb("#0d529c"), TextColor = Colors.White},
-						new Button() { Text = "Edit restaurant", CornerRadius = 5, FontSize = 14, FontAttributes = FontAttributes.Bold, Command = OpenEditRestaurantPageCommand, CommandParameter = model, BackgroundColor = Color.FromArgb("#0d529c"), BorderColor = Color.FromArgb("#0d529c"), TextColor = Colors.White},
-                    }
-                }
-            };
-
-			await App.Current.MainPage.ShowPopupAsync(popup);
+            activePopUp = TeamRestaurantsControl.GeneratePopupForItemManagement(model, OpenEditRestaurantPageCommand,
+                OpenEditItemPageCommand);
+			await App.Current.MainPage.ShowPopupAsync(activePopUp);
 			
 		}
 
@@ -103,7 +95,7 @@ namespace ProcurementHub.ViewModel.TeamsViewModels.TeamRestaurantsViewModels
         {
 			await Shell.Current.GoToAsync(nameof(TeamRestaurantsAddEditPage), true, new Dictionary<string, object>
 			{
-				{"TeamMainModel", _model },
+				{"TeamMainModel", _teamModel },
 				{"TeamRestaurant", model }
 			});
         }
@@ -113,7 +105,9 @@ namespace ProcurementHub.ViewModel.TeamsViewModels.TeamRestaurantsViewModels
         {
 			await Shell.Current.GoToAsync(nameof(TeamRestaurantItemsPage), true, new Dictionary<string, object>
 			{
-				{"TeamRestaurant", model }
+				{"TeamRestaurant", model },
+
+				{"TeamMainModel", _teamModel }
 			});
 		}
 
@@ -123,12 +117,12 @@ namespace ProcurementHub.ViewModel.TeamsViewModels.TeamRestaurantsViewModels
 			Debug.WriteLine("going to add new restaurant");
 			await Shell.Current.GoToAsync(nameof(TeamRestaurantsAddEditPage), true, new Dictionary<string, object>
 			{
-				{"TeamMainModel", _model },
+				{"TeamMainModel", _teamModel },
 				{"TeamRestaurant", new TeamRestaurantsModel() }
 			});
 		}
 
-		async partial void OnModelChanged(TeamMainModel value)
+		async partial void OnTeamModelChanged(TeamMainModel value)
 		{
 			await GetRestaurant();
 		}

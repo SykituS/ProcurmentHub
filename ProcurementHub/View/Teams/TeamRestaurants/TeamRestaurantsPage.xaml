@@ -30,7 +30,7 @@
                                         <VerticalStackLayout>
                                             <Label
                                                 FontAttributes="Bold"
-                                                FontSize="Large"
+                                                FontSize="24"
                                                 Text="{Binding Name}" />
                                             <Label FontAttributes="Bold">
                                                 <Label.Text>

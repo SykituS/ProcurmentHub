@@ -42,8 +42,6 @@ namespace ProcurementHub.ViewModel.Orders
         [ObservableProperty]
         bool _isRefreshing;
 
-        private Popup activePopup;
-
         [RelayCommand]
         async Task GetItemList()
         {
@@ -80,8 +78,8 @@ namespace ProcurementHub.ViewModel.Orders
         [RelayCommand]
         async Task ManageSelectedItem(OrderItemsModel model)
         {
-            activePopup = OrderCartControl.GeneratePopupForItemManagement(RemoveItemFromCartCommand, SplitItemCommand, model);
-            await App.Current.MainPage.ShowPopupAsync(activePopup);
+            activePopUp = OrderCartControl.GeneratePopupForItemManagement(RemoveItemFromCartCommand, SplitItemCommand, model);
+            await App.Current.MainPage.ShowPopupAsync(activePopUp);
         }
 
         [RelayCommand]
@@ -89,7 +87,7 @@ namespace ProcurementHub.ViewModel.Orders
         {
             //TODO: Implement splitting of item
             await SnackBarControl.CreateSnackBar("Function not implemented yet");
-            activePopup.Close();
+            activePopUp.Close();
         }
 
         [RelayCommand]
@@ -115,15 +113,15 @@ namespace ProcurementHub.ViewModel.Orders
             {
                 OrderSelectedItems.Remove(model);
             }
-            
-            activePopup.Close();
+
+            activePopUp.Close();
         }
 
         [RelayCommand]
         async Task ConfirmYourCart()
         {
-            activePopup = OrderCartControl.GeneratePopupForCartConfirmation(FinishOrderCommand);
-            await App.Current.MainPage.ShowPopupAsync(activePopup);
+            activePopUp = OrderCartControl.GeneratePopupForCartConfirmation(FinishOrderCommand);
+            await App.Current.MainPage.ShowPopupAsync(activePopUp);
         }
 
         [RelayCommand]
@@ -131,7 +129,7 @@ namespace ProcurementHub.ViewModel.Orders
         {
             if (!userWantToFinish)
             {
-                activePopup.Close();
+                activePopUp.Close();
                 return;
             }
 

@@ -64,10 +64,10 @@
                                         <VerticalStackLayout>
                                             <Label
                                                 FontAttributes="Bold"
-                                                FontSize="Large"
+                                                FontSize="24"
                                                 Text="{Binding Name}" />
                                             <Label Text="{Binding Description}" />
-                                            <Label Text="{Binding Price}" />
+                                            <Label Text="{Binding Price, StringFormat='{0:F2} PLN'}" />
                                         </VerticalStackLayout>
                                     </Grid>
                                 </Frame>
