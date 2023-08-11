@@ -90,8 +90,9 @@ namespace ProcurementHub.ViewModel.TeamsViewModels.TeamRestaurantsViewModels
 			await Shell.Current.GoToAsync(nameof(TeamRestaurantItemAddEditPage), true, new Dictionary<string, object>
 			{
 				{"TeamRestaurant", _restaurantModel },
-				{"TeamRestaurantItem", model }
-			});
+				{"TeamRestaurantItem", model },
+                {"TeamMainModel", _teamModel }
+            });
 		}
 
 		[RelayCommand]
@@ -100,8 +101,9 @@ namespace ProcurementHub.ViewModel.TeamsViewModels.TeamRestaurantsViewModels
 			await Shell.Current.GoToAsync(nameof(TeamRestaurantItemAddEditPage), true, new Dictionary<string, object>
 			{
 				{"TeamRestaurant", _restaurantModel },
-				{"TeamRestaurantItem", new TeamRestaurantItemsModel() }
-			});
+				{"TeamRestaurantItem", new TeamRestaurantItemsModel() },
+                {"TeamMainModel", _teamModel }
+            });
 		}
 
         async partial void OnRestaurantModelChanged(TeamRestaurantsModel value)

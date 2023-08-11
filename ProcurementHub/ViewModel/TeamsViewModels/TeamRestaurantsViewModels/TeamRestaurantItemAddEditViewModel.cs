@@ -13,6 +13,7 @@ namespace ProcurementHub.ViewModel.TeamsViewModels.TeamRestaurantsViewModels
 {
 	[QueryProperty(nameof(RestaurantModel), "TeamRestaurant")]
 	[QueryProperty(nameof(TeamRestaurantItemsModel), "TeamRestaurantItem")]
+	[QueryProperty(nameof(TeamModel), "TeamMainModel")]
 	public partial class TeamRestaurantItemAddEditViewModel : BaseViewModels.BaseViewModel
 	{
 		private TeamRestaurantsService _teamRestaurantsService;
@@ -23,7 +24,10 @@ namespace ProcurementHub.ViewModel.TeamsViewModels.TeamRestaurantsViewModels
 		[ObservableProperty]
 		private TeamRestaurantItemsModel _teamRestaurantItemsModel;
 
-		public TeamRestaurantItemAddEditViewModel(Procurement.ProcurementClient procurementClient, TeamRestaurantsService teamRestaurantsService) : base(procurementClient)
+        [ObservableProperty]
+        private TeamMainModel _teamModel;
+
+        public TeamRestaurantItemAddEditViewModel(Procurement.ProcurementClient procurementClient, TeamRestaurantsService teamRestaurantsService) : base(procurementClient)
 		{
 			_teamRestaurantsService = teamRestaurantsService;
 		}
@@ -44,7 +48,8 @@ namespace ProcurementHub.ViewModel.TeamsViewModels.TeamRestaurantsViewModels
                     await Shell.Current.DisplayAlert("Success", result.Information, "OK");
                     await Shell.Current.GoToAsync(nameof(TeamRestaurantItemsPage), true, new Dictionary<string, object>
                     {
-                        {"TeamRestaurant", _restaurantModel }
+                        {"TeamRestaurant", _restaurantModel },
+                        {"TeamMainModel", _teamModel }
                     });
                 }
                 else
