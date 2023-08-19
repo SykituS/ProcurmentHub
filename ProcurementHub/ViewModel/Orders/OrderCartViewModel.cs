@@ -24,6 +24,7 @@ namespace ProcurementHub.ViewModel.Orders
     {
         public ObservableCollection<OrderItemsModel> OrderSelectedItems { get; set; } = new();
         private TeamRestaurantsService _teamRestaurantsService;
+        private OrderServices _orderServices;
 
         [ObservableProperty]
         private string _itemListJson;
@@ -34,9 +35,10 @@ namespace ProcurementHub.ViewModel.Orders
         [ObservableProperty]
         private OrderModel _orderModel;
 
-        public OrderCartViewModel(Procurement.ProcurementClient procurementClient, TeamRestaurantsService teamRestaurantsService) : base(procurementClient)
+        public OrderCartViewModel(Procurement.ProcurementClient procurementClient, TeamRestaurantsService teamRestaurantsService, OrderServices orderServices) : base(procurementClient)
         {
-            _teamRestaurantsService = teamRestaurantsService;
+	        _teamRestaurantsService = teamRestaurantsService;
+	        _orderServices = orderServices;
         }
 
         [ObservableProperty]
@@ -168,6 +170,7 @@ namespace ProcurementHub.ViewModel.Orders
             try
             {
 	            await SnackBarControl.CreateSnackBar("Finishing your order");
+	            var result = await _orderServices.AddItemsToOrder(OrderSelectedItems.ToList(), OrderModel.ID, true);
             }
 			finally
             {

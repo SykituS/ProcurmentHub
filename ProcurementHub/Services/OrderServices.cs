@@ -51,10 +51,50 @@ namespace ProcurementHub.Services
 			return result;
 		}
 
-        public async Task<ValidationResponse> AddItemsToOrder()
+        public async Task<ValidationResponse> AddItemsToOrder(List<OrderItemsModel> orderItems, Guid orderId, bool userWantToFinish)
         {
             var result = new ValidationResponseWithResult<OrderModel>();
-            return result;
+
+	        var request = new GRPCOrderAddItems()
+	        {
+				OrderId = orderId.ToString(),
+				UserWantToFinish = userWantToFinish,
+				LoggedUser = new GRPCLoginInformationForUser
+				{
+					Id = App.LoggedUserInApplication.Id.ToString(),
+					Username = App.LoggedUserInApplication.UserName,
+					Password = App.LoggedUserInApplication.PasswordHash
+				}
+			};
+
+	        foreach (var item in orderItems)
+	        {
+		        request.Items.Add(new GRPCOrderItem
+		        {
+			        TeamOrderId = item.TeamOrdersID.ToString(),
+			        TeamRestaurantsItemId = item.TeamRestaurantsItemID,
+			        Quantity = item.Quantity,
+			        TotalPriceOfItem = new money()
+			        {
+				        CurrencyCode = "PLN",
+				        Price = item.TotalPriceOfItem.ToString()
+			        },
+			        DivideToken = item.DivideToken.ToString(),
+			        DivideOnNumberOfPersons = item.DivideOnNumberOfPersons??0,
+			        DividePrice = new money()
+			        {
+				        CurrencyCode = "PLN",
+				        Price = item.DividedPrice.ToString()
+					}
+		        });
+	        }
+
+	        var reply = await ProcurementClient.AddItemsToOrderAsync(request);
+
+			result.Successful = reply.Successful;
+			result.Information = reply.Information;
+
+			return result;
         }
     }
 }

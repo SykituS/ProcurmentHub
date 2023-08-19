@@ -75,10 +75,6 @@
 	  <ProjectReference Include="..\GrpcShared\GrpcShared.csproj" />
 	</ItemGroup>
 
-  <ItemGroup>
-    <Protobuf Include="Protos\Procurement.proto" />
-  </ItemGroup>
-
 	<ItemGroup>
 	  <Compile Update="View\Account\LoginPage.xaml.cs">
 	    <DependentUpon>LoginPage.xaml</DependentUpon>

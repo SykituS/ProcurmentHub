@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ProcurementService.DbModels;
 
 namespace GrpcShared.Models
 {
@@ -13,11 +14,13 @@ namespace GrpcShared.Models
 		public int TeamRestaurantsItemsID { get; set; }
 		public int Quantity { get; set; }
 		public decimal TotalPriceOfItem { get; set; }
+		public int ItemSelectedByID { get; set; }
 		public Guid? DivideToken { get; set; }
 		public int? DivideOnNumberOfPersons { get; set; }
 		public decimal? DividedPrice { get; set; }
 
 		public TeamOrders TeamOrders { get; set; }
+		public Persons ItemSelectedBy { get; set; }
 		public TeamRestaurantsItems TeamRestaurantsItems { get; set; }
 	}
 }

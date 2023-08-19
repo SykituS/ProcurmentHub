@@ -196,12 +196,15 @@ message GRPCOrderInformationsResponse {
 
 message GRPCOrderAddItems { 
 	repeated GRPCOrderItem items = 1;
+	string orderId = 2;
+	bool userWantToFinish = 3;
+	GRPCLoginInformationForUser LoggedUser = 4;
 }
 
 message GRPCOrderItem { 
 	int32 id = 1;
-	int32 teamOrdersId = 2;
-	int32 TeamRestaurantsItemsId = 3;
+	string teamOrderId = 2;
+	int32 TeamRestaurantsItemId = 3;
 	int32 Quantity = 4;
 	money totalPriceOfItem = 5;
 	string divideToken = 6;

@@ -949,9 +949,60 @@ namespace ProcurementService.Services
 			}
 		}
 
-        public override Task<GRPCValidationResponse> AddItemsToOrder(GRPCOrderAddItems request, ServerCallContext context)
-        {
-            return base.AddItemsToOrder(request, context);
-        }
-    }
+		public override Task<GRPCValidationResponse> AddItemsToOrder(GRPCOrderAddItems request, ServerCallContext context)
+		{
+			_logger.LogInformation("Start of call AddItemsToOrder: " + DateTime.Now);
+			var userExistsValidationResult =
+				_verifyLogin.CheckIfUsersExists(request.LoggedUser.Username, request.LoggedUser.Password, Guid.Parse(request.LoggedUser.Id));
+
+			if (!userExistsValidationResult.Successful)
+			{
+				_logger.LogInformation("End of call AddItemsToOrder: " + DateTime.Now);
+
+				return Task.FromResult(new GRPCValidationResponse()
+				{
+					Successful = false,
+					Information = "There was a problem when verifying your login credentials!"
+				});
+			}
+
+			var personIdOfLoggedUser = int.Parse(userExistsValidationResult.Information);
+			var datetimeNow = DateTime.UtcNow;
+
+			try
+			{
+				var listOfItems = request.Items.Select(item => new TeamOrdersItems
+					{
+						TeamOrdersID = Guid.Parse(request.OrderId),
+						TeamRestaurantsItemsID = item.TeamRestaurantsItemId,
+						Quantity = item.Quantity,
+						TotalPriceOfItem = decimal.Parse(item.TotalPriceOfItem.Price),
+						ItemSelectedByID = personIdOfLoggedUser,
+						DivideToken = item.DivideToken.Any() ? Guid.Parse(item.DivideToken) : null,
+						DivideOnNumberOfPersons = item.DivideOnNumberOfPersons,
+						DividedPrice = item.DividePrice.Price.Any() ? decimal.Parse(item.DividePrice.Price) : null,
+					})
+					.ToList();
+
+				_context.TeamOrdersItems.AddRange(listOfItems);
+				_context.SaveChanges();
+
+				return Task.FromResult(new GRPCValidationResponse()
+				{
+					Successful = true,
+					Information = ""
+				});
+			}
+			catch (Exception ex)
+			{
+				_logger.LogCritical($"Error in function AddItemsToOrder: Date of error: {DateTime.Now} Error: {ex}");
+
+				return Task.FromResult(new GRPCValidationResponse()
+				{
+					Successful = false,
+					Information = "There was an error while starting new order! Please try again!"
+				});
+			}
+		}
+	}
 }
