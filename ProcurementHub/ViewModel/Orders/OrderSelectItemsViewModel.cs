@@ -80,7 +80,7 @@ namespace ProcurementHub.ViewModel.Orders
 			}
 			finally
 			{
-				IsBusy = false;
+				IsBusy = false; 
 				IsRefreshing = false;
 			}
 		}

@@ -64,7 +64,6 @@ namespace ProcurementHub.ViewModel.Orders
                     {
                         OrderSelectedItems.Add(item);
                     }
-
                 }
             }
             finally
@@ -72,10 +71,38 @@ namespace ProcurementHub.ViewModel.Orders
                 IsBusy = false;
                 IsRefreshing = false;
             }
-
         }
 
         [RelayCommand]
+        async Task UpdateItemList()
+        {
+	        if (IsBusy)
+		        return;
+
+	        IsBusy = true;
+	        IsRefreshing = true;
+
+	        try
+	        {
+		        var list = OrderSelectedItems.ToList();
+
+
+				if (OrderSelectedItems.Count != 0)
+			        OrderSelectedItems.Clear();
+                
+		        foreach (var item in list)
+		        {
+			        OrderSelectedItems.Add(item);
+		        }
+	        }
+	        finally
+	        {
+		        IsBusy = false;
+		        IsRefreshing = false;
+	        }
+        }
+
+		[RelayCommand]
         async Task ManageSelectedItem(OrderItemsModel model)
         {
             activePopUp = OrderCartControl.GeneratePopupForItemManagement(RemoveItemFromCartCommand, SplitItemCommand, model);
@@ -105,16 +132,16 @@ namespace ProcurementHub.ViewModel.Orders
         [RelayCommand]
         void RemoveItemFromCart(OrderItemsModel model)
         {
-            if (model.Quantity > 0)
-            {
-                model.Quantity--;
-            }
-            else
-            {
-                OrderSelectedItems.Remove(model);
-            }
+            var item = OrderSelectedItems.First(e => e.TeamRestaurantsItemID == model.TeamRestaurantsItemID);
+            
+            item.Quantity--;
+            item.TotalPriceOfItem -= item.TeamRestaurantsItemPrice;
+            
+            if (item.Quantity <= 0)
+	            OrderSelectedItems.Remove(item);
 
             activePopUp.Close();
+            IsRefreshing = true;
         }
 
         [RelayCommand]
@@ -140,9 +167,9 @@ namespace ProcurementHub.ViewModel.Orders
 
             try
             {
-
+	            await SnackBarControl.CreateSnackBar("Finishing your order");
             }
-            finally
+			finally
             {
                 IsBusy = false;
             }
