@@ -912,6 +912,7 @@ namespace ProcurementService.Services
 					Status = TeamOrderStatusEnum.InProgress,
 					OrderStartedByID = personIdOfLoggedUser,
 					OrderStartedOn = datetimeNow,
+					OrderPayedByID = personIdOfLoggedUser,
 				};
 
 				_context.Entry(order).State = EntityState.Added;
@@ -927,6 +928,7 @@ namespace ProcurementService.Services
 						Status = (int)order.Status,
 						OrderStartedBy = order.OrderStartedByID,
 						StartedOn = order.OrderStartedOn.ToTimestamp(),
+						OrderPayedById = order.OrderPayedByID.Value,
 					},
 					Response = new GRPCValidationResponse()
 					{

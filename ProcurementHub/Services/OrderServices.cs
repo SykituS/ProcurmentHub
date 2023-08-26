@@ -46,6 +46,7 @@ namespace ProcurementHub.Services
 	            Status = (TeamOrderStatusEnum)reply.Order.Status,
 	            OrderStartedByID = reply.Order.OrderStartedBy,
 	            OrderStartedOn = reply.Order.StartedOn.ToDateTime(),
+				OrderPayedByID = reply.Order.OrderPayedById,
             };
 
 			return result;

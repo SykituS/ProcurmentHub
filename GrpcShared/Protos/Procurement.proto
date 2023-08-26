@@ -187,6 +187,9 @@ message GRPCOrderInformations {
 	int32 status = 4;
 	int32 orderStartedBy = 5;
 	google.protobuf.Timestamp startedOn = 6;
+	int32 orderPayedById = 7;
+	google.protobuf.Timestamp finishedOn = 8;
+	money totalPriceOfItem = 9;
 }
 
 message GRPCOrderInformationsResponse {
