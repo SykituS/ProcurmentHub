@@ -171,6 +171,15 @@ namespace ProcurementHub.ViewModel.Orders
             {
 	            await SnackBarControl.CreateSnackBar("Finishing your order");
 	            var result = await _orderServices.AddItemsToOrder(OrderSelectedItems.ToList(), OrderModel.ID, true);
+
+	            if (result.Successful)
+	            {
+					await Shell.Current.GoToAsync(nameof(OrderSelectItemsPage), true, new Dictionary<string, object>
+					{
+						{"TeamMainModel", _teamModel },
+						{"OrderModel", _orderModel },
+					});
+				}
             }
 			finally
             {

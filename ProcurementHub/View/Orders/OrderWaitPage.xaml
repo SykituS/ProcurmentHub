@@ -1,9 +1,49 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8" ?>
 
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="ProcurementHub.View.Orders.OrderWaitPage">
-    <ContentPage.Content>
-        
-    </ContentPage.Content>
+<ContentPage
+    x:Class="ProcurementHub.View.Orders.OrderWaitPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:viewmodel="clr-namespace:ProcurementHub.ViewModel.Orders"
+    x:DataType="viewmodel:OrderWaitViewModel">
+    <Shell.NavBarIsVisible>False</Shell.NavBarIsVisible>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="150" />
+            <RowDefinition Height="50" />
+        </Grid.RowDefinitions>
+        <StackLayout Grid.Row="1">
+            <Label
+                FontAttributes="Bold"
+                FontFamily="Arial"
+                FontSize="48"
+                HorizontalOptions="Center"
+                Text="Waiting for confirmation on delivery"
+                VerticalOptions="Center" />
+        </StackLayout>
+        <StackLayout Grid.Row="4">
+            <StackLayout
+                Margin="0,15,0,0"
+                Padding="0"
+                IsVisible="{Binding IsPayingPerson}">
+                <Button
+                    Margin="0,5,0,5"
+                    BackgroundColor="#0d529c"
+                    BorderColor="#0d529c"
+                    Command="{Binding ConfirmOrderDeliveryCommand}"
+                    CornerRadius="10"
+                    FontAttributes="Bold"
+                    IsVisible="{Binding IsPayingPerson}"
+                    Text="Confirm order"
+                    TextColor="White"
+                    WidthRequest="250" />
+            </StackLayout>
+        </StackLayout>
+    </Grid>
 </ContentPage>
