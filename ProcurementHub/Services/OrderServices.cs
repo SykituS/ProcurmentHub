@@ -97,5 +97,13 @@ namespace ProcurementHub.Services
 
 			return result;
         }
+
+        public async Task<(OrderModel, List<OrderItemsModel>)> GetFullOrderDetails(Guid orderID)
+        {
+			var orderDetails = new OrderModel();
+            var orderItems = new List<OrderItemsModel>();
+
+			return (orderDetails, orderItems);
+        }
     }
 }

@@ -19,6 +19,7 @@ service Procurement {
   rpc GetTeamRestaurantItemList (GRPCGetInformationForGivenIdRequest) returns (GRPCTeamRestaurnatItemsListResponse);
   rpc StartNewOrder (GRPCStartNewOrderRequest) returns (GRPCOrderInformationsResponse);
   rpc AddItemsToOrder (GRPCOrderAddItems) returns (GRPCValidationResponse);
+  rpc GetFullOrderDetailsById (GRPCGetOrderByIdRequest) returns (GRPCFullOrderDetailsResponse);
 }
 
 message money {
@@ -213,4 +214,43 @@ message GRPCOrderItem {
 	string divideToken = 6;
 	int32 divideOnNumberOfPersons = 7;
 	money dividePrice = 8;
+}
+
+message GRPCGetOrderByIdRequest {
+	string orderId = 1;
+	GRPCLoginInformationForUser LoggedUser = 2;
+}
+
+message GRPCFullOrderInformations {
+	string id = 1;
+	int32 teamId = 2;
+	int32 restaurantId = 3;
+	int32 status = 4;
+	int32 orderStartedById = 5;
+	google.protobuf.Timestamp startedOn = 6;
+	int32 orderPayedById = 7;
+	google.protobuf.Timestamp finishedOn = 8;
+	money totalPriceOfItem = 9;
+	GRPCRestaurant restaurant = 10;
+	GRPCTeam team = 11;
+	GRPCPerson orderStartedBy = 12;
+	GRPCPerson orderPayedBy = 13;
+}
+
+message GRPCFullOrderItem { 
+	int32 id = 1;
+	string teamOrderId = 2;
+	int32 teamRestaurantsItemId = 3;
+	int32 quantity = 4;
+	money totalPriceOfItem = 5;
+	string divideToken = 6;
+	int32 divideOnNumberOfPersons = 7;
+	money dividePrice = 8;
+	GRPCRestaurantItem restaurantItem = 9;
+}
+
+message GRPCFullOrderDetailsResponse {
+	GRPCFullOrderInformations order = 1;
+	repeated GRPCFullOrderItem items = 2;
+	GRPCValidationResponse response = 3;
 }

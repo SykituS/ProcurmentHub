@@ -1006,5 +1006,136 @@ namespace ProcurementService.Services
 				});
 			}
 		}
-	}
+
+        public override Task<GRPCFullOrderDetailsResponse> GetFullOrderDetailsById(GRPCGetOrderByIdRequest request, ServerCallContext context)
+        {
+            _logger.LogInformation("Start of call AddItemsToOrder: " + DateTime.Now);
+            var userExistsValidationResult =
+                _verifyLogin.CheckIfUsersExists(request.LoggedUser.Username, request.LoggedUser.Password, Guid.Parse(request.LoggedUser.Id));
+
+            if (!userExistsValidationResult.Successful)
+            {
+                _logger.LogInformation("End of call AddItemsToOrder: " + DateTime.Now);
+
+                return Task.FromResult(new GRPCFullOrderDetailsResponse()
+                {
+					Response = new GRPCValidationResponse()
+                    {
+                        Successful = false,
+                        Information = "There was a problem when verifying your login credentials!"
+                    }
+                });
+            }
+
+            try
+            {
+                var order = _context.TeamOrders
+                    .Include(e => e.Team)
+                    .Include(e => e.OrderPayedBy)
+                    .Include(e => e.OrderStartedBy)
+                    .Include(e => e.TeamRestaurant)
+                    .FirstOrDefault(e => e.ID == Guid.Parse(request.OrderId));
+                if (order == null)
+                {
+                    return Task.FromResult(new GRPCFullOrderDetailsResponse()
+                    {
+                        Response = new GRPCValidationResponse()
+                        {
+                            Successful = false,
+                            Information = "Order was not found!"
+                        }
+                    });
+                }
+
+                var orderItems = _context.TeamOrdersItems
+                    .Include(e => e.TeamRestaurantsItems)
+                    .Where(e => e.TeamOrdersID == order.ID);
+
+                var response = new GRPCFullOrderDetailsResponse()
+                {
+                    Order = new GRPCFullOrderInformations
+                    {
+                        Id = order.ID.ToString(),
+                        TeamId = order.TeamID,
+                        RestaurantId = order.TeamRestaurantID,
+                        Status = (int)order.Status,
+                        OrderStartedById = order.OrderStartedByID,
+                        StartedOn = order.OrderStartedOn.ToTimestamp(),
+                        OrderPayedById = order.OrderPayedByID ?? 0,
+                        FinishedOn = order.OrderFinishedOn?.ToTimestamp(),
+                        TotalPriceOfItem = new money
+                        {
+                            CurrencyCode = "PLN",
+                            Price = order.TotalPriceOfOrder.ToString(),
+                        },
+                        Restaurant = new GRPCRestaurant
+                        {
+                            Id = order.TeamRestaurant.ID,
+                            Name = order.TeamRestaurant.Name,
+                            Address = order.TeamRestaurant.Address,
+                            Description = order.TeamRestaurant.Description,
+                        },
+                        OrderStartedBy = new GRPCPerson
+                        {
+                            FirstName = order.OrderStartedBy.FirstName,
+                            LastName = order.OrderStartedBy.LastName,
+                        },
+                        OrderPayedBy = new GRPCPerson
+                        {
+                            FirstName = order.OrderPayedBy.FirstName,
+                            LastName = order.OrderPayedBy.LastName,
+                        },
+                    }
+                };
+
+                foreach (var orderItem in orderItems)
+                {
+                    response.Items.Add(new GRPCFullOrderItem
+                    {
+                        Id = orderItem.ID,
+                        TeamOrderId = orderItem.TeamOrdersID.ToString(),
+                        TeamRestaurantsItemId = orderItem.TeamRestaurantsItemsID,
+                        Quantity = orderItem.Quantity,
+                        TotalPriceOfItem = new money
+                        {
+                            CurrencyCode = "PLN",
+                            Price = orderItem.TotalPriceOfItem.ToString(),
+                        },
+                        DivideToken = orderItem.DivideToken?.ToString(),
+                        DivideOnNumberOfPersons = orderItem.DivideOnNumberOfPersons ?? 0,
+                        DividePrice = new money
+                        {
+                            CurrencyCode = "PLN",
+                            Price = orderItem.DividedPrice.ToString(),
+                        },
+                        RestaurantItem = new GRPCRestaurantItem
+                        {
+                            Id = orderItem.TeamRestaurantsItems.ID,
+                            Name = orderItem.TeamRestaurantsItems.Name,
+                            Price = new money
+                            {
+                                CurrencyCode = orderItem.TeamRestaurantsItems.CurrencyType,
+                                Price = orderItem.TeamRestaurantsItems.Price.ToString(),
+                            },
+                            Description = orderItem.TeamRestaurantsItems.Description,
+                        },
+                    });
+                }
+
+                return Task.FromResult(response);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogCritical($"Error in function AddItemsToOrder: Date of error: {DateTime.Now} Error: {ex}");
+                return Task.FromResult(new GRPCFullOrderDetailsResponse()
+                {
+                    Response = new GRPCValidationResponse()
+                    {
+                        Successful = false,
+                        Information = "There was an error while starting new order! Please try again!"
+                    }
+                });
+            }
+        }
+    }
 }

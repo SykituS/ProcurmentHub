@@ -17,6 +17,8 @@ namespace ProcurementHub.ViewModel.Orders
 		private TeamRestaurantsService _teamRestaurantsService;
 		private OrderServices _orderServices;
 
+		public ObservableCollection<OrderItemsModel> OrderItems { get; set; }
+
 		[ObservableProperty]
 		private TeamMainModel _teamModel;
 
@@ -41,10 +43,17 @@ namespace ProcurementHub.ViewModel.Orders
 			if (App.LoggedUserInApplication.PersonID != null)
 				_isPayingPerson = _orderModel.OrderPayedByID == App.LoggedUserInApplication.PersonID.Value;
 
+            var response = await _orderServices.GetFullOrderDetails(_orderModel.ID);
+            
+        }
 
-		}
+        [RelayCommand]
+        async Task CheckOrderForUpdate()
+        {
+            //send request to get new data
+        }
 
-		[RelayCommand]
+        [RelayCommand]
 		async Task ConfirmOrderDelivery()
 		{
 
