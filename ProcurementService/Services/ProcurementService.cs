@@ -1009,13 +1009,13 @@ namespace ProcurementService.Services
 
         public override Task<GRPCFullOrderDetailsResponse> GetFullOrderDetailsById(GRPCGetOrderByIdRequest request, ServerCallContext context)
         {
-            _logger.LogInformation("Start of call AddItemsToOrder: " + DateTime.Now);
+            _logger.LogInformation("Start of call GetFullOrderDetailsById: " + DateTime.Now);
             var userExistsValidationResult =
                 _verifyLogin.CheckIfUsersExists(request.LoggedUser.Username, request.LoggedUser.Password, Guid.Parse(request.LoggedUser.Id));
 
             if (!userExistsValidationResult.Successful)
             {
-                _logger.LogInformation("End of call AddItemsToOrder: " + DateTime.Now);
+                _logger.LogInformation("End of call GetFullOrderDetailsById: " + DateTime.Now);
 
                 return Task.FromResult(new GRPCFullOrderDetailsResponse()
                 {
@@ -1136,7 +1136,7 @@ namespace ProcurementService.Services
             }
             catch (Exception ex)
             {
-                _logger.LogCritical($"Error in function AddItemsToOrder: Date of error: {DateTime.Now} Error: {ex}");
+                _logger.LogCritical($"Error in function GetFullOrderDetailsById: Date of error: {DateTime.Now} Error: {ex}");
                 return Task.FromResult(new GRPCFullOrderDetailsResponse()
                 {
                     Response = new GRPCValidationResponse()
@@ -1145,6 +1145,62 @@ namespace ProcurementService.Services
                         Information = "There was an error while starting new order! Please try again!"
                     }
                 });
+            }
+        }
+
+        public override Task<GRPCValidationResponse> CloseOrderById(GRPCGetOrderByIdRequest request, ServerCallContext context)
+        {
+            _logger.LogInformation("Start of call CloseOrderById: " + DateTime.Now);
+            var userExistsValidationResult =
+                _verifyLogin.CheckIfUsersExists(request.LoggedUser.Username, request.LoggedUser.Password, Guid.Parse(request.LoggedUser.Id));
+
+            if (!userExistsValidationResult.Successful)
+            {
+                _logger.LogInformation("End of call CloseOrderById: " + DateTime.Now);
+
+                return Task.FromResult(new GRPCValidationResponse()
+                    {
+                        Successful = false,
+                        Information = "There was a problem when verifying your login credentials!"
+                    });
+            }
+
+            var personIdOfLoggedUser = int.Parse(userExistsValidationResult.Information);
+            var dateTimeNow = DateTime.UtcNow;
+
+            try
+            {
+                var order = _context.TeamOrders.FirstOrDefault(e => e.ID == Guid.Parse(request.OrderId));
+                if (order == null)
+                {
+                    return Task.FromResult(new GRPCValidationResponse
+                    {
+                        Successful = false,
+                        Information = "Order not found"
+                    });
+                }
+
+				order.OrderFinishedOn = dateTimeNow;
+                order.Status = TeamOrderStatusEnum.Closed;
+				order.TotalPriceOfOrder = _context.TeamOrdersItems.Where(e => e.TeamOrdersID == order.ID).Select(e => e.TotalPriceOfItem).Sum();
+                order.OrderPayedByID = personIdOfLoggedUser;
+
+				_context.Entry(order).State = EntityState.Modified;
+				_context.SaveChanges();
+
+                return Task.FromResult(new GRPCValidationResponse()
+                {
+                    Successful = true
+                });
+            }
+            catch (Exception ex)
+            {
+                _logger.LogCritical($"Error in function CloseOrderById: Date of error: {DateTime.Now} Error: {ex}");
+                return Task.FromResult(new GRPCValidationResponse()
+                    {
+                        Successful = false,
+                        Information = "There was an error while starting new order! Please try again!"
+                    });
             }
         }
     }

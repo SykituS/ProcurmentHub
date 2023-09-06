@@ -20,6 +20,7 @@ service Procurement {
   rpc StartNewOrder (GRPCStartNewOrderRequest) returns (GRPCOrderInformationsResponse);
   rpc AddItemsToOrder (GRPCOrderAddItems) returns (GRPCValidationResponse);
   rpc GetFullOrderDetailsById (GRPCGetOrderByIdRequest) returns (GRPCFullOrderDetailsResponse);
+  rpc CloseOrderById (GRPCGetOrderByIdRequest) returns (GRPCValidationResponse);
 }
 
 message money {

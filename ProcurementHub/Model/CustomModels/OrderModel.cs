@@ -22,5 +22,9 @@ namespace ProcurementHub.Model.CustomModels
 
 		public PersonsModel OrderStartedBy { get; set; }
 		public PersonsModel OrderPayedBy { get; set; }
+
+        public bool IsPayingPerson => OrderPayedByID == App.LoggedUserInApplication.PersonID && Status != TeamOrderStatusEnum.Closed;
+        public bool IsNotPayingPerson => OrderPayedByID != App.LoggedUserInApplication.PersonID && Status != TeamOrderStatusEnum.Closed;
+        public bool IsOrderFinished => Status == TeamOrderStatusEnum.Closed;
     }
 }

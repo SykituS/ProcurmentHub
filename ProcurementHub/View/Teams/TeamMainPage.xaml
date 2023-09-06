@@ -32,7 +32,17 @@
                 HorizontalOptions="Center"
                 Text="{Binding Model.Description}"
                 VerticalOptions="Center" />
-
+            <Button
+                Margin="0,5,0,5"
+                BackgroundColor="#0d529c"
+                BorderColor="#0d529c"
+                Command="{Binding StartNewOrderCommand}"
+                IsVisible="{Binding Model.IsOrderInActive}"
+                CornerRadius="10"
+                FontAttributes="Bold"
+                Text="Join to order!"
+                TextColor="White"
+                WidthRequest="250" />
             <!--<Label VerticalOptions="Center"
                    HorizontalOptions="Center"
                    Grid.Row="3">
@@ -57,6 +67,7 @@
                     BackgroundColor="#0d529c"
                     BorderColor="#0d529c"
                     Command="{Binding StartNewOrderCommand}"
+                    IsVisible="{Binding Model.IsOrderInActive}"
                     CornerRadius="10"
                     FontAttributes="Bold"
                     Text="Start new order"

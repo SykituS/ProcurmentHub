@@ -137,5 +137,27 @@ namespace ProcurementHub.Services
 
             return (validationResponse, orderDetails, orderItems);
         }
+
+        public async Task<ValidationResponse> CloseOrder(Guid orderID)
+        {
+            var reply = await ProcurementClient.CloseOrderByIdAsync(new GRPCGetOrderByIdRequest
+            {
+                OrderId = orderID.ToString(),
+                LoggedUser = new GRPCLoginInformationForUser
+                {
+                    Id = App.LoggedUserInApplication.Id.ToString(),
+                    Username = App.LoggedUserInApplication.UserName,
+                    Password = App.LoggedUserInApplication.PasswordHash
+                }
+            });
+
+			var response = new ValidationResponse
+            {
+                Successful = reply.Successful,
+                Information = reply.Information
+            };
+
+            return response;
+        }
     }
 }

@@ -12,8 +12,9 @@ namespace ProcurementHub.Model.CustomModels
 		public TeamRoleEnum Role { get; set; }
 		
 		public Guid? OrderId { get; set; }
-		public bool IsAnyOrderActive => OrderId != null;
-		public DateTime OrderStartedOn { get; set; }
+		public bool IsOrderActive => OrderId != null;
+		public bool IsOrderInActive => OrderId == null;
+        public DateTime OrderStartedOn { get; set; }
 
 		public bool IsAdmin => Role == TeamRoleEnum.TeamAdministrator;
     }
