@@ -137,16 +137,18 @@ public static class MauiProgram
 		builder.Services.AddTransient<OrderSelectPayingPersonPage>();
 		builder.Services.AddTransient<OrderWaitPage>();
 		builder.Services.AddTransient<OrderDetailsPage>();
+		builder.Services.AddTransient<OrderListPage>();
 
-		builder.Services.AddTransient<OrderStartViewModel>();
+        builder.Services.AddTransient<OrderStartViewModel>();
 		builder.Services.AddTransient<OrderSelectItemsViewModel>();
 		builder.Services.AddTransient<OrderCartViewModel>();
 		builder.Services.AddTransient<OrderSelectPayingPersonViewModel>();
 		builder.Services.AddTransient<OrderWaitViewModel>();
 		builder.Services.AddTransient<OrderDetailsViewModel>();
+		builder.Services.AddTransient<OrderListViewModel>();
 
-		#endregion
+        #endregion
 
-		return builder.Build();
+        return builder.Build();
 	}
 }

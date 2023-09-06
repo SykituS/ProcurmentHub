@@ -84,7 +84,14 @@ namespace ProcurementHub.ViewModel.TeamsViewModels
 
 		}
 
-		[RelayCommand]
+        [RelayCommand]
+        async Task JoinToOrder()
+        {
+            Debug.WriteLine("Joining to order");
+
+        }
+
+        [RelayCommand]
         async Task GoToTeamMembersPage()
         {
 	        Debug.WriteLine("Changing page to team members page");

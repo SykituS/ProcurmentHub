@@ -32,12 +32,20 @@
                 HorizontalOptions="Center"
                 Text="{Binding Model.Description}"
                 VerticalOptions="Center" />
+            <Label
+                Padding="0,15,0,0"
+                FontAttributes="Bold"
+                FontFamily="Arial"
+                FontSize="24"
+                HorizontalOptions="Center"
+                Text="There is an order in progress!"
+                VerticalOptions="Center" />
             <Button
                 Margin="0,5,0,5"
                 BackgroundColor="#0d529c"
                 BorderColor="#0d529c"
-                Command="{Binding StartNewOrderCommand}"
-                IsVisible="{Binding Model.IsOrderInActive}"
+                Command="{Binding JoinToOrderCommand}"
+                IsVisible="{Binding Model.IsOrderActive}"
                 CornerRadius="10"
                 FontAttributes="Bold"
                 Text="Join to order!"
