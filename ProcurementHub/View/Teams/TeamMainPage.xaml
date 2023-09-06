@@ -38,6 +38,7 @@
                 FontFamily="Arial"
                 FontSize="24"
                 HorizontalOptions="Center"
+                IsVisible="{Binding Model.IsOrderActive}"
                 Text="There is an order in progress!"
                 VerticalOptions="Center" />
             <Button
@@ -45,9 +46,9 @@
                 BackgroundColor="#0d529c"
                 BorderColor="#0d529c"
                 Command="{Binding JoinToOrderCommand}"
-                IsVisible="{Binding Model.IsOrderActive}"
                 CornerRadius="10"
                 FontAttributes="Bold"
+                IsVisible="{Binding Model.IsOrderActive}"
                 Text="Join to order!"
                 TextColor="White"
                 WidthRequest="250" />
@@ -75,9 +76,9 @@
                     BackgroundColor="#0d529c"
                     BorderColor="#0d529c"
                     Command="{Binding StartNewOrderCommand}"
-                    IsVisible="{Binding Model.IsOrderInActive}"
                     CornerRadius="10"
                     FontAttributes="Bold"
+                    IsVisible="{Binding Model.IsOrderInActive}"
                     Text="Start new order"
                     TextColor="White"
                     WidthRequest="250" />
