@@ -81,7 +81,7 @@ namespace ProcurementHub.Services
 						FirstName = restaurant.CreatedBy.FirstName,
 						LastName = restaurant.CreatedBy.LastName,
 						Email = restaurant.CreatedBy.Email,
-						FullName = $"{restaurant.CreatedBy.FirstName} {restaurant.CreatedBy.LastName}",
+						//FullName = $"{restaurant.CreatedBy.FirstName} {restaurant.CreatedBy.LastName}",
 					},
 					IsUpdated = restaurant.CreatedOn != restaurant.UpdatedOn,
 					UpdatedBy = new PersonsModel
@@ -90,7 +90,7 @@ namespace ProcurementHub.Services
 						FirstName = restaurant.UpdatedBy.FirstName,
 						LastName = restaurant.UpdatedBy.LastName,
 						Email = restaurant.UpdatedBy.Email,
-						FullName = $"{restaurant.UpdatedBy.FirstName} {restaurant.UpdatedBy.LastName}",
+						//FullName = $"{restaurant.UpdatedBy.FirstName} {restaurant.UpdatedBy.LastName}",
 					},
 				});
 			}
@@ -169,7 +169,7 @@ namespace ProcurementHub.Services
 						FirstName = item.CreatedBy.FirstName,
 						LastName = item.CreatedBy.LastName,
 						Email = item.CreatedBy.Email,
-						FullName = $"{item.CreatedBy.FirstName} {item.CreatedBy.LastName}",
+						//FullName = $"{item.CreatedBy.FirstName} {item.CreatedBy.LastName}",
 					},
 					IsUpdated = item.CreatedOn != item.UpdatedOn,
 					UpdatedBy = new PersonsModel
@@ -178,7 +178,7 @@ namespace ProcurementHub.Services
 						FirstName = item.UpdatedBy.FirstName,
 						LastName = item.UpdatedBy.LastName,
 						Email = item.UpdatedBy.Email,
-						FullName = $"{item.UpdatedBy.FirstName} {item.UpdatedBy.LastName}",
+						//FullName = $"{item.UpdatedBy.FirstName} {item.UpdatedBy.LastName}",
 					},
 				});
 			}

@@ -26,15 +26,22 @@
                 <VerticalStackLayout>
                     <Label FontAttributes="Bold" FontSize="Large">
                         <Label.Text>
-                            <MultiBinding StringFormat="Items for restaurant: {0}">
+                            <MultiBinding StringFormat="Sumup of order in restaurant: {0}">
                                 <Binding Path="OrderModel.Restaurants.Name" />
                             </MultiBinding>
                         </Label.Text>
                     </Label>
                     <Label>
                         <Label.Text>
-                            <MultiBinding StringFormat="Address: {0}">
+                            <MultiBinding StringFormat="Restaurant address: {0}">
                                 <Binding Path="OrderModel.Restaurants.Address" />
+                            </MultiBinding>
+                        </Label.Text>
+                    </Label>
+                    <Label>
+                        <Label.Text>
+                            <MultiBinding StringFormat="Order is payed by {0}">
+                                <Binding Path="OrderModel.OrderPayedBy.FullName" />
                             </MultiBinding>
                         </Label.Text>
                     </Label>
@@ -56,15 +63,37 @@
                                     BackgroundColor="Transparent"
                                     BorderColor="#0d529c"
                                     HasShadow="True"
-                                    HeightRequest="125">
+                                    HeightRequest="150">
                                     <Grid Padding="0">
                                         <VerticalStackLayout>
                                             <Label
                                                 FontAttributes="Bold"
                                                 FontSize="24"
-                                                Text="{Binding TeamRestaurantsItemID}" />
-                                            <Label Text="{Binding Quantity}" />
-                                            <Label Text="{Binding TotalPriceOfItem, StringFormat='{0:F2} PLN'}" />
+                                                Text="{Binding TeamRestaurantsItemName}" />
+                                            <Label Text="{Binding TeamRestaurantsItemDescription}" />
+                                            <Label>
+                                                <Label.Text>
+                                                    <MultiBinding StringFormat="Item price: {0:F2} PLN">
+                                                        <Binding Path="TeamRestaurantsItemPrice" />
+                                                    </MultiBinding>
+                                                </Label.Text>
+                                            </Label>
+
+                                            <Label>
+                                                <Label.Text>
+                                                    <MultiBinding StringFormat="Quantity: {0} | Total price: {1:f2} PLN">
+                                                        <Binding Path="Quantity" />
+                                                        <Binding Path="TotalPriceOfItem" />
+                                                    </MultiBinding>
+                                                </Label.Text>
+                                            </Label>
+                                            <Label>
+                                                <Label.Text>
+                                                    <MultiBinding StringFormat="Ordered by: {0} ">
+                                                        <Binding Path="ItemSelectedBy.FullName" />
+                                                    </MultiBinding>
+                                                </Label.Text>
+                                            </Label>
                                         </VerticalStackLayout>
                                     </Grid>
                                 </Frame>
@@ -75,30 +104,49 @@
             </ContentView>
         </RefreshView>
 
-        <!--<Button
-            Grid.Row="2"
-            Grid.Column="0"
-            Margin="5,0,5,5"
-            BackgroundColor="#0d529c"
-            BorderColor="#0d529c"
-            Command="{Binding LeaveOrderCommand}"
-            FontAttributes="Bold"
-            FontSize="14"
-            LineBreakMode="WordWrap"
-            Text="Leave Order"
-            TextColor="White" />-->
-        <Button
-            Grid.Row="2"
+        <StackLayout
             Grid.ColumnSpan="2"
-            Margin="5,0,5,5"
-            BackgroundColor="#0d529c"
-            BorderColor="#0d529c"
-            Command="{Binding ConfirmOrderDeliveryCommand}"
-            IsVisible="{Binding IsPayingPerson}"
-            FontAttributes="Bold"
-            FontSize="14"
-            LineBreakMode="WordWrap"
-            Text="Confirm order"
-            TextColor="White" />
+            Grid.Row="2">
+            <Button
+                Margin="5,0,5,5"
+                BackgroundColor="#0d529c"
+                BorderColor="#0d529c"
+                Command="{Binding ConfirmOrderDeliveryCommand}"
+                IsVisible="{Binding IsPayingPerson}"
+                IsEnabled="{Binding IsNotBusy}"
+                FontAttributes="Bold"
+                FontSize="14"
+                LineBreakMode="WordWrap"
+                Text="Confirm order"
+                TextColor="White" />
+
+            <Frame
+                Margin="0,0,0,0"
+                Padding="5,5,0,0"
+                BackgroundColor="Transparent"
+                IsVisible="{Binding IsNotPayingPerson}"
+                BorderColor="#0d529c"
+                HasShadow="True"
+                HeightRequest="100">
+                <Grid Padding="0">
+                    <VerticalStackLayout>
+                        <Label HorizontalOptions="Center" VerticalOptions="Center" FontAttributes="Bold" FontSize="Large" Text="Waiting for Delivery"/>
+                    </VerticalStackLayout>
+                </Grid>
+            </Frame>
+
+            <Button
+                Margin="5,0,5,5"
+                BackgroundColor="#0d529c"
+                BorderColor="#0d529c"
+                Command="{Binding GoToOrderDetailsCommand}"
+                IsVisible="{Binding IsOrderFinished}"
+                IsEnabled="{Binding IsNotBusy}"
+                FontAttributes="Bold"
+                FontSize="14"
+                LineBreakMode="WordWrap"
+                Text="Confirm order"
+                TextColor="White" />
+        </StackLayout>
     </Grid>
 </ContentPage>

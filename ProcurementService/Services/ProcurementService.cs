@@ -1049,6 +1049,7 @@ namespace ProcurementService.Services
 
                 var orderItems = _context.TeamOrdersItems
                     .Include(e => e.TeamRestaurantsItems)
+                    .Include(e => e.ItemSelectedBy)
                     .Where(e => e.TeamOrdersID == order.ID);
 
                 var response = new GRPCFullOrderDetailsResponse()
@@ -1060,13 +1061,13 @@ namespace ProcurementService.Services
                         RestaurantId = order.TeamRestaurantID,
                         Status = (int)order.Status,
                         OrderStartedById = order.OrderStartedByID,
-                        StartedOn = order.OrderStartedOn.ToTimestamp(),
+                        StartedOn = order.OrderStartedOn.ToUniversalTime().ToTimestamp(),
                         OrderPayedById = order.OrderPayedByID ?? 0,
-                        FinishedOn = order.OrderFinishedOn?.ToTimestamp(),
-                        TotalPriceOfItem = new money
+                        FinishedOn = order.OrderFinishedOn?.ToUniversalTime().ToTimestamp(),
+                        TotalPriceOfOrder = new money
                         {
                             CurrencyCode = "PLN",
-                            Price = order.TotalPriceOfOrder.ToString(),
+                            Price = order.TotalPriceOfOrder.ToString() == "" ? decimal.Zero.ToString() : order.TotalPriceOfOrder.ToString(),
                         },
                         Restaurant = new GRPCRestaurant
                         {
@@ -1085,7 +1086,8 @@ namespace ProcurementService.Services
                             FirstName = order.OrderPayedBy.FirstName,
                             LastName = order.OrderPayedBy.LastName,
                         },
-                    }
+                    },
+					Response = new GRPCValidationResponse(),
                 };
 
                 foreach (var orderItem in orderItems)
@@ -1099,14 +1101,14 @@ namespace ProcurementService.Services
                         TotalPriceOfItem = new money
                         {
                             CurrencyCode = "PLN",
-                            Price = orderItem.TotalPriceOfItem.ToString(),
+                            Price = orderItem.TotalPriceOfItem.ToString() ?? decimal.Zero.ToString(),
                         },
-                        DivideToken = orderItem.DivideToken?.ToString(),
+                        DivideToken = orderItem.DivideToken?.ToString() ?? string.Empty,
                         DivideOnNumberOfPersons = orderItem.DivideOnNumberOfPersons ?? 0,
                         DividePrice = new money
                         {
                             CurrencyCode = "PLN",
-                            Price = orderItem.DividedPrice.ToString(),
+                            Price = orderItem.DividedPrice?.ToString() ?? decimal.Zero.ToString(),
                         },
                         RestaurantItem = new GRPCRestaurantItem
                         {
@@ -1115,12 +1117,20 @@ namespace ProcurementService.Services
                             Price = new money
                             {
                                 CurrencyCode = orderItem.TeamRestaurantsItems.CurrencyType,
-                                Price = orderItem.TeamRestaurantsItems.Price.ToString(),
+                                Price = orderItem.TeamRestaurantsItems.Price.ToString() == "" ? decimal.Zero.ToString() : orderItem.TeamRestaurantsItems.Price.ToString(),
                             },
                             Description = orderItem.TeamRestaurantsItems.Description,
                         },
+						SelectedById = orderItem.ItemSelectedByID,
+						SelectedBy = new GRPCPerson
+                        {
+                            FirstName = orderItem.ItemSelectedBy.FirstName,
+                            LastName = orderItem.ItemSelectedBy.FirstName,
+                        },
                     });
                 }
+
+				response.Response.Successful = true;
 
                 return Task.FromResult(response);
             }

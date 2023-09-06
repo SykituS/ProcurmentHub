@@ -105,6 +105,7 @@ CREATE TABLE TeamOrders (
 	OrderStartedByID int NOT NULL,
 	OrderStartedOn datetime NOT NULL,
 	TotalPriceOfOrder money,
+	ItemSelectedByID int,
 	OrderPayedByID int,
 	OrderFinishedOn datetime,
 
@@ -152,3 +153,8 @@ CREATE TABLE TeamOrdersItems (
 
 --	CONSTRAINT FK_RestaurantItemMenuRestaurant FOREIGN KEY (RestaurantID) REFERENCES Restaurants(ID)
 --)
+
+-- Add a new column '[ItemSelectedByID]' to table '[TableName]' in schema '[dbo]'
+ALTER TABLE [dbo].[TeamOrdersItems]
+	ADD [ItemSelectedByID] /*new_column_name*/ int /*new_column_datatype*/ NULL /*new_column_nullability*/
+GO

@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using GrpcShared;
 using ProcurementHub.Model.CustomModels;
+using ProcurementHub.Model.Enums;
 using ProcurementHub.Services;
 using ProcurementHub.ViewModel.BaseViewModels;
 
@@ -17,7 +18,7 @@ namespace ProcurementHub.ViewModel.Orders
 		private TeamRestaurantsService _teamRestaurantsService;
 		private OrderServices _orderServices;
 
-		public ObservableCollection<OrderItemsModel> OrderItems { get; set; }
+        public ObservableCollection<OrderItemsModel> OrderItems { get; set; } = new();
 
 		[ObservableProperty]
 		private TeamMainModel _teamModel;
@@ -37,14 +38,50 @@ namespace ProcurementHub.ViewModel.Orders
 		[ObservableProperty]
 		bool _isPayingPerson;
 
-		[RelayCommand]
+        [ObservableProperty]
+        bool _isNotPayingPerson;
+
+        [ObservableProperty]
+        bool _isOrderFinished;
+
+        [RelayCommand]
 		async Task GetOrderInformation()
 		{
-			if (App.LoggedUserInApplication.PersonID != null)
-				_isPayingPerson = _orderModel.OrderPayedByID == App.LoggedUserInApplication.PersonID.Value;
+            _isRefreshing = true;
 
-            var response = await _orderServices.GetFullOrderDetails(_orderModel.ID);
-            
+            try
+            {
+                var response = await _orderServices.GetFullOrderDetails(_orderModel.ID);
+
+                if (!response.Item1.Successful)
+                {
+                    return;
+                }
+
+			    if (OrderItems.Any())
+				    OrderItems.Clear();
+
+			    _orderModel = response.Item2;
+
+                foreach (var item in response.Item3)
+                    OrderItems.Add(item);
+                
+			    if (App.LoggedUserInApplication.PersonID != null)
+				    _isPayingPerson = _orderModel.OrderPayedByID == App.LoggedUserInApplication.PersonID.Value;
+
+                _isNotPayingPerson = !_isPayingPerson;
+
+                if (OrderModel.Status == TeamOrderStatusEnum.Closed)
+                {
+                    _isOrderFinished = true;
+					_isNotPayingPerson = false;
+                    _isPayingPerson = false;
+                }
+            }
+            finally
+            {
+			    _isRefreshing = false;
+            }
         }
 
         [RelayCommand]
@@ -59,7 +96,13 @@ namespace ProcurementHub.ViewModel.Orders
 
 		}
 
-		async partial void OnOrderModelChanged(OrderModel value)
+        [RelayCommand]
+        async Task GoToOrderDetails()
+        {
+
+        }
+
+        async partial void OnOrderModelChanged(OrderModel value)
 		{
 			await GetOrderInformation();
 		}

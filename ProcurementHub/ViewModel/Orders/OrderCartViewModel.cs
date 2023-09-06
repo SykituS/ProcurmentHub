@@ -174,7 +174,7 @@ namespace ProcurementHub.ViewModel.Orders
 
 	            if (result.Successful)
 	            {
-					await Shell.Current.GoToAsync(nameof(OrderSelectItemsPage), true, new Dictionary<string, object>
+					await Shell.Current.GoToAsync(nameof(OrderWaitPage), true, new Dictionary<string, object>
 					{
 						{"TeamMainModel", _teamModel },
 						{"OrderModel", _orderModel },

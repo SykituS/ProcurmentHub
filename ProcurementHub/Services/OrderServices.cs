@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AutoMapper;
 using GrpcShared;
+using ProcurementHub.Infrastructure;
 using ProcurementHub.Model.CustomModels;
 using ProcurementHub.Model.Enums;
 
@@ -11,9 +13,10 @@ namespace ProcurementHub.Services
 {
 	public class OrderServices : BaseServices
 	{
+		private IMapper _mapper = MapperConfig.CreateMapper();
 		public OrderServices(Procurement.ProcurementClient procurementClient) : base(procurementClient)
-		{
-		}
+        {
+        }
 
 		public async Task<ValidationResponseWithResult<OrderModel>> StartNewOrder(int teamId, int restaurantId)
 		{
@@ -98,12 +101,41 @@ namespace ProcurementHub.Services
 			return result;
         }
 
-        public async Task<(OrderModel, List<OrderItemsModel>)> GetFullOrderDetails(Guid orderID)
+        public async Task<(ValidationResponse, OrderModel, List<OrderItemsModel>)> GetFullOrderDetails(Guid orderID)
         {
+            var validationResponse = new ValidationResponse();
 			var orderDetails = new OrderModel();
             var orderItems = new List<OrderItemsModel>();
 
-			return (orderDetails, orderItems);
+            var reply = await ProcurementClient.GetFullOrderDetailsByIdAsync(new GRPCGetOrderByIdRequest
+            {
+                OrderId = orderID.ToString(),
+                LoggedUser = new GRPCLoginInformationForUser
+                {
+                    Id = App.LoggedUserInApplication.Id.ToString(),
+                    Username = App.LoggedUserInApplication.UserName,
+                    Password = App.LoggedUserInApplication.PasswordHash
+                }
+            });
+
+            if (!reply.Response.Successful)
+            {
+                validationResponse.Information = reply.Response.Information;
+				validationResponse.Successful = false;
+			    return (validationResponse, orderDetails, orderItems);
+            }
+
+            var orderReply = reply.Order;
+			orderDetails = _mapper.Map<OrderModel>(orderReply);
+
+            foreach (var item in reply.Items)
+            {
+                orderItems.Add(_mapper.Map<OrderItemsModel>(item));
+            }
+
+            validationResponse.Successful = true;
+
+            return (validationResponse, orderDetails, orderItems);
         }
     }
 }

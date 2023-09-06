@@ -19,5 +19,8 @@ namespace ProcurementHub.Model.CustomModels
 	    public int OrderPayedByID { get; set; }
 	    public DateTime OrderFinishedOn { get; set; }
 		public TeamRestaurantsModel Restaurants { get; set; }
+
+		public PersonsModel OrderStartedBy { get; set; }
+		public PersonsModel OrderPayedBy { get; set; }
     }
 }

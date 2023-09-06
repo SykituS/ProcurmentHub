@@ -230,7 +230,7 @@ message GRPCFullOrderInformations {
 	google.protobuf.Timestamp startedOn = 6;
 	int32 orderPayedById = 7;
 	google.protobuf.Timestamp finishedOn = 8;
-	money totalPriceOfItem = 9;
+	money totalPriceOfOrder = 9;
 	GRPCRestaurant restaurant = 10;
 	GRPCTeam team = 11;
 	GRPCPerson orderStartedBy = 12;
@@ -247,6 +247,8 @@ message GRPCFullOrderItem {
 	int32 divideOnNumberOfPersons = 7;
 	money dividePrice = 8;
 	GRPCRestaurantItem restaurantItem = 9;
+	int32 selectedById = 10;
+	GRPCPerson selectedBy = 11;
 }
 
 message GRPCFullOrderDetailsResponse {

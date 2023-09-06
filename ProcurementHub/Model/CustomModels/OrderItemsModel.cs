@@ -19,5 +19,8 @@ namespace ProcurementHub.Model.CustomModels
         public Guid? DivideToken { get; set; }
         public int? DivideOnNumberOfPersons { get; set; }
         public decimal? DividedPrice { get; set; }
+        public int ItemSelectedById { get; set; }
+        public PersonsModel ItemSelectedBy { get; set; }
+
     }
 }
