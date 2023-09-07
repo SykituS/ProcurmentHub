@@ -21,6 +21,8 @@ service Procurement {
   rpc AddItemsToOrder (GRPCOrderAddItems) returns (GRPCValidationResponse);
   rpc GetFullOrderDetailsById (GRPCGetOrderByIdRequest) returns (GRPCFullOrderDetailsResponse);
   rpc CloseOrderById (GRPCGetOrderByIdRequest) returns (GRPCValidationResponse);
+  rpc GetOrderListForTeamId (GRPCGetInformationForGivenIdRequest) returns (GRPCOrderListResponse);
+  rpc GetOrderListForUserId (GRPCGetInformationForGivenIdRequest) returns (GRPCOrderListResponse);
 }
 
 message money {
@@ -256,4 +258,9 @@ message GRPCFullOrderDetailsResponse {
 	GRPCFullOrderInformations order = 1;
 	repeated GRPCFullOrderItem items = 2;
 	GRPCValidationResponse response = 3;
+}
+
+message GRPCOrderListResponse {
+	repeated GRPCFullOrderInformations orders = 1;
+	GRPCValidationResponse response = 2;
 }
