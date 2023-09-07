@@ -70,9 +70,9 @@
                                                 </Label.Text>
                                             </Label>
 
-                                            <Label TextColor="{Binding RatioColor}">
+                                            <Label>
                                                 <Label.Text>
-                                                    <MultiBinding StringFormat="ratio: {0:F2} PLN">
+                                                    <MultiBinding StringFormat="Ratio (Payed - Spend): {0:F2} PLN">
                                                         <Binding Path="PayedSpendRation" />
                                                     </MultiBinding>
                                                 </Label.Text>
@@ -88,51 +88,16 @@
         </RefreshView>
 
         <StackLayout Grid.Row="2" Grid.ColumnSpan="2">
-            <!--<Button
-                Margin="5,0,5,5"
-                BackgroundColor="#0d529c"
-                BorderColor="#0d529c"
-                Command="{Binding OrderDeliveryCommand}"
-                FontAttributes="Bold"
-                FontSize="14"
-                IsEnabled="{Binding IsNotBusy}"
-                IsVisible="{Binding OrderModel.IsPayingPerson}"
-                LineBreakMode="WordWrap"
-                Text="Confirm order"
-                TextColor="White" />
-
-            <Frame
-                Margin="0,0,0,0"
-                Padding="5,5,0,0"
-                BackgroundColor="Transparent"
-                BorderColor="#0d529c"
-                HasShadow="True"
-                HeightRequest="100"
-                IsVisible="{Binding OrderModel.IsNotPayingPerson}">
-                <Grid Padding="0">
-                    <VerticalStackLayout>
-                        <Label
-                            FontAttributes="Bold"
-                            FontSize="Large"
-                            HorizontalOptions="Center"
-                            Text="Waiting for Delivery"
-                            VerticalOptions="Center" />
-                    </VerticalStackLayout>
-                </Grid>
-            </Frame>
-
             <Button
                 Margin="5,0,5,5"
                 BackgroundColor="#0d529c"
                 BorderColor="#0d529c"
-                Command="{Binding GoToOrderDetailsCommand}"
                 FontAttributes="Bold"
                 FontSize="14"
                 IsEnabled="{Binding IsNotBusy}"
-                IsVisible="{Binding OrderModel.IsOrderFinished}"
                 LineBreakMode="WordWrap"
-                Text="Confirm order"
-                TextColor="White" />-->
+                Text="Go back"
+                TextColor="White" />
         </StackLayout>
     </Grid>
 </ContentPage>

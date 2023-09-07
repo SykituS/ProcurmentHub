@@ -1343,7 +1343,9 @@ namespace ProcurementService.Services
                     decimal? spendAmount = orderItems.Where(e => e.ItemSelectedByID == member.PersonID).Sum(e => e.TotalPriceOfItem);
                     decimal? payedAmount = orders.Where(e => e.OrderPayedByID == member.PersonID).Sum(e => e.TotalPriceOfOrder);
 
-                    var ratio = payedAmount ?? 0 - spendAmount ?? 0;
+                    var spend = spendAmount ?? 0;
+                    var payed = payedAmount ?? 0;
+                    var ratio = payed - spend;
 
                     reply.TeamMembers.Add(new GRPCTeamMember
                     {
