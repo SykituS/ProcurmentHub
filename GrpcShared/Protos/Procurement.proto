@@ -16,9 +16,9 @@ service Procurement {
 	rpc CreateNewTeam (GRPCCreateNewTeam) returns (GRPCValidationResponse);
 	rpc JoinToTeam (GRPCJoinToTeam) returns (GRPCTeamValidationResponse);
 	rpc GetSelectedTeam (GRPCGetInformationForGivenIdRequest) returns (GRPCSelectedTeamResponse);
-	rpc GetTeamSettings (GRPCGetInformationForGivenIdRequest) returns (GRPCValidationResponse);
-	rpc GetTeamMemebers (GRPCGetInformationForGivenIdRequest) returns (GRPCValidationResponse);
-	rpc GetTeamStatistics (GRPCGetInformationForGivenIdRequest) returns (GRPCValidationResponse);
+	rpc GetTeamSettings (GRPCGetInformationForGivenIdRequest) returns (GRPCTeamSettingsResponse);
+	rpc GetTeamMemebers (GRPCGetInformationForGivenIdRequest) returns (GRPCTeamMembersResponse);
+	//rpc GetTeamStatistics (GRPCGetInformationForGivenIdRequest) returns (GRPCValidationResponse);
 
 	//Restaurant realted services
 	rpc CreateOrUpdateRestaurant (GRPCCreateOrUpdateRestaurantRequest) returns (GRPCValidationResponse);
@@ -146,6 +146,34 @@ message GRPCSelectedTeamResponse {
 	int32 status = 4;
 	int32 role = 5;
 	GRPCValidationResponse response = 6;
+}
+
+message GRPCTeamSettings {
+	int32 teamId = 1;
+	string description = 2;
+	int32 status = 3;
+	string teamJoinCode = 4;
+	string teamJoinPassword = 5;
+}
+
+message GRPCTeamSettingsResponse {
+	GRPCTeamSettings teamSettings = 1;
+	GRPCValidationResponse response = 2;
+} 
+
+message GRPCTeamMember {
+	int32 id = 1;
+	string firstName = 2;
+	string lastName = 3;
+	money spendAmmonut = 4;
+	money payedAmmonut = 5;
+	money payedSpendRatio = 6;
+	bool isGroupCreator = 7;
+}
+
+message GRPCTeamMembersResponse {
+	repeated GRPCTeamMember teamMembers = 1;
+	GRPCValidationResponse response = 2;
 }
 
 // -- TEAM SECTION -- //
