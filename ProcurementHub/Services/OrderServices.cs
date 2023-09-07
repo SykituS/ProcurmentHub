@@ -159,5 +159,36 @@ namespace ProcurementHub.Services
 
             return response;
         }
+
+        public async Task<ValidationResponseWithResult<List<OrderModel>>> GetOrderListForTeam(int teamId)
+        {
+            var reply = await ProcurementClient.GetOrderListForTeamIdAsync(new GRPCGetInformationForGivenIdRequest
+            {
+                LoggedUser = new GRPCLoginInformationForUser
+                {
+                    Id = App.LoggedUserInApplication.Id.ToString(),
+                    Username = App.LoggedUserInApplication.UserName,
+                    Password = App.LoggedUserInApplication.PasswordHash
+                },
+                Id = teamId
+            });
+
+            var response = new ValidationResponseWithResult<List<OrderModel>>();
+
+            if (!reply.Response.Successful)
+            {
+                response.Successful = false;
+                response.Information = reply.Response.Information;
+                return response;
+            }
+
+            foreach (var replyOrder in reply.Orders)
+            {
+                response.ResultValues.Add(_mapper.Map<OrderModel>(replyOrder));
+            }
+
+            response.Successful = true;
+            return response;
+        }
     }
 }
