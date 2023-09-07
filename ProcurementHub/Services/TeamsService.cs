@@ -159,5 +159,11 @@ namespace ProcurementHub.Services
 
             return result;
         }
+
+        public async Task<ValidationResponseWithResult<TeamMainModel>> GetSelectedTeamDetails(int teamId)
+        {
+
+        }
+
     }
 }

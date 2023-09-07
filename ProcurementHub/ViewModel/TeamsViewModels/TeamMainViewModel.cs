@@ -5,8 +5,10 @@ using System.Text;
 using System.Threading.Tasks;
 using Grpc.Core;
 using GrpcShared;
+using ProcurementHub.Controls;
 using ProcurementHub.Model;
 using ProcurementHub.Model.CustomModels;
+using ProcurementHub.Services;
 using ProcurementHub.View.Main;
 using ProcurementHub.View.Orders;
 using ProcurementHub.View.Teams;
@@ -17,8 +19,10 @@ namespace ProcurementHub.ViewModel.TeamsViewModels
     [QueryProperty(nameof(Model), "TeamMainModel")]
     public partial class TeamMainViewModel : BaseViewModels.BaseViewModel
     {
-        public TeamMainViewModel(Procurement.ProcurementClient procurementClient) : base(procurementClient)
+		private TeamsService _teamsService;
+        public TeamMainViewModel(Procurement.ProcurementClient procurementClient, TeamsService teamsService) : base(procurementClient)
         {
+            _teamsService = teamsService;
         }
 
         [ObservableProperty]
@@ -45,7 +49,7 @@ namespace ProcurementHub.ViewModel.TeamsViewModels
 
 	        try
 	        {
-		        //var result = await TeamsService.GetSelectedTeam(_model.ID);
+		        var result = await _teamsService.GetSelectedTeam(_model.ID);
 
 		        //if (result.Successful)
 		        //{
@@ -88,22 +92,22 @@ namespace ProcurementHub.ViewModel.TeamsViewModels
         async Task JoinToOrder()
         {
             Debug.WriteLine("Joining to order");
-
+            await SnackBarControl.CreateSnackBar("Incoming still in work");
         }
 
         [RelayCommand]
         async Task GoToTeamMembersPage()
         {
 	        Debug.WriteLine("Changing page to team members page");
-
-		}
+            await SnackBarControl.CreateSnackBar("Incoming still in work");
+        }
 
 		[RelayCommand]
         async Task GoToTeamStatisticsPage()
         {
 	        Debug.WriteLine("Changing page to team statistics page");
-
-		}
+            await SnackBarControl.CreateSnackBar("Incoming still in work");
+        }
 
         [RelayCommand]
         async Task GoToTeamRestaurantPage()
