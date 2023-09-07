@@ -18,11 +18,13 @@ public partial class AppShell : Shell
 		Routing.RegisterRoute(nameof(LoginPage), typeof(LoginPage));
 		Routing.RegisterRoute(nameof(ForgotPasswordPage), typeof(ForgotPasswordPage));
 
+		Routing.RegisterRoute(nameof(ProfileManagementPage), typeof(ProfileManagementPage));
 		Routing.RegisterRoute(nameof(MainPage), typeof(MainPage));
+
 		Routing.RegisterRoute(nameof(TeamMainPage), typeof(TeamMainPage));
 		Routing.RegisterRoute(nameof(JoinTeamPage), typeof(JoinTeamPage));
 		Routing.RegisterRoute(nameof(CreateNewTeamPage), typeof(CreateNewTeamPage));
-		Routing.RegisterRoute(nameof(ProfileManagementPage), typeof(ProfileManagementPage));
+		Routing.RegisterRoute(nameof(TeamMembersPage), typeof(TeamMembersPage));
 
 		Routing.RegisterRoute(nameof(TeamSettingsPage), typeof(TeamSettingsPage));
 		Routing.RegisterRoute(nameof(TeamRestaurantsPage), typeof(TeamRestaurantsPage));
@@ -30,7 +32,7 @@ public partial class AppShell : Shell
 		Routing.RegisterRoute(nameof(TeamRestaurantItemsPage), typeof(TeamRestaurantItemsPage));
 		Routing.RegisterRoute(nameof(TeamRestaurantItemAddEditPage), typeof(TeamRestaurantItemAddEditPage));
 
-		Routing.RegisterRoute(nameof(OrderStartPage), typeof(OrderStartPage));
+        Routing.RegisterRoute(nameof(OrderStartPage), typeof(OrderStartPage));
 		Routing.RegisterRoute(nameof(OrderSelectItemsPage), typeof(OrderSelectItemsPage));
 		Routing.RegisterRoute(nameof(OrderCartPage), typeof(OrderCartPage));
 		Routing.RegisterRoute(nameof(OrderSelectPayingPersonPage), typeof(OrderSelectPayingPersonPage));

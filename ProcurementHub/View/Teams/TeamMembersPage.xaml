@@ -3,11 +3,136 @@
     x:Class="ProcurementHub.View.Teams.TeamMembersPage"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    Title="TeamMembersPage">
-    <VerticalStackLayout>
-        <Label
-            HorizontalOptions="Center"
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" />
-    </VerticalStackLayout>
+    xmlns:model="using:ProcurementHub.Model.CustomModels"
+    xmlns:viewmodel="using:ProcurementHub.ViewModel.TeamsViewModels"
+    x:DataType="viewmodel:TeamMembersViewModel">
+    <Shell.NavBarIsVisible>False</Shell.NavBarIsVisible>
+    <Grid
+        ColumnDefinitions="*,*"
+        ColumnSpacing="5"
+        RowDefinitions="Auto,*,Auto"
+        RowSpacing="0">
+
+        <Frame
+            Grid.ColumnSpan="2"
+            Margin="0,0,0,0"
+            Padding="5,5,0,0"
+            BackgroundColor="Transparent"
+            BorderColor="#0d529c"
+            HasShadow="True"
+            HeightRequest="50">
+            <Grid Padding="0">
+                <VerticalStackLayout>
+                    <Label
+                        FontAttributes="Bold"
+                        FontSize="Large"
+                        HorizontalTextAlignment="Center"
+                        Text="Team members"
+                        VerticalTextAlignment="Center" />
+                </VerticalStackLayout>
+            </Grid>
+        </Frame>
+
+        <RefreshView
+            Grid.Row="1"
+            Grid.ColumnSpan="2"
+            Command="{Binding LoadTeamMembersCommand}"
+            IsRefreshing="{Binding IsRefreshing}">
+            <ContentView>
+                <CollectionView ItemsSource="{Binding TeamMembers}">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="model:TeamMembersModel">
+                            <Grid Padding="10">
+                                <Frame
+                                    BackgroundColor="Transparent"
+                                    BorderColor="#0d529c"
+                                    HasShadow="True"
+                                    HeightRequest="150">
+                                    <Grid Padding="0">
+                                        <VerticalStackLayout>
+                                            <Label
+                                                FontAttributes="Bold"
+                                                FontSize="24"
+                                                Text="{Binding FullName}" />
+                                            <Label>
+                                                <Label.Text>
+                                                    <MultiBinding StringFormat="Spend: {0:F2} PLN">
+                                                        <Binding Path="SpendAmount" />
+                                                    </MultiBinding>
+                                                </Label.Text>
+                                            </Label>
+
+                                            <Label>
+                                                <Label.Text>
+                                                    <MultiBinding StringFormat="Payed: {0:F2} PLN">
+                                                        <Binding Path="PayedAmount" />
+                                                    </MultiBinding>
+                                                </Label.Text>
+                                            </Label>
+
+                                            <Label TextColor="{Binding RatioColor}">
+                                                <Label.Text>
+                                                    <MultiBinding StringFormat="ratio: {0:F2} PLN">
+                                                        <Binding Path="PayedSpendRation" />
+                                                    </MultiBinding>
+                                                </Label.Text>
+                                            </Label>
+                                        </VerticalStackLayout>
+                                    </Grid>
+                                </Frame>
+                            </Grid>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </ContentView>
+        </RefreshView>
+
+        <StackLayout Grid.Row="2" Grid.ColumnSpan="2">
+            <!--<Button
+                Margin="5,0,5,5"
+                BackgroundColor="#0d529c"
+                BorderColor="#0d529c"
+                Command="{Binding OrderDeliveryCommand}"
+                FontAttributes="Bold"
+                FontSize="14"
+                IsEnabled="{Binding IsNotBusy}"
+                IsVisible="{Binding OrderModel.IsPayingPerson}"
+                LineBreakMode="WordWrap"
+                Text="Confirm order"
+                TextColor="White" />
+
+            <Frame
+                Margin="0,0,0,0"
+                Padding="5,5,0,0"
+                BackgroundColor="Transparent"
+                BorderColor="#0d529c"
+                HasShadow="True"
+                HeightRequest="100"
+                IsVisible="{Binding OrderModel.IsNotPayingPerson}">
+                <Grid Padding="0">
+                    <VerticalStackLayout>
+                        <Label
+                            FontAttributes="Bold"
+                            FontSize="Large"
+                            HorizontalOptions="Center"
+                            Text="Waiting for Delivery"
+                            VerticalOptions="Center" />
+                    </VerticalStackLayout>
+                </Grid>
+            </Frame>
+
+            <Button
+                Margin="5,0,5,5"
+                BackgroundColor="#0d529c"
+                BorderColor="#0d529c"
+                Command="{Binding GoToOrderDetailsCommand}"
+                FontAttributes="Bold"
+                FontSize="14"
+                IsEnabled="{Binding IsNotBusy}"
+                IsVisible="{Binding OrderModel.IsOrderFinished}"
+                LineBreakMode="WordWrap"
+                Text="Confirm order"
+                TextColor="White" />-->
+        </StackLayout>
+    </Grid>
 </ContentPage>

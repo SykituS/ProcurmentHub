@@ -20,7 +20,15 @@ namespace ProcurementHub.Infrastructure
                     .ForMember(dest => dest.FullName, act => act.MapFrom(src => src.FirstName + " " + src.LastName))
                     .ReverseMap();
 
-                cfg.CreateMap<GRPCRestaurant, TeamRestaurantsModel>();
+                cfg.CreateMap<GRPCTeamMember, TeamMembersModel>()
+                    .ForMember(dest => dest.PayedAmount, act => act.MapFrom(src => decimal.Parse(src.PayedAmmonut.Price)))
+                    .ForMember(dest => dest.SpendAmount, act => act.MapFrom(src => decimal.Parse(src.SpendAmmonut.Price)))
+                    .ForMember(dest => dest.PayedSpendRation, act => act.MapFrom(src => decimal.Parse(src.PayedSpendRatio.Price)))
+                    .ReverseMap();
+
+                cfg.CreateMap<GRPCRestaurant, TeamRestaurantsModel>()
+                    .ReverseMap();
+
                 cfg.CreateMap<GRPCFullOrderInformations, OrderModel>()
                     .ForMember(dest => dest.ID, act => act.MapFrom(src => Guid.Parse(src.Id)))
                     .ForMember(dest => dest.TeamRestaurantID, act => act.MapFrom(src => src.RestaurantId))
@@ -29,7 +37,8 @@ namespace ProcurementHub.Infrastructure
                     .ForMember(dest => dest.OrderStartedBy, act => act.MapFrom(src => src.OrderStartedBy))
                     .ForMember(dest => dest.OrderStartedOn, act => act.MapFrom(src => src.StartedOn.ToDateTime()))
                     .ForMember(dest => dest.OrderFinishedOn, act => act.MapFrom(src => src.FinishedOn.ToDateTime()))
-                    .ForMember(dest => dest.TotalPriceOfOrder, act => act.MapFrom(src => decimal.Parse(src.TotalPriceOfOrder.Price)));
+                    .ForMember(dest => dest.TotalPriceOfOrder, act => act.MapFrom(src => decimal.Parse(src.TotalPriceOfOrder.Price)))
+                    .ReverseMap();
 
                 cfg.CreateMap<GRPCFullOrderItem, OrderItemsModel>()
                     .ForMember(dest => dest.ItemSelectedBy, act => act.MapFrom(src => src.SelectedBy))
@@ -39,7 +48,9 @@ namespace ProcurementHub.Infrastructure
                     .ForMember(dest => dest.TeamRestaurantsItemDescription, act => act.MapFrom(src => src.RestaurantItem.Description))
                     .ForMember(dest => dest.TotalPriceOfItem, act => act.MapFrom(src => decimal.Parse(src.TotalPriceOfItem.Price)))
                     .ForMember(dest => dest.DividedPrice, act => act.MapFrom(src => decimal.Parse(src.DividePrice.Price)))
-                    .ForMember(dest => dest.DivideToken, act => act.MapFrom(src => src.DivideToken == "" ? (Guid?)null : Guid.Parse(src.DivideToken)));
+                    .ForMember(dest => dest.DivideToken, act => act.MapFrom(src => src.DivideToken == "" ? (Guid?)null : Guid.Parse(src.DivideToken)))
+                    .ReverseMap();
+
             });
             
             return config.CreateMapper();

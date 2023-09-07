@@ -13,7 +13,6 @@ namespace ProcurementHub.Services
 {
 	public class OrderServices : BaseServices
 	{
-		private IMapper _mapper = MapperConfig.CreateMapper();
 		public OrderServices(Procurement.ProcurementClient procurementClient) : base(procurementClient)
         {
         }

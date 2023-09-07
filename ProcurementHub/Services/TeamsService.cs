@@ -162,8 +162,44 @@ namespace ProcurementHub.Services
 
         public async Task<ValidationResponseWithResult<TeamMainModel>> GetSelectedTeamDetails(int teamId)
         {
+            var response = new ValidationResponseWithResult<TeamMainModel>();
 
+            return response;
         }
 
+        public async Task<ValidationResponseWithResult<List<TeamMembersModel>>> GetTeamMembers(int teamId)
+        {
+            var result = new ValidationResponseWithResult<List<TeamMembersModel>>()
+            {
+                ResultValues = new List<TeamMembersModel>()
+            };
+            
+            var reply = await ProcurementClient.GetTeamMemebersAsync(new GRPCGetInformationForGivenIdRequest
+            {
+                LoggedUser = new GRPCLoginInformationForUser()
+                {
+                    Id = App.LoggedUserInApplication.Id.ToString(),
+                    Password = App.LoggedUserInApplication.PasswordHash,
+                    Username = App.LoggedUserInApplication.UserName,
+                },
+                Id = teamId
+            });
+
+
+            if (!reply.Response.Successful)
+            {
+                result.Successful = false;
+                result.Information = reply.Response.Information;
+                return result;
+            }
+
+            foreach (var member in reply.TeamMembers)
+            {
+                result.ResultValues.Add(_mapper.Map<TeamMembersModel>(member));
+            }
+
+            result.Successful = true;
+            return result;
+        }
     }
 }

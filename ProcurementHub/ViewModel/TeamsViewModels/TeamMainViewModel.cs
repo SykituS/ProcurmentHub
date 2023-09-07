@@ -98,8 +98,10 @@ namespace ProcurementHub.ViewModel.TeamsViewModels
         [RelayCommand]
         async Task GoToTeamMembersPage()
         {
-	        Debug.WriteLine("Changing page to team members page");
-            await SnackBarControl.CreateSnackBar("Incoming still in work");
+            await Shell.Current.GoToAsync(nameof(TeamMembersPage), true, new Dictionary<string, object>
+            {
+                {"TeamMainModel", _model }
+            });
         }
 
 		[RelayCommand]

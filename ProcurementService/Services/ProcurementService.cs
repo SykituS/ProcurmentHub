@@ -1206,13 +1206,13 @@ namespace ProcurementService.Services
 
         public override Task<GRPCOrderListResponse> GetOrderListForTeamId(GRPCGetInformationForGivenIdRequest request, ServerCallContext context)
         {
-            _logger.LogInformation("Start of call CloseOrderById: " + DateTime.Now);
+            _logger.LogInformation("Start of call GetOrderListForTeamId: " + DateTime.Now);
             var userExistsValidationResult =
                 _verifyLogin.CheckIfUsersExists(request.LoggedUser.Username, request.LoggedUser.Password, Guid.Parse(request.LoggedUser.Id));
 
             if (!userExistsValidationResult.Successful)
             {
-                _logger.LogInformation("End of call CloseOrderById: " + DateTime.Now);
+                _logger.LogInformation("End of call GetOrderListForTeamId: " + DateTime.Now);
 
                 return Task.FromResult(new GRPCOrderListResponse
                 {
@@ -1278,8 +1278,104 @@ namespace ProcurementService.Services
             }
             catch (Exception ex)
             {
-                _logger.LogCritical($"Error in function CloseOrderById: Date of error: {DateTime.Now} Error: {ex}");
+                _logger.LogCritical($"Error in function GetOrderListForTeamId: Date of error: {DateTime.Now} Error: {ex}");
                 return Task.FromResult(new GRPCOrderListResponse
+                {
+                    Response = new GRPCValidationResponse()
+                    {
+                        Successful = false,
+                        Information = "There was an error while starting new order! Please try again!"
+                    }
+                });
+            }
+        }
+
+        public override Task<GRPCTeamMembersResponse> GetTeamMemebers(GRPCGetInformationForGivenIdRequest request, ServerCallContext context)
+        {
+            _logger.LogInformation("Start of call GetTeamMemebers: " + DateTime.Now);
+            var userExistsValidationResult =
+                _verifyLogin.CheckIfUsersExists(request.LoggedUser.Username, request.LoggedUser.Password, Guid.Parse(request.LoggedUser.Id));
+
+            if (!userExistsValidationResult.Successful)
+            {
+                _logger.LogInformation("End of call GetTeamMemebers: " + DateTime.Now);
+
+                return Task.FromResult(new GRPCTeamMembersResponse()
+                {
+                    Response = new GRPCValidationResponse()
+                    {
+                        Successful = false,
+                        Information = "There was a problem when verifying your login credentials!"
+                    }
+                });
+            }
+
+            try
+            {
+                var team = _context.Teams.FirstOrDefault(e => e.ID == request.Id);
+                if (team == null)
+                {
+                    return Task.FromResult(new GRPCTeamMembersResponse
+                    {
+                        Response = new GRPCValidationResponse()
+                        {
+                            Successful = false,
+                            Information = "Team was not found"
+                        }
+                    });
+                }
+
+                var teamMembers = _context.TeamMembers.Include(e => e.Person).Where(e => e.TeamID == team.ID);
+
+                var reply = new GRPCTeamMembersResponse()
+                {
+                    Response = new GRPCValidationResponse()
+                };
+
+                var orderItems = _context.TeamOrdersItems
+                    .Include(e => e.TeamOrders)
+                    .Where(e => e.TeamOrders.TeamID == team.ID && e.TeamOrders.Status == TeamOrderStatusEnum.Closed).ToList();
+
+                var orders = _context.TeamOrders.Where(e => e.TeamID == team.ID && e.Status == TeamOrderStatusEnum.Closed).ToList();
+
+                foreach (var member in teamMembers)
+                {
+                    decimal? spendAmount = orderItems.Where(e => e.ItemSelectedByID == member.PersonID).Sum(e => e.TotalPriceOfItem);
+                    decimal? payedAmount = orders.Where(e => e.OrderPayedByID == member.PersonID).Sum(e => e.TotalPriceOfOrder);
+
+                    var ratio = payedAmount ?? 0 - spendAmount ?? 0;
+
+                    reply.TeamMembers.Add(new GRPCTeamMember
+                    {
+                        Id = member.ID,
+                        FirstName = member.Person.FirstName,
+                        LastName = member.Person.LastName,
+                        SpendAmmonut = new money
+                        {
+                            CurrencyCode = "PLN",
+                            Price = spendAmount.ToString() == "" ? decimal.Zero.ToString() : spendAmount.ToString()
+                        },
+                        PayedAmmonut = new money
+                        {
+                            CurrencyCode = "PLN",
+                            Price = payedAmount.ToString() == "" ? decimal.Zero.ToString() : payedAmount.ToString()
+                        },
+                        PayedSpendRatio = new money
+                        {
+                            CurrencyCode = "PLN",
+                            Price = ratio.ToString() == "" ? decimal.Zero.ToString() : ratio.ToString()
+                        },
+                        IsGroupCreator = member.Role == TeamRoleEnum.TeamAdministrator
+                    });
+                }
+
+                reply.Response.Successful = true;
+                return Task.FromResult(reply);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogCritical($"Error in function GetTeamMemebers: Date of error: {DateTime.Now} Error: {ex}");
+                return Task.FromResult(new GRPCTeamMembersResponse
                 {
                     Response = new GRPCValidationResponse()
                     {
