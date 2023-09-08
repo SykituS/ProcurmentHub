@@ -1,9 +1,121 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8" ?>
 
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="ProcurementHub.View.Orders.OrderDetailsPage">
-    <ContentPage.Content>
-        
-    </ContentPage.Content>
+<ContentPage
+    x:Class="ProcurementHub.View.Orders.OrderDetailsPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:model="clr-namespace:ProcurementHub.Model.CustomModels"
+    xmlns:viewmodel="clr-namespace:ProcurementHub.ViewModel.Orders"
+    x:DataType="viewmodel:OrderDetailsViewModel">
+    <Shell.NavBarIsVisible>False</Shell.NavBarIsVisible>
+    <Grid
+        ColumnDefinitions="*,*"
+        ColumnSpacing="5"
+        RowDefinitions="Auto,*,Auto"
+        RowSpacing="0">
+        <Frame
+            Grid.ColumnSpan="2"
+            Margin="0,0,0,0"
+            Padding="5,5,0,0"
+            BackgroundColor="Transparent"
+            BorderColor="#0d529c"
+            HasShadow="True"
+            HeightRequest="100">
+            <Grid Padding="0">
+                <VerticalStackLayout>
+                    <Label FontAttributes="Bold" FontSize="Large">
+                        <Label.Text>
+                            <MultiBinding StringFormat="Sum up of order in restaurant: {0}">
+                                <Binding Path="OrderModel.Restaurants.Name" />
+                            </MultiBinding>
+                        </Label.Text>
+                    </Label>
+                    <Label>
+                        <Label.Text>
+                            <MultiBinding StringFormat="Restaurant address: {0}">
+                                <Binding Path="OrderModel.Restaurants.Address" />
+                            </MultiBinding>
+                        </Label.Text>
+                    </Label>
+                    <Label>
+                        <Label.Text>
+                            <MultiBinding StringFormat="Order is payed by {0} Total amount: {1:F2} PLN">
+                                <Binding Path="OrderModel.OrderPayedBy.FullName" />
+                                <Binding Path="OrderModel.TotalPriceOfOrder" />
+                            </MultiBinding>
+                        </Label.Text>
+                    </Label>
+                </VerticalStackLayout>
+            </Grid>
+        </Frame>
+
+        <RefreshView
+            Grid.Row="1"
+            Grid.ColumnSpan="2"
+            Command="{Binding GetOrderInformationCommand}"
+            IsRefreshing="{Binding IsRefreshing}">
+            <ContentView>
+                <CollectionView ItemsSource="{Binding OrderItems}">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="model:OrderItemsModel">
+                            <Grid Padding="10">
+                                <Frame
+                                    BackgroundColor="Transparent"
+                                    BorderColor="#0d529c"
+                                    HasShadow="True"
+                                    HeightRequest="150">
+                                    <Grid Padding="0">
+                                        <VerticalStackLayout>
+                                            <Label
+                                                FontAttributes="Bold"
+                                                FontSize="24"
+                                                Text="{Binding TeamRestaurantsItemName}" />
+                                            <Label Text="{Binding TeamRestaurantsItemDescription}" />
+                                            <Label>
+                                                <Label.Text>
+                                                    <MultiBinding StringFormat="Item price: {0:F2} PLN">
+                                                        <Binding Path="TeamRestaurantsItemPrice" />
+                                                    </MultiBinding>
+                                                </Label.Text>
+                                            </Label>
+
+                                            <Label>
+                                                <Label.Text>
+                                                    <MultiBinding StringFormat="Quantity: {0} | Total price: {1:f2} PLN">
+                                                        <Binding Path="Quantity" />
+                                                        <Binding Path="TotalPriceOfItem" />
+                                                    </MultiBinding>
+                                                </Label.Text>
+                                            </Label>
+                                            <Label>
+                                                <Label.Text>
+                                                    <MultiBinding StringFormat="Ordered by: {0} ">
+                                                        <Binding Path="ItemSelectedBy.FullName" />
+                                                    </MultiBinding>
+                                                </Label.Text>
+                                            </Label>
+                                        </VerticalStackLayout>
+                                    </Grid>
+                                </Frame>
+                            </Grid>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </ContentView>
+        </RefreshView>
+
+        <StackLayout Grid.Row="2" Grid.ColumnSpan="2">
+            <Button
+                Margin="5,0,5,5"
+                BackgroundColor="#0d529c"
+                BorderColor="#0d529c"
+                Command="{Binding GoBackCommand}"
+                FontAttributes="Bold"
+                FontSize="14"
+                IsEnabled="{Binding IsNotBusy}"
+                LineBreakMode="WordWrap"
+                Text="Go back to orders archive"
+                TextColor="White" />
+        </StackLayout>
+    </Grid>
 </ContentPage>

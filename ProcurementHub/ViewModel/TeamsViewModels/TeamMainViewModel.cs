@@ -105,10 +105,12 @@ namespace ProcurementHub.ViewModel.TeamsViewModels
         }
 
 		[RelayCommand]
-        async Task GoToTeamStatisticsPage()
+        async Task GoToTeamOrdersArchivePage()
         {
-	        Debug.WriteLine("Changing page to team statistics page");
-            await SnackBarControl.CreateSnackBar("Incoming still in work");
+            await Shell.Current.GoToAsync(nameof(OrderListPage), true, new Dictionary<string, object>
+            {
+                {"TeamMainModel", _model }
+            });
         }
 
         [RelayCommand]

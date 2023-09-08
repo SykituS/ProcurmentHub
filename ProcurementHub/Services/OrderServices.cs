@@ -172,7 +172,10 @@ namespace ProcurementHub.Services
                 Id = teamId
             });
 
-            var response = new ValidationResponseWithResult<List<OrderModel>>();
+            var response = new ValidationResponseWithResult<List<OrderModel>>()
+            {
+                ResultValues = new List<OrderModel>()
+            };
 
             if (!reply.Response.Successful)
             {

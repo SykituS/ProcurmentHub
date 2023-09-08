@@ -96,10 +96,10 @@
                     Margin="0,0,0,5"
                     BackgroundColor="#0d529c"
                     BorderColor="#0d529c"
-                    Command="{Binding GoToTeamStatisticsPageCommand}"
+                    Command="{Binding GoToTeamOrdersArchivePageCommand}"
                     CornerRadius="10"
                     FontAttributes="Bold"
-                    Text="Statistics"
+                    Text="Orders archive"
                     TextColor="White"
                     WidthRequest="250" />
                 <Button

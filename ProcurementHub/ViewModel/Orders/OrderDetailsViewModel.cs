@@ -11,23 +11,64 @@ using ProcurementHub.ViewModel.BaseViewModels;
 namespace ProcurementHub.ViewModel.Orders
 {
     [QueryProperty(nameof(TeamModel), "TeamMainModel")]
-    [QueryProperty(nameof(OrderId), "OrderId")]
+    [QueryProperty(nameof(OrderModel), "OrderModel")]
     public partial class OrderDetailsViewModel : BaseViewModel
     {
-        public OrderServices OrderServices;
-        public ObservableCollection<OrderItemsModel> Orders { get; set; } = new();
-
-		[ObservableProperty]
-        private string _orderId;
-
+        private OrderServices _orderServices;
+        public ObservableCollection<OrderItemsModel> OrderItems { get; set; } = new();
+        
 		[ObservableProperty]
         private OrderModel _orderModel;
 
 		[ObservableProperty]
 		private TeamMainModel _teamModel;
 
-		public OrderDetailsViewModel(Procurement.ProcurementClient procurementClient) : base(procurementClient)
-		{
-		}
-	}
+		public OrderDetailsViewModel(Procurement.ProcurementClient procurementClient, OrderServices orderServices) : base(procurementClient)
+        {
+            _orderServices = orderServices;
+        }
+
+        [ObservableProperty]
+        bool _isRefreshing;
+
+
+        [RelayCommand]
+        async Task GetOrderInformation()
+        {
+            _isRefreshing = true;
+
+            try
+            {
+                var response = await _orderServices.GetFullOrderDetails(_orderModel.ID);
+
+                if (!response.Item1.Successful)
+                {
+                    return;
+                }
+
+                if (OrderItems.Any())
+                    OrderItems.Clear();
+
+                _orderModel = response.Item2;
+
+                foreach (var item in response.Item3)
+                    OrderItems.Add(item);
+            }
+            finally
+            {
+                _isRefreshing = false;
+            }
+        }
+
+        [RelayCommand]
+        async Task GoBack()
+        {
+
+        }
+
+        async partial void OnOrderModelChanged(OrderModel value)
+        {
+            await GetOrderInformation();
+        }
+    }
 }

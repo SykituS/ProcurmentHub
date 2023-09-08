@@ -7,6 +7,7 @@ using GrpcShared;
 using ProcurementHub.Controls;
 using ProcurementHub.Model.CustomModels;
 using ProcurementHub.Services;
+using ProcurementHub.View.Orders;
 using ProcurementHub.ViewModel.BaseViewModels;
 
 namespace ProcurementHub.ViewModel.Orders
@@ -31,7 +32,11 @@ namespace ProcurementHub.ViewModel.Orders
         [RelayCommand]
         async Task GoToOrderDetails(OrderModel order)
         {
-
+            await Shell.Current.GoToAsync(nameof(OrderDetailsPage), true, new Dictionary<string, object>
+            {
+                {"TeamMainModel", _teamModel },
+                {"OrderModel", order }
+            });
         }
 
         [RelayCommand]

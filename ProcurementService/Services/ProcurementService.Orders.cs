@@ -264,7 +264,7 @@ namespace ProcurementService.Services
                         SelectedBy = new GRPCPerson
                         {
                             FirstName = orderItem.ItemSelectedBy.FirstName,
-                            LastName = orderItem.ItemSelectedBy.FirstName,
+                            LastName = orderItem.ItemSelectedBy.LastName,
                         },
                     });
                 }
@@ -376,7 +376,7 @@ namespace ProcurementService.Services
                     .Include(e => e.OrderPayedBy)
                     .Include(e => e.OrderStartedBy)
                     .Include(e => e.TeamRestaurant)
-                    .Where(e => e.TeamID == request.Id);
+                    .Where(e => e.TeamID == request.Id && e.Status == TeamOrderStatusEnum.Closed);
                 var response = new GRPCOrderListResponse()
                 {
                     Response = new GRPCValidationResponse()
@@ -417,6 +417,7 @@ namespace ProcurementService.Services
                             FirstName = order.OrderPayedBy.FirstName,
                             LastName = order.OrderPayedBy.LastName,
                         },
+                        Team = new GRPCTeam()
                     });
                 }
 

@@ -82,10 +82,19 @@ namespace ProcurementHub.ViewModel.Orders
         [RelayCommand]
         async Task GoToOrderDetails()
         {
+            var response = await _orderServices.GetFullOrderDetails(_orderModel.ID);
+
+            if (!response.Item1.Successful)
+            {
+                return;
+            }
+
+            _orderModel = response.Item2;
+
             await Shell.Current.GoToAsync(nameof(OrderDetailsPage), true, new Dictionary<string, object>
             {
                 {"TeamMainModel", _teamModel },
-                {"OrderId", _orderModel.ID },
+                {"OrderModel", _orderModel },
             });
         }
 
