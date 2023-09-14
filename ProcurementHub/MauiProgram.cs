@@ -3,6 +3,7 @@ using CommunityToolkit.Maui;
 using CommunityToolkit.Maui.Maps;
 using Grpc.Net.Client;
 using GrpcShared;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Logging;
 using ProcurementHub.Infrastructure;
 using ProcurementHub.Services;
@@ -53,6 +54,7 @@ public static class MauiProgram
 		builder.Services.AddSingleton<IConnectivity>(Connectivity.Current);
 		builder.Services.AddSingleton<IGeolocation>(Geolocation.Default);
 		builder.Services.AddSingleton<IMap>(Map.Default);
+        builder.Services.AddTransient<ApiServices>();
 
 		#region LoggedUserInApplication
 

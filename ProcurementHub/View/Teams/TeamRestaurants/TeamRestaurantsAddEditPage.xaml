@@ -38,7 +38,17 @@
             Grid.Row="3"
             HorizontalOptions="CenterAndExpand"
             Orientation="Vertical">
-            <maps:Map x:Name="map" WidthRequest="500" HeightRequest="500"  MapType="Street" MapClicked="OnMapClicked"/>
+            <maps:Map x:Name="map" WidthRequest="500" HeightRequest="500" MapType="Street" MapClicked="OnMapClicked"/>
+            <Button
+                Margin="0,15,10,0"
+                BackgroundColor="#0d529c"
+                BorderColor="#0d529c"
+                Command="{Binding MapClickedCommand}"
+                CornerRadius="10"
+                FontAttributes="Bold"
+                HorizontalOptions="EndAndExpand"
+                Text="Find close restaurants"
+                WidthRequest="150" />
 
             <Frame
                 Margin="0,15,0,0"

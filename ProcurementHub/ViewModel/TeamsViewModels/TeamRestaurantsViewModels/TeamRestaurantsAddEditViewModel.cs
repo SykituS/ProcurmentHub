@@ -20,6 +20,7 @@ namespace ProcurementHub.ViewModel.TeamsViewModels.TeamRestaurantsViewModels
 	public partial class TeamRestaurantsAddEditViewModel : BaseViewModels.BaseViewModel
 	{
 		private TeamRestaurantsService _teamRestaurantsService;
+		private ApiServices _apiServices;
 
 		[ObservableProperty]
 		private TeamMainModel _model;
@@ -27,10 +28,10 @@ namespace ProcurementHub.ViewModel.TeamsViewModels.TeamRestaurantsViewModels
 		[ObservableProperty]
 		private TeamRestaurantsModel _teamRestaurantsModel = new ();
 
-		public TeamRestaurantsAddEditViewModel(Procurement.ProcurementClient procurementClient, TeamRestaurantsService teamRestaurantsService) : base(procurementClient)
-		{
-			_teamRestaurantsService = teamRestaurantsService;
-            
+		public TeamRestaurantsAddEditViewModel(Procurement.ProcurementClient procurementClient, TeamRestaurantsService teamRestaurantsService, ApiServices apiServices) : base(procurementClient)
+        {
+            _teamRestaurantsService = teamRestaurantsService;
+            _apiServices = apiServices;
         }
 
 		[RelayCommand]
@@ -79,9 +80,9 @@ namespace ProcurementHub.ViewModel.TeamsViewModels.TeamRestaurantsViewModels
 		}
 
 		[RelayCommand]
-        async Task MapClicked(Map map)
+        async Task MapClicked()
         {
-            
+            await _apiServices.ConvertAddressToGeoLocation();
         }
     }
 }

@@ -11,7 +11,7 @@ public partial class TeamRestaurantsAddEditPage : ContentPage
 	{
 		InitializeComponent();
 		BindingContext = viewModel;
-
+        
         map.Pins.Add(new Pin()
         {
             Location = new Location(51.748580, 19.405720),
@@ -26,14 +26,14 @@ public partial class TeamRestaurantsAddEditPage : ContentPage
 
     void OnMapClicked(object sender, MapClickedEventArgs e)
     {
-        System.Diagnostics.Debug.WriteLine($"MapClick: {e.Location.Latitude}, {e.Location.Longitude}");
-        
+
         map.Pins.Add(new Pin()
         {
             Location = new Location(e.Location.Latitude, e.Location.Longitude),
             Label = "Restaurant",
             Address = "",
             Type = PinType.Generic,
+            
         });
     }
 }
