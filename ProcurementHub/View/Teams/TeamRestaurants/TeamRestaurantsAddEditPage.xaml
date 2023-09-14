@@ -2,9 +2,12 @@
 <ContentPage
     x:Class="ProcurementHub.View.Teams.TeamRestaurants.TeamRestaurantsAddEditPage"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:model="clr-namespace:ProcurementHub.Model.CustomModels"
     xmlns:viewmodel="clr-namespace:ProcurementHub.ViewModel.TeamsViewModels.TeamRestaurantsViewModels"
+    xmlns:maps="clr-namespace:Microsoft.Maui.Controls.Maps;assembly=Microsoft.Maui.Controls.Maps"
+    xmlns:loc="clr-namespace:Microsoft.Maui.Devices.Sensors;assembly=Microsoft.Maui.Essentials"
     x:DataType="viewmodel:TeamRestaurantsAddEditViewModel">
     <Grid Margin="20,0,20,0">
         <Grid.RowDefinitions>
@@ -16,6 +19,7 @@
             <RowDefinition Height="40" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
+        
         <Label
             Grid.Row="1"
             FontAttributes="Bold"
@@ -34,8 +38,11 @@
             Grid.Row="3"
             HorizontalOptions="CenterAndExpand"
             Orientation="Vertical">
+            <maps:Map x:Name="map" WidthRequest="500" HeightRequest="500"  MapType="Street" MapClicked="OnMapClicked"/>
+
             <Frame
-                Padding="0"
+                Margin="0,15,0,0"
+                Padding="0,0,0,0"
                 BackgroundColor="Transparent"
                 BorderColor="#0d529c"
                 CornerRadius="10"

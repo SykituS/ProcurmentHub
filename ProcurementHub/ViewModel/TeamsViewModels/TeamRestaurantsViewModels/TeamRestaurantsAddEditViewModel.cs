@@ -5,9 +5,13 @@ using System.Text;
 using System.Threading.Tasks;
 using Grpc.Core;
 using GrpcShared;
+using Microsoft.Maui.Controls.Maps;
+using Microsoft.Maui.Maps;
 using ProcurementHub.Model.CustomModels;
 using ProcurementHub.Services;
 using ProcurementHub.View.Teams.TeamRestaurants;
+using IMap = Microsoft.Maui.Maps.IMap;
+using Map = Microsoft.Maui.Controls.Maps.Map;
 
 namespace ProcurementHub.ViewModel.TeamsViewModels.TeamRestaurantsViewModels
 {
@@ -26,7 +30,8 @@ namespace ProcurementHub.ViewModel.TeamsViewModels.TeamRestaurantsViewModels
 		public TeamRestaurantsAddEditViewModel(Procurement.ProcurementClient procurementClient, TeamRestaurantsService teamRestaurantsService) : base(procurementClient)
 		{
 			_teamRestaurantsService = teamRestaurantsService;
-		}
+            
+        }
 
 		[RelayCommand]
 		async Task CreateOrUpdateRestaurant()
@@ -37,7 +42,7 @@ namespace ProcurementHub.ViewModel.TeamsViewModels.TeamRestaurantsViewModels
 			IsBusy = true;
 			try
 			{
-				var result = await _teamRestaurantsService.CreateOrUpdateRestaurantAsync(_teamRestaurantsModel, _model.ID);
+                var result = await _teamRestaurantsService.CreateOrUpdateRestaurantAsync(_teamRestaurantsModel, _model.ID);
 
 				if (result.Successful)
 				{
@@ -72,5 +77,11 @@ namespace ProcurementHub.ViewModel.TeamsViewModels.TeamRestaurantsViewModels
 		{
 			await Shell.Current.GoToAsync("..");
 		}
-	}
+
+		[RelayCommand]
+        async Task MapClicked(Map map)
+        {
+            
+        }
+    }
 }

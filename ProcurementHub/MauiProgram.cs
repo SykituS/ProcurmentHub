@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using CommunityToolkit.Maui;
+using CommunityToolkit.Maui.Maps;
 using Grpc.Net.Client;
 using GrpcShared;
 using Microsoft.Extensions.Logging;
@@ -34,8 +35,9 @@ public static class MauiProgram
 
 		var builder = MauiApp.CreateBuilder();
 		builder
-			.UseMauiApp<App>()
+            .UseMauiApp<App>()
             .UseMauiCommunityToolkit()
+            .UseMauiCommunityToolkitMaps("As4qZeUVfRF8v0mBvinbTnhGo1aKvgsnuaLxcQjkSNGVuU81oseeDOhhBgD-D75e")
 			.ConfigureFonts(fonts =>
 			{
 				fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");

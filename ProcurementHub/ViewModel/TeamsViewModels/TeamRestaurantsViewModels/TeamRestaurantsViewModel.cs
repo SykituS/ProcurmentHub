@@ -84,7 +84,7 @@ namespace ProcurementHub.ViewModel.TeamsViewModels.TeamRestaurantsViewModels
 		[RelayCommand]
 		async Task OpenRestaurantPopup(TeamRestaurantsModel model)
         {
-            activePopUp = TeamRestaurantsControl.GeneratePopupForItemManagement(model, OpenEditRestaurantPageCommand,
+            activePopUp = TeamRestaurantsControl.GeneratePopupForItemManagement(model, OpenEditItemPageCommand,
                 OpenEditItemPageCommand);
 			await App.Current.MainPage.ShowPopupAsync(activePopUp);
 			
